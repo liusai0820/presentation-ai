@@ -15,11 +15,11 @@ import { ImageSourceSelector } from "./ImageSourceSelector";
 import { ThemeModal } from "./ThemeModal";
 
 const PRESENTATION_STYLES = [
-  { value: "professional", label: "Professional" },
-  { value: "creative", label: "Creative" },
-  { value: "minimal", label: "Minimal" },
-  { value: "bold", label: "Bold" },
-  { value: "elegant", label: "Elegant" },
+  { value: "professional", label: "专业" },
+  { value: "creative", label: "创意" },
+  { value: "minimal", label: "最少" },
+  { value: "bold", label: "粤加" },
+  { value: "elegant", label: "优雅" },
 ];
 
 export function ThemeSettings() {
@@ -40,9 +40,9 @@ export function ThemeSettings() {
     <div className="space-y-6">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <Label className="text-sm font-medium">Theme & Layout</Label>
+          <Label className="text-sm font-medium">主题和布局</Label>
           <ThemeModal>
-            <Button variant={"link"}>More Themes</Button>
+            <Button variant={"link"}>更多主题</Button>
           </ThemeModal>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -112,9 +112,9 @@ export function ThemeSettings() {
                   style={{ color: modeColors.muted }}
                 >
                   <span className="block">
-                    Heading: {themeOption.fonts.heading}
+                    标题: {themeOption.fonts.heading}
                   </span>
-                  <span className="block">Body: {themeOption.fonts.body}</span>
+                  <span className="block">正文: {themeOption.fonts.body}</span>
                 </div>
               </button>
             );
@@ -134,10 +134,10 @@ export function ThemeSettings() {
       />
 
       <div className="space-y-4">
-        <Label className="text-sm font-medium">Presentation Style</Label>
+        <Label className="text-sm font-medium">演示样式</Label>
         <Select defaultValue="professional">
           <SelectTrigger>
-            <SelectValue placeholder="Select style" />
+            <SelectValue placeholder="选择样式" />
           </SelectTrigger>
           <SelectContent>
             {PRESENTATION_STYLES.map((style) => (

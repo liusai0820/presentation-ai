@@ -1,3 +1,4 @@
+import { getUserIdOrDev } from "@/lib/dev-user";
 import { modelPicker } from "@/lib/model-picker";
 import { auth } from "@/server/auth";
 import { streamText } from "ai";
@@ -19,50 +20,59 @@ Topic: {prompt}
 
 First, generate an appropriate title for the presentation, then create exactly {numberOfCards} main topics that would make for an engaging and well-structured presentation.
 
-Format the response starting with the title in XML tags, followed by markdown content with each topic as a heading and 2-3 bullet points.
+Format the response starting with the title in XML tags, followed by markdown content with each topic as a heading and 2-3 bullet points describing the key content.
 
 Example format:
 <TITLE>Your Generated Presentation Title Here</TITLE>
 
 # First Main Topic
-- Key point about this topic
-- Another important aspect
-- Brief conclusion or impact
+- Key point or data to highlight
+- Visual element suggestion (chart/image/list)
+- Main takeaway message
 
 # Second Main Topic
-- Main insight for this section
-- Supporting detail or example
-- Practical application or takeaway
+- Core concept to explain
+- Supporting evidence or example
+- Layout recommendation
 
-# Third Main Topic 
-- Primary concept to understand
-- Evidence or data point
-- Conclusion or future direction
+# Third Main Topic
+- Primary insight
+- Data visualization idea
+- Conclusion or impact
 
 Make sure the topics:
 1. Flow logically from one to another
 2. Cover the key aspects of the main topic
-3. Are clear and concise
-4. Are engaging for the audience
-5. ALWAYS use bullet points (not paragraphs) and format each point as "- point text"
+3. Have clear, concise headings (5-10 words)
+4. Include 2-3 bullet points per topic describing:
+   - Key content/data to show
+   - Suggested visual elements (charts, images, lists, timelines, etc.)
+   - Layout or design recommendations
+5. Keep bullet points brief (one sentence each)
 6. Do not use bold, italic or underline
-7. Keep each bullet point brief - just one sentence per point
-8. Include exactly 2-3 bullet points per topic (not more, not less)`;
+7. Focus on actionable content that helps design the slide`;
 
 export async function POST(req: Request) {
   try {
     const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // 开发模式:确保测试用户存在
+    await getUserIdOrDev(session);
 
     const {
       prompt,
       numberOfCards,
       language,
-      modelProvider = "openai",
-      modelId,
+      modelProvider = "openrouter",
+      modelId = "google/gemini-2.5-flash",
     } = (await req.json()) as OutlineRequest;
+
+    console.log(`🎯 大纲生成请求:`, {
+      prompt: prompt?.substring(0, 100) + "...",
+      numberOfCards,
+      language,
+      modelProvider,
+      modelId
+    });
 
     if (!prompt || !numberOfCards || !language) {
       return NextResponse.json(
@@ -94,6 +104,7 @@ export async function POST(req: Request) {
     });
 
     const model = modelPicker(modelProvider, modelId);
+    console.log(`📚 使用大纲生成模型: ${modelProvider}/${modelId}`);
 
     // Format the prompt with template variables
     const formattedPrompt = outlineTemplate
@@ -102,9 +113,13 @@ export async function POST(req: Request) {
       .replace(/{currentDate}/g, currentDate)
       .replace(/{prompt}/g, prompt);
 
+    console.log(`🚀 开始生成大纲...`);
     const result = streamText({
       model,
       prompt: formattedPrompt,
+      maxTokens: 2000,
+      temperature: 0.7,
+      abortSignal: AbortSignal.timeout(60000), // 60秒超时
     });
 
     return result.toDataStreamResponse();

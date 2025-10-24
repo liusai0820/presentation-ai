@@ -20,7 +20,7 @@ interface ThinkingDisplayProps {
 export function ThinkingDisplay({
   thinking,
   isGenerating: _isGenerating,
-  title = "AI is thinking...",
+  title = "AI 正在思考...",
 }: ThinkingDisplayProps) {
   const extractThinkingContent = (text: string): string => {
     return text
@@ -32,11 +32,12 @@ export function ThinkingDisplay({
   const hasClosingTag = /<\/think>/i.test(thinking);
   const thinkingContent = extractThinkingContent(thinking);
 
+  const [open, setOpen] = useState(false);
+
   // Only render when there is actual thinking content, not just loading
   if (!thinkingContent) {
     return null;
   }
-  const [open, setOpen] = useState(false);
 
   return (
     <Card
@@ -80,7 +81,7 @@ export function ThinkingDisplay({
                 >
                   {thinkingContent || (
                     <div className="animate-pulse text-muted-foreground/70">
-                      Processing your request...
+                      正在处理你的请求...
                     </div>
                   )}
                 </motion.div>

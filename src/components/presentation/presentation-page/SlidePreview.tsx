@@ -25,6 +25,8 @@ function SlidePreviewBase({
   showSidebar = true,
 }: SlidePreviewProps) {
   const slides = usePresentationState((s) => s.slides);
+  const htmlSlides = usePresentationState((s) => s.htmlSlides);
+  const generationMode = usePresentationState((s) => s.generationMode);
   const stateCurrentSlideIndex = usePresentationState(
     (s) => s.currentSlideIndex,
   );
@@ -40,6 +42,9 @@ function SlidePreviewBase({
     typeof currentSlideIndexProp === "number"
       ? currentSlideIndexProp
       : stateCurrentSlideIndex;
+
+  // 根据生成模式选择使用哪个幻灯片数组
+  const displaySlides = generationMode === "html" && htmlSlides.length > 0 ? htmlSlides : slides;
 
   const [sidebarWidth, setSidebarWidth] = useState(150);
   const { scrollToSlide } = usePresentationSlides();
@@ -120,17 +125,48 @@ function SlidePreviewBase({
                         <PanelRightOpen className="size-3" />
                       </Button>
                     </div>
-                    <div className="flex flex-col space-y-4">
-                      {slides.map((slide, index) => (
-                        <MemoPreviewItem
-                          key={slide.id}
-                          index={index}
-                          isActive={effectiveCurrentSlideIndex === index}
-                          onClick={handleSlideClick}
-                          slideId={slide.id}
-                          slide={slide}
-                        />
-                      ))}
+                    <div className="flex flex-col space-y-2">
+                      {generationMode === "html" && htmlSlides.length > 0 ? (
+                        // HTML幻灯片 - 简洁的数字列表
+                        htmlSlides.map((slide, index) => (
+                          <button
+                            key={slide.id}
+                            onClick={() => handleSlideClick(index)}
+                            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-left transition-all ${
+                              effectiveCurrentSlideIndex === index
+                                ? "bg-primary text-primary-foreground shadow-sm"
+                                : "hover:bg-muted"
+                            }`}
+                          >
+                            <div
+                              className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md font-semibold ${
+                                effectiveCurrentSlideIndex === index
+                                  ? "bg-primary-foreground/20 text-primary-foreground"
+                                  : "bg-muted text-muted-foreground"
+                              }`}
+                            >
+                              {index + 1}
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-sm font-medium">
+                                第 {index + 1} 页
+                              </p>
+                            </div>
+                          </button>
+                        ))
+                      ) : (
+                        // XML组件幻灯片缩略图（原有逻辑）
+                        slides.map((slide, index) => (
+                          <MemoPreviewItem
+                            key={slide.id}
+                            index={index}
+                            isActive={effectiveCurrentSlideIndex === index}
+                            onClick={handleSlideClick}
+                            slideId={slide.id}
+                            slide={slide}
+                          />
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>

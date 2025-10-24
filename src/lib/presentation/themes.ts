@@ -7,7 +7,10 @@ export type ThemeName =
   | "gammaDark"
   | "crimson"
   | "sunset"
-  | "forest";
+  | "forest"
+  | "mckinsey"
+  | "bcg"
+  | "bain";
 
 interface ThemeColors {
   primary: string;
@@ -435,6 +438,135 @@ export const themes: Record<ThemeName, ThemeProperties> = {
       dark: {
         card: "0 4px 12px rgba(52,211,153,0.15)",
         button: "0 3px 8px rgba(52,211,153,0.2)",
+      },
+    },
+  },
+
+  mckinsey: {
+    name: "McKinsey",
+    description: "Professional & data-driven",
+    colors: {
+      light: {
+        primary: "#0066CC",
+        secondary: "#005199",
+        accent: "#3386FF",
+        background: "#FFFFFF",
+        text: "#1a1a1a",
+        heading: "#000000",
+        muted: "#666666",
+      },
+      dark: {
+        primary: "#3386FF",
+        secondary: "#99CCFF",
+        accent: "#66B3FF",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Helvetica Neue",
+      body: "Helvetica Neue",
+    },
+    borderRadius: "4px",
+    transitions: {
+      default: "all 0.2s ease",
+    },
+    shadows: {
+      light: {
+        card: "0 1px 3px rgba(0,0,0,0.05)",
+        button: "0 2px 4px rgba(0,102,204,0.1)",
+      },
+      dark: {
+        card: "0 1px 3px rgba(0,0,0,0.3)",
+        button: "0 2px 4px rgba(51,134,255,0.2)",
+      },
+    },
+  },
+
+  bcg: {
+    name: "BCG",
+    description: "Modern & innovative",
+    colors: {
+      light: {
+        primary: "#00A758",
+        secondary: "#008C4A",
+        accent: "#00D97E",
+        background: "#FFFFFF",
+        text: "#2c2c2c",
+        heading: "#000000",
+        muted: "#666666",
+      },
+      dark: {
+        primary: "#00D97E",
+        secondary: "#00FFB3",
+        accent: "#66FFB3",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Helvetica Neue",
+      body: "Helvetica Neue",
+    },
+    borderRadius: "12px",
+    transitions: {
+      default: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+    },
+    shadows: {
+      light: {
+        card: "0 12px 32px rgba(0, 167, 88, 0.15)",
+        button: "0 3px 10px rgba(0, 167, 88, 0.25)",
+      },
+      dark: {
+        card: "0 12px 32px rgba(0, 217, 126, 0.2)",
+        button: "0 3px 10px rgba(0, 217, 126, 0.3)",
+      },
+    },
+  },
+
+  bain: {
+    name: "Bain",
+    description: "Classic & trustworthy",
+    colors: {
+      light: {
+        primary: "#E31937",
+        secondary: "#B31429",
+        accent: "#FF2D4F",
+        background: "#FFFFFF",
+        text: "#333333",
+        heading: "#000000",
+        muted: "#666666",
+      },
+      dark: {
+        primary: "#FF2D4F",
+        secondary: "#FF6B7F",
+        accent: "#FF99A6",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Georgia",
+      body: "Georgia",
+    },
+    borderRadius: "0px",
+    transitions: {
+      default: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    },
+    shadows: {
+      light: {
+        card: "5px 5px 0 rgba(227, 25, 55, 0.12)",
+        button: "3px 3px 0 rgba(227, 25, 55, 0.25)",
+      },
+      dark: {
+        card: "5px 5px 0 rgba(255, 45, 79, 0.2)",
+        button: "3px 3px 0 rgba(255, 45, 79, 0.3)",
       },
     },
   },

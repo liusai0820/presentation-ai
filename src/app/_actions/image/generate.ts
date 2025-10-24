@@ -2,12 +2,19 @@
 
 import { utapi } from "@/app/api/uploadthing/core";
 import { env } from "@/env";
+import { getUserIdOrDev } from "@/lib/dev-user";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import Together from "together-ai";
 import { UTFile } from "uploadthing/server";
 
-const together = new Together({ apiKey: env.TOGETHER_AI_API_KEY });
+// 延迟初始化Together客户端,避免启动时就要求API key
+function getTogetherClient() {
+  if (!env.TOGETHER_AI_API_KEY) {
+    throw new Error("请配置 TOGETHER_AI_API_KEY 环境变量以使用 AI 图片生成功能");
+  }
+  return new Together({ apiKey: env.TOGETHER_AI_API_KEY });
+}
 
 export type ImageModelList =
   | "black-forest-labs/FLUX1.1-pro"
@@ -22,16 +29,13 @@ export async function generateImageAction(
 ) {
   // Get the current session
   const session = await auth();
-
-  // Check if user is authenticated
-  if (!session?.user?.id) {
-    throw new Error("You must be logged in to generate images");
-  }
+  const userId = await getUserIdOrDev(session);
 
   try {
     console.log(`Generating image with model: ${model}`);
 
     // Generate the image using Together AI
+    const together = getTogetherClient();
     const response = (await together.images.create({
       model: model,
       prompt: prompt,
@@ -88,7 +92,7 @@ export async function generateImageAction(
       data: {
         url: permanentUrl, // Store the UploadThing URL instead of the Together AI URL
         prompt: prompt,
-        userId: session.user.id,
+        userId: userId,
       },
     });
 

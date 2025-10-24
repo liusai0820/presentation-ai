@@ -1,0 +1,62 @@
+feat: Reveal.js 布局与样式系统全面优化
+
+## 主要更新
+
+### 1. 布局优化
+- 修复内容溢出问题，优化边距策略（Reveal margin 4% + CSS padding 20px）
+- 实现预览与全屏模式的一致缩放
+- 添加全屏和窗口 resize 事件监听器
+
+### 2. 样式系统重构
+- 去除所有渐变效果，采用极简主义设计
+- 重新设计数据卡片和指标卡片样式
+- 优化布局系统（three-columns gap 增加到 24px）
+- 统一色彩系统，使用纯色设计
+
+### 3. AI 内容生成优化
+- 重新设计 Prompt，平衡内容质量与页面空间
+- 明确内容密度指南（200-300 字/页，3-5 个信息块）
+- 添加内容深度要求和分页判断标准
+- 提供正反示例，提高 AI 生成质量
+
+### 4. 文档整理
+- 重构 README.md 和 README_CN.md，结构更清晰
+- 创建 REVEALJS_LAYOUT_OPTIMIZATION.md 记录完整优化过程
+- 创建 DOCUMENTATION_INDEX.md 提供文档导航
+- 清理所有临时测试文件和过程文档
+
+## 技术细节
+
+### 修改的核心文件
+- src/lib/presentation/html-themes/revealjs-adapter.ts
+- src/lib/presentation/html-themes/mckinsey.css
+- src/lib/prompts/revealjs-content-generator.ts
+
+### 删除的文件
+- 测试文件：test-*.html (7个)
+- 临时文档：20+ 个过程文档
+- 临时 Prompt：3 个文件
+
+### 新增的文档
+- REVEALJS_LAYOUT_OPTIMIZATION.md
+- DOCUMENTATION_INDEX.md
+- 重构后的 README.md 和 README_CN.md
+
+## 影响范围
+- ✅ 解决内容溢出问题
+- ✅ 修复全屏缩放不一致
+- ✅ 提升 AI 生成内容质量
+- ✅ 改进卡片视觉设计
+- ✅ 优化项目文档结构
+
+## 测试验证
+- [x] 预览模式显示正常
+- [x] 全屏模式比例一致
+- [x] 内容不溢出页面
+- [x] 边距合理美观
+- [x] 卡片样式专业
+- [x] AI 生成内容密度适中
+
+---
+
+Co-authored-by: Kiro AI <kiro@allweone.com>

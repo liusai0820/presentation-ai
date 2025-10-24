@@ -1,6 +1,7 @@
 import { type ImageModelList } from "@/app/_actions/image/generate";
 import { type PlateSlide } from "@/components/presentation/utils/parser";
 import { type ThemeProperties, type Themes } from "@/lib/presentation/themes";
+import { type AnalyzedContent } from "@/lib/content-analyzer/types";
 import { type TElement } from "platejs";
 import { create } from "zustand";
 
@@ -21,7 +22,7 @@ interface PresentationState {
   imageSource: "ai" | "stock";
   stockImageProvider: "unsplash";
   presentationStyle: string;
-  modelProvider: "openai" | "ollama" | "lmstudio";
+  modelProvider: "openai" | "ollama" | "lmstudio" | "openrouter";
   modelId: string;
   savingStatus: "idle" | "saving" | "saved";
   isPresenting: boolean;
@@ -91,7 +92,7 @@ interface PresentationState {
   setImageSource: (source: "ai" | "stock") => void;
   setStockImageProvider: (provider: "unsplash") => void;
   setPresentationStyle: (style: string) => void;
-  setModelProvider: (provider: "openai" | "ollama" | "lmstudio") => void;
+  setModelProvider: (provider: "openai" | "ollama" | "lmstudio" | "openrouter") => void;
   setModelId: (id: string) => void;
   setSavingStatus: (status: "idle" | "saving" | "saved") => void;
   setIsPresenting: (isPresenting: boolean) => void;
@@ -121,6 +122,22 @@ interface PresentationState {
   // Palette → Editor communication
   pendingInsertNode: TElement | null;
   setPendingInsertNode: (node: TElement | null) => void;
+
+  // 文档分析结果
+  analyzedDocument: AnalyzedContent | null;
+  setAnalyzedDocument: (analyzed: AnalyzedContent | null) => void;
+  
+  // 原始文档内容（完整文本）
+  originalDocumentContent: string | null;
+  setOriginalDocumentContent: (content: string | null) => void;
+
+  // HTML幻灯片
+  htmlSlides: Array<{ id: string; index: number; html: string; title: string }>;
+  setHtmlSlides: (slides: Array<{ id: string; index: number; html: string; title: string }>) => void;
+  generatedHtml: string | null; // 完整的生成HTML（用于Reveal.js）
+  setGeneratedHtml: (html: string | null) => void;
+  generationMode: "xml" | "html" | "revealjs"; // 生成模式：XML组件、HTML页面 或 Reveal.js
+  setGenerationMode: (mode: "xml" | "html" | "revealjs") => void;
 }
 
 export const usePresentationState = create<PresentationState>((set) => ({
@@ -133,21 +150,21 @@ export const usePresentationState = create<PresentationState>((set) => ({
   thumbnailUrl: undefined,
   setThumbnailUrl: (url) => set({ thumbnailUrl: url }),
   numSlides: 5,
-  language: "en-US",
+  language: "zh",
   pageStyle: "default",
   showTemplates: false,
   presentationInput: "",
   outline: [],
   searchResults: [],
   webSearchEnabled: false,
-  theme: "mystique",
+  theme: "mckinsey",
   customThemeData: null,
   imageModel: "black-forest-labs/FLUX.1-schnell-Free",
   imageSource: "stock",
   stockImageProvider: "unsplash",
   presentationStyle: "professional",
-  modelProvider: "openai",
-  modelId: "llama3.1:8b",
+  modelProvider: "openrouter",
+  modelId: "google/gemini-2.5-flash",
   slides: [], // Now holds the new slide object structure
   outlineThinking: "",
   presentationThinking: "",
@@ -158,6 +175,11 @@ export const usePresentationState = create<PresentationState>((set) => ({
   isThemeCreatorOpen: false,
   config: {},
   pendingInsertNode: null,
+  analyzedDocument: null,
+  originalDocumentContent: null,
+  htmlSlides: [],
+  generatedHtml: null,
+  generationMode: "html", // 默认使用HTML模式
 
   // Sidebar states
   isSidebarCollapsed: false,
@@ -176,6 +198,11 @@ export const usePresentationState = create<PresentationState>((set) => ({
   },
   setPendingInsertNode: (node) => set({ pendingInsertNode: node }),
   setConfig: (config) => set({ config }),
+  setAnalyzedDocument: (analyzed) => set({ analyzedDocument: analyzed }),
+  setOriginalDocumentContent: (content) => set({ originalDocumentContent: content }),
+  setHtmlSlides: (slides) => set({ htmlSlides: slides }),
+  setGeneratedHtml: (html) => set({ generatedHtml: html }),
+  setGenerationMode: (mode) => set({ generationMode: mode }),
   startRootImageGeneration: (slideId, query) =>
     set((state) => ({
       rootImageGeneration: {

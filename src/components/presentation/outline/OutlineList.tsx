@@ -31,7 +31,6 @@ export function OutlineList() {
     numSlides,
     isGeneratingOutline,
     webSearchEnabled,
-    outlineThinking,
   } = usePresentationState();
 
   const [items, setItems] = useState<OutlineItemType[]>(
@@ -105,25 +104,41 @@ export function OutlineList() {
     });
   };
 
-  const content = useMemo(() => {
-    const totalSlides = numSlides;
-    const loadedCount = items.length;
-    const remainingCount = Math.max(0, totalSlides - loadedCount);
+  // Calculate skeleton counts
+  const totalSlides = numSlides;
+  const loadedCount = items.length;
+  const remainingCount = Math.max(0, totalSlides - loadedCount);
 
-    // Show skeleton placeholders when web search is enabled and outline is empty (before generation starts)
-    const showSkeletonPlaceholders =
-      webSearchEnabled && items.length === 0 && !isGeneratingOutline;
-    // Show loading skeletons only when actually generating outline
-    const showLoadingSkeletons = isGeneratingOutline && remainingCount > 0;
+  // Show skeleton placeholders when web search is enabled and outline is empty (before generation starts)
+  const showSkeletonPlaceholders =
+    webSearchEnabled && items.length === 0 && !isGeneratingOutline;
+  // Show loading skeletons only when actually generating outline
+  const showLoadingSkeletons = isGeneratingOutline && remainingCount > 0;
 
-    return (
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-foreground">演示大纲</h2>
+        {isGeneratingOutline && (
+          <span className="animate-pulse text-xs text-muted-foreground">
+            正在生成大纲...
+          </span>
+        )}
+        {webSearchEnabled && items.length === 0 && !isGeneratingOutline && (
+          <span className="text-xs text-muted-foreground">
+            准备好生成
+          </span>
+        )}
+      </div>
+
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          <div className="space-y-2">
+          {/* 2列网格布局 - 更大的卡片 */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {items.map((item, index) => (
               <OutlineItem
                 key={item.id}
@@ -140,54 +155,29 @@ export function OutlineList() {
         {showSkeletonPlaceholders && <Skeleton className="h-96 w-full" />}
 
         {/* Show loading skeletons only when actually generating */}
-        {showLoadingSkeletons &&
-          Array.from({ length: remainingCount }).map((_, index) => (
-            <Skeleton key={`loading-${index}`} className="h-16 w-full" />
-          ))}
+        {showLoadingSkeletons && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {Array.from({ length: remainingCount }).map((_, index) => (
+              <Skeleton key={`loading-${index}`} className="h-[280px] w-full" />
+            ))}
+          </div>
+        )}
       </DndContext>
-    );
-  }, [
-    items,
-    numSlides,
-    isGeneratingOutline,
-    webSearchEnabled,
-    sensors,
-    handleDragEnd,
-    handleTitleChange,
-    handleDeleteCard,
-  ]);
-
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-sm text-foreground">Outline</h2>
-        {isGeneratingOutline && (
-          <span className="animate-pulse text-xs text-muted-foreground">
-            Generating outline...
-          </span>
-        )}
-        {webSearchEnabled && items.length === 0 && !isGeneratingOutline && (
-          <span className="text-xs text-muted-foreground">
-            Ready to generate
-          </span>
-        )}
-      </div>
-
-      {content}
 
       <button
+        type="button"
         onClick={handleAddCard}
         disabled={isGeneratingOutline}
         className="flex w-full items-center justify-center gap-2 rounded-md bg-muted/50 py-3 text-muted-foreground transition-colors hover:bg-muted disabled:opacity-50"
       >
         <Plus size={20} />
-        Add card
+        添加卡片
       </button>
 
       <div className="flex justify-between text-sm text-muted-foreground">
-        <span>{items.length} cards total</span>
+        <span>总计 {items.length} 张幻灯片</span>
         <span>
-          {items.reduce((acc, item) => acc + item.title.length, 0)}/20000
+          {items.reduce((acc, item) => acc + item.title.length, 0)}/20000 字符
         </span>
       </div>
     </div>

@@ -19,16 +19,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TanStackQueryProvider>
-      <NextAuthProvider>
-        <html lang="en">
-          <body className={`${inter.className} antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <TanStackQueryProvider>
+          <NextAuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}
             </ThemeProvider>
-          </body>
-        </html>
-      </NextAuthProvider>
-    </TanStackQueryProvider>
+          </NextAuthProvider>
+        </TanStackQueryProvider>
+      </body>
+    </html>
   );
 }

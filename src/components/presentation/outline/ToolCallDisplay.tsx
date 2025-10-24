@@ -31,7 +31,7 @@ export function ToolCallDisplay() {
             <div className="flex items-center gap-2">
               <Search className="h-4 w-4 text-blue-500" />
               <span className="text-sm font-medium">
-                Web Search Results ({searchResults.length})
+                网络搜索结果 ({searchResults.length})
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -39,7 +39,7 @@ export function ToolCallDisplay() {
                 <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
               )}
               <span className="text-xs text-muted-foreground">
-                {isExpanded ? "Hide" : "Show"}
+                {isExpanded ? "隐藏" : "显示"}
               </span>
             </div>
           </button>
@@ -76,7 +76,7 @@ export function ToolCallDisplay() {
               <div className="flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
                 <span className="text-sm text-muted-foreground">
-                  AI is researching...
+                  AI 正在究茶...
                 </span>
               </div>
             </div>

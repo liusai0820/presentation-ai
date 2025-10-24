@@ -17,7 +17,7 @@ export function WebSearchToggle() {
           htmlFor="web-search-toggle"
           className="text-xs font-medium leading-none cursor-pointer select-none text-foreground"
         >
-          Web Search
+          网络搜索
         </Label>
       </div>
       <Switch

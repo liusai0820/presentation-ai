@@ -39,7 +39,7 @@ export function PresentationDashboard({
 
   const handleGenerate = async () => {
     if (!presentationInput.trim()) {
-      toast.error("Please enter a topic for your presentation");
+      toast.error("请输入您的演示文稿主题");
       return;
     }
 
@@ -48,7 +48,7 @@ export function PresentationDashboard({
 
     try {
       const result = await createEmptyPresentation(
-        presentationInput.substring(0, 50) || "Untitled Presentation",
+        presentationInput.substring(0, 50) || "未命名演示文稿",
         theme,
         language,
       );
@@ -62,12 +62,12 @@ export function PresentationDashboard({
         router.push(`/presentation/generate/${result.presentation.id}`);
       } else {
         setIsGeneratingOutline(false);
-        toast.error(result.message || "Failed to create presentation");
+        toast.error(result.message || "创建演示文稿失败");
       }
     } catch (error) {
       setIsGeneratingOutline(false);
       console.error("Error creating presentation:", error);
-      toast.error("Failed to create presentation");
+      toast.error("创建演示文稿失败");
     }
   };
 
@@ -90,7 +90,7 @@ export function PresentationDashboard({
                 className="gap-2"
               >
                 <Wand2 className="h-4 w-4" />
-                Generate Presentation
+                生成演示文稿
               </Button>
             </div>
           </div>

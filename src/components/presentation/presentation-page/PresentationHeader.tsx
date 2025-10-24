@@ -75,10 +75,7 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
     <header className="flex h-12 w-full items-center justify-between border-b border-accent bg-background px-4">
       {/* Left section with breadcrumb navigation */}
       <div className="flex items-center gap-2">
-        <Link
-          href="/presentations"
-          className="text-muted-foreground hover:text-foreground"
-        >
+        <Link href="/" className="text-muted-foreground hover:text-foreground">
           <Brain className="h-5 w-5"></Brain>
         </Link>
         <ChevronRight className="h-4 w-4 text-muted-foreground" />

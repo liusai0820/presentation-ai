@@ -1,0 +1,949 @@
+/**
+ * 麦肯锡主题 - McKinsey & Company
+ * 专业级商业演示文稿样式
+ * 
+ * 设计原则：
+ * - 简洁专业
+ * - 数据驱动
+ * - 清晰层次
+ * - 精致细节
+ */
+
+/* ==================== 全局设置 ==================== */
+
+body {
+  background: #ffffff;
+}
+
+.reveal {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* ==================== 幻灯片容器 ==================== */
+/* 使用Reveal.js响应式系统，基础尺寸960x700 */
+
+.reveal .slides {
+  background: #ffffff !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal .slides section {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  text-align: left !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  font-size: 20px !important;
+  line-height: 1.5 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+/* 封面页特殊样式 - 垂直居中 */
+.reveal .slides section.cover {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 80px;
+}
+
+/* 标准内容页 - Reveal.js margin 已提供边距，这里只需少量内边距 */
+.reveal .slides section:not(.cover) {
+  padding: 30px 20px 25px 20px !important;
+}
+
+/* ==================== 页面结构 ==================== */
+
+/* 页眉区域 - 固定在顶部 */
+.slide-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 12px 20px;
+  background: #ffffff;
+  z-index: 10;
+}
+
+/* 内容区域 - 在页眉下方 */
+.slide-content {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+  margin-top: 0;
+}
+
+/* 页脚区域 - 固定在底部 */
+.slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.7em;
+  color: #666666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* ==================== 标题层级 ==================== */
+
+/* H1 - 用于封面页 */
+.reveal h1 {
+  font-size: 2.5em !important;
+  font-weight: 200 !important;
+  color: #0066CC !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.5em !important;
+  letter-spacing: -0.02em !important;
+  display: block !important;
+}
+
+/* H2 - 用于页面标题（页眉） */
+.reveal h2 {
+  font-size: 1.6em !important;
+  font-weight: 300 !important;
+  color: #1a1a1a !important;
+  text-transform: none !important;
+  line-height: 1.3 !important;
+  margin: 0 0 20px 0 !important;
+  padding-bottom: 12px !important;
+  border-bottom: 2px solid #0066CC !important;
+  display: block !important;
+}
+
+.reveal h3 {
+  font-size: 1.2em !important;
+  font-weight: 400 !important;
+  color: #333333 !important;
+  text-transform: none !important;
+  margin-bottom: 0.5em !important;
+  margin-top: 0.8em !important;
+  display: block !important;
+}
+
+.reveal h4 {
+  font-size: 0.9em !important;
+  font-weight: 500;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5em;
+}
+
+/* ==================== 段落和文本 ==================== */
+
+.reveal p {
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+.reveal strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.reveal em {
+  font-style: italic;
+  color: #333333;
+}
+
+/* ==================== 数据卡片 ==================== */
+
+.data-card {
+  background: #f8f9fa;
+  padding: 24px 28px;
+  margin: 15px 0;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+}
+
+.data-card:hover {
+  background: #f0f2f5;
+}
+
+.data-card h3,
+.data-card h4 {
+  margin-top: 0;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999999;
+  margin-bottom: 0.8em;
+}
+
+.data-value {
+  font-size: 2.8em;
+  font-weight: 300;
+  line-height: 1;
+  color: #0066CC;
+  margin: 0.3em 0 0.5em 0;
+  letter-spacing: -0.03em;
+}
+
+.data-card p {
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+}
+
+/* ==================== 布局系统 ==================== */
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+/* ==================== 列表样式 ==================== */
+
+.reveal ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+.reveal ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: #0066CC;
+  border-radius: 50%;
+}
+
+.reveal ol {
+  counter-reset: item;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ol li {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  counter-increment: item;
+  color: #1a1a1a;
+}
+
+.reveal ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  background: #0066CC;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: 500;
+}
+
+/* ==================== 强调元素 ==================== */
+
+.highlight {
+  color: #0066CC;
+  font-weight: 500;
+  background: rgba(0, 102, 204, 0.08);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.key-number {
+  font-size: 1.8em;
+  font-weight: 300;
+  color: #0066CC;
+  display: inline-block;
+  margin: 0 0.2em;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: #0066CC;
+  color: white;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  margin: 0 0.2em;
+}
+
+/* ==================== 分隔线 ==================== */
+
+.divider {
+  height: 1px;
+  background: #d0d0d0;
+  margin: 32px 0;
+  border: none;
+}
+
+/* ==================== 图表容器 ==================== */
+
+.chart-container {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  padding: 32px;
+  margin: 24px 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h4 {
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ==================== 引用块 ==================== */
+
+.reveal blockquote {
+  border-left: 5px solid #0066CC;
+  padding: 0.8em 1.2em;
+  margin: 1em 0;
+  background: #f8f9fa;
+  font-style: italic;
+  color: #333333;
+  font-size: 1.1em;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reveal blockquote p {
+  margin: 0;
+}
+
+/* ==================== 表格样式 ==================== */
+
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.85em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.reveal table th {
+  background: #0066CC;
+  color: white;
+  padding: 0.5em 0.7em;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #1a1a1a;
+  background: white;
+}
+
+.reveal table tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal table tr:hover td {
+  background: #f8f9fa;
+}
+
+/* 表格斑马纹 */
+.reveal table tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.reveal table tbody tr:nth-child(even):hover {
+  background: #f5f6f7;
+}
+
+/* ==================== 图片样式 ==================== */
+
+.reveal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reveal figure {
+  margin: 30px 0;
+}
+
+.reveal figcaption {
+  font-size: 0.8em;
+  color: #666666;
+  text-align: center;
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* ==================== 代码块 ==================== */
+
+.reveal pre {
+  background: #f5f5f5;
+  border-left: 4px solid #0066CC;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.reveal code {
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #d63384;
+  background: #f8f9fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.reveal pre code {
+  color: #333333;
+  background: transparent;
+  padding: 0;
+}
+
+/* ==================== 控制元素 ==================== */
+
+.reveal .controls {
+  color: #0066CC;
+}
+
+.reveal .controls button {
+  color: #0066CC;
+}
+
+.reveal .controls button:hover {
+  color: #0052a3;
+}
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.1);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: #0066CC;
+}
+
+.reveal .slide-number {
+  color: #666666;
+  background: transparent;
+  padding: 0;
+  font-size: 0.8em;
+  bottom: 12px;
+  right: 20px;
+}
+
+/* ==================== 全屏模式 ==================== */
+/* 确保全屏时保持等比例缩放 */
+
+.reveal:fullscreen,
+.reveal:-webkit-full-screen,
+.reveal:-moz-full-screen,
+.reveal:-ms-fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal:fullscreen .slides,
+.reveal:-webkit-full-screen .slides,
+.reveal:-moz-full-screen .slides,
+.reveal:-ms-fullscreen .slides {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==================== 响应式设计 ==================== */
+/* 注意：由于使用固定尺寸960x700，响应式主要由Reveal.js的缩放处理 */
+
+@media (max-width: 768px) {
+  /* 移动设备上保持固定尺寸，让Reveal.js自动缩放 */
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .reveal .slides section {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .reveal .controls,
+  .reveal .progress,
+  .reveal .slide-number {
+    display: none;
+  }
+}
+
+/* ==================== 动画效果 ==================== */
+
+.data-card,
+.chart-container,
+.reveal table {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: #666666;
+  opacity: 0.7;
+}
+
+.text-small {
+  font-size: 0.8em;
+}
+
+.mt-1 {
+  margin-top: 0.5em;
+}
+
+.mt-2 {
+  margin-top: 1em;
+}
+
+.mt-3 {
+  margin-top: 1.5em;
+}
+
+.mt-4 {
+  margin-top: 2em;
+}
+
+.mb-1 {
+  margin-bottom: 0.5em;
+}
+
+.mb-2 {
+  margin-bottom: 1em;
+}
+
+.mb-3 {
+  margin-bottom: 1.5em;
+}
+
+.mb-4 {
+  margin-bottom: 2em;
+}
+
+
+/* ==================== ECharts图表样式 ==================== */
+
+.chart-wrapper {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-wrapper h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+  min-height: 300px;
+}
+
+/* ==================== 进度条 ==================== */
+
+.progress-bar {
+  background: #e0e0e0;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+  position: relative;
+}
+
+.progress-fill {
+  background: #0066CC;
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5em;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.progress-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-bottom: 0.3em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==================== 时间线 ==================== */
+
+.timeline {
+  position: relative;
+  padding-left: 50px;
+  margin: 30px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d0d0d0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -42px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background: #0066CC;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+}
+
+.timeline-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  color: #0066CC;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.timeline-item p {
+  margin: 0;
+  color: #555555;
+  font-size: 0.9em;
+}
+
+/* ==================== 流程图 ==================== */
+
+.process-flow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  flex: 1;
+  padding: 18px 15px;
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.flow-step:hover {
+  border-color: #0066CC;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+}
+
+.flow-step::after {
+  content: '→';
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3em;
+  color: #0066CC;
+  font-weight: 300;
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-step h4 {
+  margin: 0 0 0.3em 0;
+  color: #0066CC;
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flow-step p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555555;
+}
+
+/* ==================== 指标卡片网格 ==================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 0;
+  padding: 28px 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.metric-card:hover {
+  border-color: #0066CC;
+  background: #fafbfc;
+}
+
+.metric-value {
+  font-size: 2.5em;
+  font-weight: 300;
+  color: #0066CC;
+  line-height: 1;
+  margin: 0 0 0.4em 0;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  font-size: 0.7em;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: 600;
+}
+
+.metric-change {
+  font-size: 0.75em;
+  margin-top: 0.6em;
+  font-weight: 500;
+}
+
+.metric-change.positive {
+  color: #28a745;
+}
+
+.metric-change.negative {
+  color: #dc3545;
+}
+
+/* ==================== 对比卡片 ==================== */
+
+.comparison-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.comparison-card {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 28px;
+  position: relative;
+}
+
+.comparison-card.highlight {
+  border-color: #0066CC;
+  background: #fafbfc;
+}
+
+.comparison-card h3 {
+  margin-top: 0;
+  color: #0066CC;
+  font-size: 1.2em;
+}
+
+.comparison-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #0066CC;
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 12px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==================== 图标列表 ==================== */
+
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.icon-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.icon-list li::before {
+  display: none;
+}
+
+.icon-list .icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: #0066CC;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+/* ==================== 统计数字行 ==================== */
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px 0;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5em;
+  font-weight: 200;
+  color: #0066CC;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-top: 0.3em;
+}

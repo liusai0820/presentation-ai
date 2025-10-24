@@ -36,7 +36,7 @@ export function ModelPicker({
       if (savedModel) {
         console.log("Restoring model from localStorage:", savedModel);
         setModelProvider(
-          savedModel.modelProvider as "openai" | "ollama" | "lmstudio",
+          savedModel.modelProvider as "openai" | "ollama" | "lmstudio" | "openrouter",
         );
         setModelId(savedModel.modelId);
       }
@@ -88,6 +88,8 @@ export function ModelPicker({
       return `ollama-${modelId}`;
     } else if (modelProvider === "lmstudio") {
       return `lmstudio-${modelId}`;
+    } else if (modelProvider === "openrouter") {
+      return `openrouter-${modelId}`;
     }
     return modelProvider;
   };
@@ -99,6 +101,14 @@ export function ModelPicker({
     if (currentValue === "openai") {
       return {
         label: "GPT-4o-mini",
+        icon: Bot,
+      };
+    }
+
+    if (currentValue.startsWith("openrouter-")) {
+      const modelName = modelId.split("/").pop() || modelId;
+      return {
+        label: modelName,
         icon: Bot,
       };
     }
@@ -137,6 +147,12 @@ export function ModelPicker({
       setModelId("");
       setSelectedModel("openai", "");
       console.log("Saved to localStorage: openai, ''");
+    } else if (value.startsWith("openrouter-")) {
+      const model = value.replace("openrouter-", "");
+      setModelProvider("openrouter");
+      setModelId(model);
+      setSelectedModel("openrouter", model);
+      console.log("Saved to localStorage: openrouter,", model);
     } else if (value.startsWith("ollama-")) {
       const model = value.replace("ollama-", "");
       setModelProvider("ollama");
@@ -193,16 +209,54 @@ export function ModelPicker({
             </SelectGroup>
           )}
 
+          {/* OpenRouter Group */}
+          <SelectGroup>
+            <SelectLabel>OpenRouter 模型</SelectLabel>
+            <SelectItem value="openrouter-x-ai/grok-2-fast">
+              <div className="flex items-center gap-3">
+                <Bot className="h-4 w-4 flex-shrink-0" />
+                <div className="flex flex-col min-w-0">
+                  <span className="truncate text-sm">Grok 2 Fast (推荐)</span>
+                  <span className="text-xs text-muted-foreground truncate">
+                    快速响应的 Grok 2 模型
+                  </span>
+                </div>
+              </div>
+            </SelectItem>
+            <SelectItem value="openrouter-anthropic/claude-3.5-sonnet">
+              <div className="flex items-center gap-3">
+                <Bot className="h-4 w-4 flex-shrink-0" />
+                <div className="flex flex-col min-w-0">
+                  <span className="truncate text-sm">Claude 3.5 Sonnet</span>
+                  <span className="text-xs text-muted-foreground truncate">
+                    Anthropic 高质量模型
+                  </span>
+                </div>
+              </div>
+            </SelectItem>
+            <SelectItem value="openrouter-openai/gpt-4o">
+              <div className="flex items-center gap-3">
+                <Bot className="h-4 w-4 flex-shrink-0" />
+                <div className="flex flex-col min-w-0">
+                  <span className="truncate text-sm">GPT-4o</span>
+                  <span className="text-xs text-muted-foreground truncate">
+                    OpenAI 最新多模态模型
+                  </span>
+                </div>
+              </div>
+            </SelectItem>
+          </SelectGroup>
+
           {/* OpenAI Group */}
           <SelectGroup>
-            <SelectLabel>Cloud Models</SelectLabel>
+            <SelectLabel>OpenAI 直连 (需要单独配置)</SelectLabel>
             <SelectItem value="openai">
               <div className="flex items-center gap-3">
                 <Bot className="h-4 w-4 flex-shrink-0" />
                 <div className="flex flex-col min-w-0">
                   <span className="truncate text-sm">GPT-4o-mini</span>
                   <span className="text-xs text-muted-foreground truncate">
-                    Cloud-based AI model
+                    OpenAI 官方 API
                   </span>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 "use server";
 
 import { type PlateSlide } from "@/components/presentation/utils/parser";
+import { getUserIdOrDev } from "@/lib/dev-user";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import { type InputJsonValue } from "@prisma/client/runtime/library";
@@ -25,10 +26,7 @@ export async function createPresentation({
   language?: string;
 }) {
   const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
-  const userId = session.user.id;
+  const userId = await getUserIdOrDev(session);
 
   try {
     const presentation = await db.baseDocument.create({
@@ -111,9 +109,7 @@ export async function updatePresentation({
   thumbnailUrl?: string;
 }) {
   const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  await getUserIdOrDev(session); // 确保用户存在
 
   try {
     // Extract values from content if provided there
@@ -162,9 +158,7 @@ export async function updatePresentation({
 
 export async function updatePresentationTitle(id: string, title: string) {
   const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  await getUserIdOrDev(session); // 确保用户存在
 
   try {
     const presentation = await db.baseDocument.update({
@@ -195,9 +189,7 @@ export async function deletePresentation(id: string) {
 
 export async function deletePresentations(ids: string[]) {
   const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  const userId = await getUserIdOrDev(session); // 确保用户存在
 
   try {
     // Delete the base documents using deleteMany (this will cascade delete the presentations)
@@ -206,7 +198,7 @@ export async function deletePresentations(ids: string[]) {
         id: {
           in: ids,
         },
-        userId: session.user.id, // Ensure only user's own presentations can be deleted
+        userId, // Ensure only user's own presentations can be deleted
       },
     });
 
@@ -243,7 +235,8 @@ export async function deletePresentations(ids: string[]) {
 // Get the presentation with the presentation content
 export async function getPresentation(id: string) {
   const session = await auth();
-  if (!session?.user) {
+  const userId = await getUserIdOrDev(session);
+  if (!userId) {
     throw new Error("Unauthorized");
   }
 

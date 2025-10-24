@@ -43,7 +43,7 @@ export function ImageSourceSelector({
   return (
     <div className={className}>
       {showLabel && (
-        <Label className="text-sm font-medium mb-2 block">Image Source</Label>
+        <Label className="text-sm font-medium mb-2 block">图片来源</Label>
       )}
       <Select
         value={
@@ -65,13 +65,13 @@ export function ImageSourceSelector({
         }}
       >
         <SelectTrigger>
-          <SelectValue placeholder="Select image generation method" />
+          <SelectValue placeholder="选择图片生成方法" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel className="text-primary/80 flex items-center gap-1">
               <Wand2 size={10} />
-              AI Generation
+              AI 生成
             </SelectLabel>
             {IMAGE_MODELS.map((model) => (
               <SelectItem key={model.value} value={model.value}>
@@ -82,7 +82,7 @@ export function ImageSourceSelector({
           <SelectGroup>
             <SelectLabel className="text-primary/80 flex items-center gap-1">
               <Image size={10} />
-              Stock Images
+              个性化图片
             </SelectLabel>
             <SelectItem value="stock-unsplash">Unsplash</SelectItem>
           </SelectGroup>

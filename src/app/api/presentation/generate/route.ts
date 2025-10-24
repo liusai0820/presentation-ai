@@ -1,3 +1,4 @@
+import { getUserIdOrDev } from "@/lib/dev-user";
 import { modelPicker } from "@/lib/model-picker";
 import { auth } from "@/server/auth";
 import { streamText } from "ai";
@@ -234,9 +235,8 @@ Now create a complete XML presentation with {TOTAL_SLIDES} slides that significa
 export async function POST(req: Request) {
   try {
     const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // 开发模式:确保测试用户存在
+    await getUserIdOrDev(session);
 
     const {
       title,

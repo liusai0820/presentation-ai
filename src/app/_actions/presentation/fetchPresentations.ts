@@ -1,6 +1,7 @@
 "use server";
 import "server-only";
 
+import { getUserIdOrDev } from "@/lib/dev-user";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import { type Prisma, DocumentType } from "@prisma/client";
@@ -15,14 +16,7 @@ const ITEMS_PER_PAGE = 10;
 
 export async function fetchPresentations(page = 0) {
   const session = await auth();
-  const userId = session?.user.id;
-
-  if (!userId) {
-    return {
-      items: [],
-      hasMore: false,
-    };
-  }
+  const userId = await getUserIdOrDev(session);
 
   const skip = page * ITEMS_PER_PAGE;
 
@@ -88,7 +82,7 @@ export async function fetchPublicPresentations(page = 0) {
 
 export async function fetchUserPresentations(userId: string, page = 0) {
   const session = await auth();
-  const currentUserId = session?.user.id;
+  const currentUserId = await getUserIdOrDev(session);
 
   const skip = page * ITEMS_PER_PAGE;
 

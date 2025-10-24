@@ -19,9 +19,11 @@ import debounce from "lodash.debounce";
 import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { HTMLPresentationView } from "./HTMLPresentationView";
 import { LoadingState } from "./Loading";
 import { PresentationLayout } from "./PresentationLayout";
 import { PresentationSlidesView } from "./PresentationSlidesView";
+import { RevealJSPresentationView } from "./RevealJSPresentationView";
 
 export default function PresentationPage() {
   const params = useParams();
@@ -48,7 +50,22 @@ export default function PresentationPage() {
   );
   const currentSlideIndex = usePresentationState((s) => s.currentSlideIndex);
   const setLanguage = usePresentationState((s) => s.setLanguage);
+  const generationMode = usePresentationState((s) => s.generationMode);
+  const htmlSlides = usePresentationState((s) => s.htmlSlides);
+  const generatedHtml = usePresentationState((s) => s.generatedHtml);
   const theme = usePresentationState((s) => s.theme);
+
+  // 调试日志
+  useEffect(() => {
+    console.log("🎭 Main组件状态:");
+    console.log("  - generationMode:", generationMode);
+    console.log("  - htmlSlides.length:", htmlSlides.length);
+    console.log("  - generatedHtml:", generatedHtml ? "有" : "无");
+    console.log(
+      "  - 条件判断结果:",
+      generationMode === "html" && htmlSlides.length > 0,
+    );
+  }, [generationMode, htmlSlides, generatedHtml]);
   // Track the theme value as it exists in the database to avoid redundant saves on hydration
   const dbThemeRef = useRef<string | null>(null);
 
@@ -278,7 +295,7 @@ export default function PresentationPage() {
     return null;
   })();
 
-  if (isLoading) {
+  if (isLoading || isGeneratingPresentation) {
     return <LoadingState />;
   }
 
@@ -289,9 +306,18 @@ export default function PresentationPage() {
     >
       <div className="mx-auto max-w-[90%] space-y-8 pt-16">
         <div className="space-y-8">
-          <PresentationSlidesView
-            isGeneratingPresentation={isGeneratingPresentation}
-          />
+          {generationMode === "revealjs" && generatedHtml ? (
+            // Reveal.js模式
+            <RevealJSPresentationView />
+          ) : generationMode === "html" && htmlSlides.length > 0 ? (
+            // HTML幻灯片模式
+            <HTMLPresentationView />
+          ) : (
+            // XML组件模式（原有逻辑）
+            <PresentationSlidesView
+              isGeneratingPresentation={isGeneratingPresentation}
+            />
+          )}
         </div>
       </div>
     </PresentationLayout>

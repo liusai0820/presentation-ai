@@ -1,0 +1,1187 @@
+/**
+ * Bain主题 - Bain & Company
+ * 专业级商业演示文稿样式
+ * 
+ * 设计理念:
+ * - 经典可信
+ * - 结果导向
+ * - 商业稳重
+ * - 数据权威
+ * 
+ * 品牌色彩:
+ * - Bain红: #E31937 (主色)
+ * - 深红: #B31429 (深色调)
+ * - 亮红: #FF2D4F (亮色调)
+ * - 深灰: #333333 (文字)
+ * - 白色: #ffffff (背景)
+ */
+
+/* ==================== 全局设置 ==================== */
+
+body {
+  background: #ffffff;
+}
+
+.reveal {
+  font-family: Georgia, 'Times New Roman', Times, 'Songti SC', 'SimSun', serif;
+  background: #ffffff;
+  color: #333333;
+}
+
+/* ==================== 幻灯片容器 ==================== */
+
+.reveal .slides {
+  background: #ffffff !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal .slides section {
+  background: #ffffff !important;
+  color: #333333 !important;
+  text-align: left !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  font-size: 20px !important;
+  line-height: 1.7 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+/* 封面页特殊样式 - 垂直居中 */
+.reveal .slides section.cover {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 80px;
+  background: #E31937 !important;
+}
+
+.reveal .slides section.cover h1,
+.reveal .slides section.cover h2,
+.reveal .slides section.cover p {
+  color: white !important;
+  border-color: white !important;
+}
+
+/* 标准内容页 */
+.reveal .slides section:not(.cover) {
+  padding: 30px 20px 25px 20px !important;
+}
+
+/* ==================== 页面结构 ==================== */
+
+/* 页眉区域 - 固定在顶部 */
+.slide-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 15px 20px;
+  background: #ffffff;
+  z-index: 10;
+}
+
+/* 内容区域 - 在页眉下方 */
+.slide-content {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+  margin-top: 0;
+}
+
+/* 页脚区域 - 固定在底部 */
+.slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-top: 2px solid #E31937;
+  font-size: 0.7em;
+  color: #666666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* ==================== 标题层级 ==================== */
+
+/* H1 - 用于封面页 */
+.reveal h1 {
+  font-size: 2.6em !important;
+  font-weight: 700 !important;
+  color: #E31937 !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.5em !important;
+  letter-spacing: -0.01em !important;
+  display: block !important;
+}
+
+/* H2 - 用于页面标题(页眉) */
+.reveal h2 {
+  font-size: 1.7em !important;
+  font-weight: 600 !important;
+  color: #333333 !important;
+  text-transform: none !important;
+  line-height: 1.3 !important;
+  margin: 0 0 20px 0 !important;
+  padding-bottom: 0.5em !important;
+  border-bottom: 3px solid #E31937 !important;
+  display: block !important;
+}
+
+.reveal h3 {
+  font-size: 1.3em !important;
+  font-weight: 600 !important;
+  color: #444444 !important;
+  text-transform: none !important;
+  margin-bottom: 0.6em !important;
+  margin-top: 0.9em !important;
+  display: block !important;
+}
+
+.reveal h4 {
+  font-size: 0.85em !important;
+  font-weight: 700 !important;
+  color: #E31937 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  margin-bottom: 0.5em !important;
+  display: block !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* ==================== 段落和文本 ==================== */
+
+.reveal p {
+  color: #333333;
+  line-height: 1.8;
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+.reveal strong {
+  font-weight: 700;
+  color: #333333;
+}
+
+.reveal em {
+  font-style: italic;
+  color: #555555;
+}
+
+/* ==================== 数据卡片 - Bain经典风格 ==================== */
+
+.data-card {
+  background: #ffffff;
+  border: 3px solid #E31937;
+  border-radius: 0;
+  padding: 30px 32px;
+  margin: 15px 0;
+  box-shadow: 5px 5px 0 rgba(227, 25, 55, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.data-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(135deg, #E31937 0%, #FF2D4F 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.data-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 rgba(227, 25, 55, 0.18);
+  border-color: #B31429;
+}
+
+.data-card h3,
+.data-card h4 {
+  margin-top: 0;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #E31937;
+  margin-bottom: 0.9em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.data-value {
+  font-size: 3.4em;
+  font-weight: 700;
+  line-height: 1;
+  color: #E31937;
+  margin: 0.3em 0 0.5em 0;
+  letter-spacing: -0.02em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.data-card p {
+  font-size: 0.9em;
+  line-height: 1.7;
+  color: #555555;
+  margin: 0;
+}
+
+/* ==================== 布局系统 ==================== */
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 45px;
+  margin: 20px 0;
+}
+
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+/* ==================== 列表样式 ==================== */
+
+.reveal ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ul li {
+  position: relative;
+  padding-left: 38px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+  color: #333333;
+}
+
+.reveal ul li::before {
+  content: '■';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #E31937;
+  font-size: 0.85em;
+  font-weight: 900;
+}
+
+.reveal ol {
+  counter-reset: item;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ol li {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+  counter-increment: item;
+  color: #333333;
+}
+
+.reveal ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  min-width: 36px;
+  height: 36px;
+  background: #E31937;
+  color: white;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  box-shadow: 3px 3px 0 rgba(227, 25, 55, 0.2);
+}
+
+/* ==================== 强调元素 ==================== */
+
+.highlight {
+  color: #E31937;
+  font-weight: 600;
+  background: rgba(227, 25, 55, 0.1);
+  padding: 2px 10px;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+
+.highlight:hover {
+  background: rgba(227, 25, 55, 0.15);
+}
+
+.key-number {
+  font-size: 1.9em;
+  font-weight: 700;
+  color: #E31937;
+  display: inline-block;
+  margin: 0 0.15em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.badge {
+  display: inline-block;
+  padding: 7px 18px;
+  background: #E31937;
+  color: white;
+  border-radius: 0;
+  font-size: 0.6em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 6px 6px 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  box-shadow: 3px 3px 0 rgba(227, 25, 55, 0.25);
+  transition: all 0.2s ease;
+}
+
+.badge:hover {
+  box-shadow: 4px 4px 0 rgba(227, 25, 55, 0.35);
+  transform: translate(-1px, -1px);
+}
+
+/* ==================== 分隔线 ==================== */
+
+.divider {
+  height: 3px;
+  background: #E31937;
+  margin: 32px 0;
+  border: none;
+}
+
+/* ==================== 图表容器 ==================== */
+
+.chart-container {
+  background: #f9f9f9;
+  border: 3px solid #E31937;
+  border-radius: 0;
+  padding: 28px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 0 rgba(227, 25, 55, 0.15);
+}
+
+.chart-container:hover {
+  box-shadow: 0 5px 0 rgba(227, 25, 55, 0.25);
+  transform: translateY(-2px);
+}
+
+.chart-container h4 {
+  margin-top: 0;
+  margin-bottom: 0.8em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ==================== 引用块 ==================== */
+
+.reveal blockquote {
+  border-left: 6px solid #E31937;
+  padding: 24px 36px;
+  margin: 1.5em 0;
+  background: #f9f9f9;
+  font-style: italic;
+  color: #444444;
+  font-size: 1.1em;
+  line-height: 1.8;
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+}
+
+.reveal blockquote::before {
+  content: '"';
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 4em;
+  color: rgba(227, 25, 55, 0.15);
+  font-family: Georgia, serif;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.reveal blockquote p {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==================== 表格样式 ==================== */
+
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+  font-size: 0.85em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #E31937;
+}
+
+.reveal table th {
+  background: #E31937;
+  color: white;
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.reveal table td {
+  padding: 16px 20px;
+  border-bottom: 2px solid #e8e8e8;
+  color: #333333;
+  background: white;
+}
+
+.reveal table tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal table tr:hover td {
+  background: #f9f9f9;
+}
+
+/* 表格斑马纹 */
+.reveal table tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.reveal table tbody tr:nth-child(even):hover {
+  background: #f5f6f7;
+}
+
+/* ==================== 图片样式 ==================== */
+
+.reveal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e8e8e8;
+}
+
+.reveal figure {
+  margin: 30px 0;
+}
+
+.reveal figcaption {
+  font-size: 0.8em;
+  color: #666666;
+  text-align: center;
+  margin-top: 0.5em;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+
+/* ==================== 代码块 ==================== */
+
+.reveal pre {
+  background: #f5f5f5;
+  border-left: 4px solid #E31937;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 0;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+}
+
+.reveal code {
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #E31937;
+  background: rgba(227, 25, 55, 0.08);
+  padding: 0.2em 0.4em;
+  border-radius: 0;
+}
+
+.reveal pre code {
+  color: #333333;
+  background: transparent;
+  padding: 0;
+}
+
+/* ==================== 控制元素 ==================== */
+
+.reveal .controls {
+  color: #E31937;
+}
+
+.reveal .controls button {
+  color: #E31937;
+}
+
+.reveal .controls button:hover {
+  color: #B31429;
+}
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.1);
+  height: 4px;
+}
+
+.reveal .progress span {
+  background: #E31937;
+}
+
+.reveal .slide-number {
+  color: #666666;
+  background: transparent;
+  padding: 0;
+  font-size: 0.75em;
+  font-weight: 600;
+  bottom: 12px;
+  right: 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ==================== ECharts图表样式 ==================== */
+
+.chart-wrapper {
+  background: #ffffff;
+  border: 2px solid #E31937;
+  border-radius: 0;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.chart-wrapper h4 {
+  margin-top: 0;
+  margin-bottom: 0.6em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+/* ==================== 进度条 ==================== */
+
+.progress-bar {
+  background: #e8e8e8;
+  height: 30px;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 16px 0;
+  position: relative;
+  border: 2px solid #E31937;
+}
+
+.progress-fill {
+  background: #E31937;
+  height: 100%;
+  border-radius: 0;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.6em;
+  color: white;
+  font-size: 0.7em;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #B31429;
+}
+
+.progress-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-bottom: 0.4em;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ==================== 时间线 ==================== */
+
+.timeline {
+  position: relative;
+  padding-left: 50px;
+  margin: 30px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #E31937;
+  border-radius: 0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 24px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -42px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background: #E31937;
+  border: 4px solid #ffffff;
+  border-radius: 0;
+  box-shadow: 0 0 0 4px rgba(227, 25, 55, 0.25);
+  transform: rotate(45deg);
+}
+
+.timeline-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  color: #E31937;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.timeline-item p {
+  margin: 0;
+  color: #555555;
+  font-size: 0.9em;
+}
+
+/* ==================== 流程图 ==================== */
+
+.process-flow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  flex: 1;
+  padding: 24px 18px;
+  background: #ffffff;
+  border: 3px solid #E31937;
+  border-radius: 0;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 3px 3px 0 rgba(227, 25, 55, 0.15);
+}
+
+.flow-step:hover {
+  background: #fafafa;
+  box-shadow: 5px 5px 0 rgba(227, 25, 55, 0.25);
+  transform: translate(-2px, -2px);
+}
+
+.flow-step::after {
+  content: '▶';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #E31937;
+  font-weight: 900;
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-step h4 {
+  margin: 0 0 0.4em 0;
+  color: #E31937;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.flow-step p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555555;
+  line-height: 1.6;
+  font-family: Georgia, serif;
+}
+
+/* ==================== 指标卡片网格 ==================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 3px solid #E31937;
+  border-radius: 0;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(227, 25, 55, 0.12);
+}
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent #E31937 transparent transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(227, 25, 55, 0.2);
+  background: #fafafa;
+}
+
+.metric-card:hover::after {
+  opacity: 1;
+}
+
+.metric-value {
+  font-size: 2.9em;
+  font-weight: 700;
+  color: #E31937;
+  line-height: 1;
+  margin: 0 0 0.5em 0;
+  letter-spacing: -0.02em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.metric-label {
+  font-size: 0.7em;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.9em;
+  display: block;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.metric-change {
+  font-size: 0.75em;
+  margin-top: 0.7em;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.metric-change.positive {
+  color: #00A758;
+}
+
+.metric-change.negative {
+  color: #E31937;
+}
+
+/* ==================== 对比卡片 ==================== */
+
+.comparison-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 24px 0;
+}
+
+.comparison-card {
+  background: #ffffff;
+  border: 3px solid #e8e8e8;
+  border-radius: 0;
+  padding: 32px;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.comparison-card.highlight {
+  border-color: #E31937;
+  background: #fafafa;
+  box-shadow: 5px 5px 0 rgba(227, 25, 55, 0.15);
+}
+
+.comparison-card h3 {
+  margin-top: 0;
+  color: #E31937;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.comparison-badge {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  background: #E31937;
+  color: white;
+  padding: 6px 18px;
+  border-radius: 0;
+  font-size: 0.65em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  box-shadow: 2px 2px 0 rgba(227, 25, 55, 0.3);
+}
+
+/* ==================== 图标列表 ==================== */
+
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.icon-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding-left: 0;
+}
+
+.icon-list li::before {
+  display: none;
+}
+
+.icon-list .icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  background: #E31937;
+  color: white;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 rgba(227, 25, 55, 0.25);
+}
+
+/* ==================== 统计数字行 ==================== */
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 32px 0;
+  padding: 32px;
+  background: #f9f9f9;
+  border-radius: 0;
+  border: 3px solid #E31937;
+}
+
+.stat-item {
+  text-align: center;
+  position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60px;
+  background: #E31937;
+}
+
+.stat-number {
+  font-size: 2.9em;
+  font-weight: 700;
+  color: #E31937;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-top: 0.4em;
+  font-weight: 600;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ==================== 全屏模式 ==================== */
+
+.reveal:fullscreen,
+.reveal:-webkit-full-screen,
+.reveal:-moz-full-screen,
+.reveal:-ms-fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal:fullscreen .slides,
+.reveal:-webkit-full-screen .slides,
+.reveal:-moz-full-screen .slides,
+.reveal:-ms-fullscreen .slides {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .two-columns,
+  .three-columns,
+  .sidebar-layout,
+  .comparison-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .reveal .slides section {
+    padding: 20px 15px !important;
+  }
+
+  .flow-step::after {
+    content: '▼';
+    right: 50%;
+    transform: translateX(50%);
+    bottom: -20px;
+    top: auto;
+  }
+
+  .process-flow {
+    flex-direction: column;
+  }
+
+  .stat-item:not(:last-child)::after {
+    display: none;
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .reveal .slides section {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .reveal .controls,
+  .reveal .progress,
+  .reveal .slide-number {
+    display: none;
+  }
+
+  .data-card,
+  .metric-card,
+  .comparison-card,
+  .flow-step {
+    box-shadow: none;
+    border: 2px solid #E31937;
+  }
+}
+
+/* ==================== 动画效果 ==================== */
+
+.data-card,
+.chart-container,
+.reveal table,
+.metric-card,
+.flow-step {
+  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: #666666;
+  opacity: 0.75;
+}
+
+.text-small {
+  font-size: 0.8em;
+}
+
+.mt-1 {
+  margin-top: 0.5em;
+}
+
+.mt-2 {
+  margin-top: 1em;
+}
+
+.mt-3 {
+  margin-top: 1.5em;
+}
+
+.mt-4 {
+  margin-top: 2em;
+}
+
+.mb-1 {
+  margin-bottom: 0.5em;
+}
+
+.mb-2 {
+  margin-bottom: 1em;
+}
+
+.mb-3 {
+  margin-bottom: 1.5em;
+}
+
+.mb-4 {
+  margin-bottom: 2em;
+}
+
+/* ==================== 特殊效果类 ==================== */
+
+.bold-text {
+  font-weight: 700;
+  color: #E31937;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.accent-box {
+  background: rgba(227, 25, 55, 0.08);
+  border-left: 5px solid #E31937;
+  padding: 20px 24px;
+  border-radius: 0;
+  margin: 20px 0;
+  box-shadow: 3px 3px 0 rgba(227, 25, 55, 0.1);
+}
+
+.callout {
+  background: #E31937;
+  color: white;
+  padding: 24px 28px;
+  border-radius: 0;
+  margin: 24px 0;
+  box-shadow: 5px 5px 0 rgba(227, 25, 55, 0.3);
+  position: relative;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: #B31429;
+}
+
+.callout h3,
+.callout h4 {
+  color: white !important;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.callout p {
+  color: white;
+  margin: 0;
+}
+
+.emphasis-box {
+  border: 3px solid #E31937;
+  padding: 24px;
+  margin: 20px 0;
+  background: #ffffff;
+  box-shadow: 5px 5px 0 rgba(227, 25, 55, 0.15);
+  position: relative;
+}
+
+.emphasis-box::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
+  background: #E31937;
+}

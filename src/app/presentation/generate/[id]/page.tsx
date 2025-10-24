@@ -6,16 +6,12 @@ import { ThinkingDisplay } from "@/components/presentation/dashboard/ThinkingDis
 import { Header } from "@/components/presentation/outline/Header";
 import { OutlineList } from "@/components/presentation/outline/OutlineList";
 import { PromptInput } from "@/components/presentation/outline/PromptInput";
+import { ThemeSelector } from "@/components/presentation/outline/ThemeSelector";
 import { ToolCallDisplay } from "@/components/presentation/outline/ToolCallDisplay";
 import { ThemeBackground } from "@/components/presentation/theme/ThemeBackground";
-import { ThemeSettings } from "@/components/presentation/theme/ThemeSettings";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import {
-  themes,
-  type ThemeProperties,
-  type Themes,
-} from "@/lib/presentation/themes";
+import { type Themes, themes, type ThemeProperties } from "@/lib/presentation/themes";
 import { usePresentationState } from "@/states/presentation-state";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Wand2 } from "lucide-react";
@@ -29,6 +25,7 @@ export default function PresentationGenerateWithIdPage() {
   const params = useParams();
   const id = params.id as string;
   const {
+    presentationInput,
     setCurrentPresentation,
     setPresentationInput,
     startPresentationGeneration,
@@ -80,15 +77,15 @@ export default function PresentationGenerateWithIdPage() {
   }, []);
 
   // This effect handles the immediate startup of generation upon first mount
-  // only if we're coming fresh from the dashboard (isGeneratingOutline === true)
+  // Check if presentationInput exists (which means we came from dashboard with content)
   useEffect(() => {
     // Only run once on initial page load
     if (initialLoadComplete.current) return;
     initialLoadComplete.current = true;
 
-    // If isGeneratingOutline is true but generation hasn't been started yet,
+    // If we have presentationInput AND haven't started generation yet,
     // this indicates we just came from the dashboard and should start generation
-    if (isGeneratingOutline && !generationStarted.current) {
+    if (presentationInput && presentationInput.trim().length > 0 && !generationStarted.current) {
       console.log("Starting outline generation after navigation");
       generationStarted.current = true;
 
@@ -98,7 +95,7 @@ export default function PresentationGenerateWithIdPage() {
         setShouldStartOutlineGeneration(true);
       }, 100);
     }
-  }, [isGeneratingOutline, setShouldStartOutlineGeneration]);
+  }, [presentationInput, setShouldStartOutlineGeneration]);
 
   // Update presentation state when data is fetched
   useEffect(() => {
@@ -148,13 +145,13 @@ export default function PresentationGenerateWithIdPage() {
               } else {
                 // Fallback to default theme if custom theme not found
                 console.warn("Custom theme not found:", themeId);
-                setTheme("mystique");
+                setTheme("mckinsey");
               }
             })
             .catch((error) => {
               console.error("Failed to load custom theme:", error);
               // Fallback to default theme on error
-              setTheme("mystique");
+              setTheme("mckinsey");
             });
         }
       }
@@ -200,8 +197,8 @@ export default function PresentationGenerateWithIdPage() {
             <Spinner className="h-10 w-10 text-primary" />
           </div>
           <div className="space-y-2 text-center">
-            <h2 className="text-2xl font-bold">Loading Presentation Outline</h2>
-            <p className="text-muted-foreground">Please wait a moment...</p>
+            <h2 className="text-2xl font-bold">正在加载演示文稿大纲</h2>
+            <p className="text-muted-foreground">请稍候...</p>
           </div>
         </div>
       </ThemeBackground>
@@ -215,28 +212,24 @@ export default function PresentationGenerateWithIdPage() {
         onClick={() => router.back()}
       >
         <ArrowLeft className="h-4 w-4" />
-        Back
+        返回
       </Button>
 
       <div className="flex flex-row justify-center">
         {/* <GoogleAdsBanner isVertical={true} /> */}
 
-        <div className="max-w-4xl space-y-8 p-8 pt-6">
+        <div className="max-w-6xl space-y-8 p-8 pt-6">
           <div className="space-y-8">
             <Header />
             <PromptInput />
+            <ThemeSelector />
             <ThinkingDisplay
               thinking={outlineThinking}
               isGenerating={isGeneratingOutline}
-              title="AI is thinking about your outline..."
+              title="AI 正在思考..."
             />
             <ToolCallDisplay />
             <OutlineList />
-
-            <div className="!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6">
-              <h2 className="text-lg font-semibold">Customize Theme</h2>
-              <ThemeSettings />
-            </div>
           </div>
         </div>
 
@@ -251,7 +244,7 @@ export default function PresentationGenerateWithIdPage() {
           disabled={isGeneratingPresentation}
         >
           <Wand2 className="h-5 w-5" />
-          {isGeneratingPresentation ? "Generating..." : "Generate Presentation"}
+          {isGeneratingPresentation ? "正在生成..." : "生成演示文稿"}
         </Button>
       </div>
     </ThemeBackground>

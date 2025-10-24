@@ -11,10 +11,19 @@ export interface RevealTheme {
 
 // 自定义商业级主题配置
 export const REVEAL_THEMES: RevealTheme[] = [
-  // 顶级咨询公司主题（完全自定义）
+  // 顶级咨询公司主题
   { name: 'mckinsey', label: '麦肯锡 (推荐)', cssUrl: '/themes/mckinsey.css' },
   { name: 'bcg', label: 'BCG波士顿', cssUrl: '/themes/bcg.css' },
   { name: 'bain', label: '贝恩咨询', cssUrl: '/themes/bain.css' },
+  { name: 'deloitte', label: '德勤', cssUrl: '/themes/deloitte.css' },
+  
+  // 金融投行主题
+  { name: 'cicc', label: '中金公司', cssUrl: '/themes/cicc.css' },
+  { name: 'goldman', label: '高盛', cssUrl: '/themes/goldman.css' },
+  
+  // 现代风格主题
+  { name: 'apple', label: '苹果风格', cssUrl: '/themes/apple.css' },
+  { name: 'ted', label: 'TED演讲', cssUrl: '/themes/ted.css' },
 
   // Reveal.js 内置主题（备选）
   { name: 'white', label: 'Reveal白色', cssUrl: 'https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css' },

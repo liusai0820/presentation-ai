@@ -1,0 +1,374 @@
+/**
+ * 高盛主题 - Goldman Sachs Theme
+ * 经典蓝白配色，权威简洁的投行风格
+ * 特点：深蓝主色，极简设计，数据驱动，权威感强
+ */
+
+:root {
+  --goldman-blue: #0D47A1;
+  --goldman-light-blue: #1976D2;
+  --goldman-navy: #0A3D91;
+  --goldman-gray: #546E7A;
+  --goldman-light-gray: #ECEFF1;
+  --goldman-white: #FFFFFF;
+  --goldman-text: #263238;
+  --goldman-accent: #0D47A1;
+}
+
+.reveal {
+  font-family: "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--goldman-text);
+  background: var(--goldman-white);
+}
+
+/* 幻灯片容器 */
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 60px 80px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* 标题样式 - 极简风格 */
+.reveal h1 {
+  font-size: 3em;
+  font-weight: 700;
+  color: var(--goldman-blue);
+  margin-bottom: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  border-bottom: 4px solid var(--goldman-blue);
+  padding-bottom: 0.2em;
+}
+
+.reveal h2 {
+  font-size: 2.2em;
+  font-weight: 600;
+  color: var(--goldman-navy);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.01em;
+}
+
+.reveal h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--goldman-light-blue);
+  margin-top: 0.8em;
+  margin-bottom: 0.4em;
+}
+
+/* 段落与文本 */
+.reveal p {
+  margin: 0.7em 0;
+  line-height: 1.7;
+  font-size: 1em;
+  color: var(--goldman-text);
+}
+
+.reveal strong {
+  color: var(--goldman-blue);
+  font-weight: 700;
+}
+
+/* 列表样式 - 简洁专业 */
+.reveal ul, .reveal ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+
+.reveal ul li {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+.reveal ul li::marker {
+  color: var(--goldman-blue);
+  font-weight: bold;
+}
+
+.reveal ol li {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+.reveal ol li::marker {
+  color: var(--goldman-blue);
+  font-weight: 700;
+}
+
+/* 数据卡片 - 极简风格 */
+.reveal .data-card {
+  background: var(--goldman-blue);
+  padding: 32px;
+  border-radius: 0;
+  margin: 1.5em 0;
+  color: var(--goldman-white);
+  box-shadow: none;
+  border-left: 6px solid var(--goldman-white);
+}
+
+.reveal .data-card h3 {
+  color: var(--goldman-white);
+  margin-top: 0;
+  font-size: 1.2em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal .data-card .number {
+  font-size: 3.5em;
+  font-weight: 700;
+  color: var(--goldman-white);
+  margin: 0.2em 0;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+/* 统计卡片 */
+.reveal .stat-card {
+  background: var(--goldman-white);
+  border: 3px solid var(--goldman-light-gray);
+  padding: 28px;
+  border-radius: 0;
+  margin: 1em 0;
+  transition: all 0.3s ease;
+}
+
+.reveal .stat-card:hover {
+  border-color: var(--goldman-blue);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.15);
+}
+
+.reveal .stat-card .label {
+  font-size: 0.85em;
+  color: var(--goldman-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+}
+
+.reveal .stat-card .value {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: var(--goldman-blue);
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+/* 引用块 - 极简边框 */
+.reveal blockquote {
+  background: var(--goldman-light-gray);
+  border-left: 8px solid var(--goldman-blue);
+  margin: 1.5em 0;
+  padding: 1.5em 2em;
+  font-style: normal;
+  color: var(--goldman-text);
+  box-shadow: none;
+  font-size: 1.1em;
+}
+
+.reveal blockquote p {
+  margin: 0;
+}
+
+/* 表格样式 - 极简线条 */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.9em;
+  width: 100%;
+  border: 2px solid var(--goldman-light-gray);
+}
+
+.reveal table thead {
+  background: var(--goldman-blue);
+  color: var(--goldman-white);
+}
+
+.reveal table th {
+  padding: 18px 16px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85em;
+}
+
+.reveal table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--goldman-light-gray);
+}
+
+.reveal table tbody tr:hover {
+  background: var(--goldman-light-gray);
+}
+
+/* 网格布局 */
+.reveal .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 1.5em 0;
+}
+
+.reveal .grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin: 1.5em 0;
+}
+
+/* 标签 - 极简设计 */
+.reveal .badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--goldman-blue);
+  color: var(--goldman-white);
+  border-radius: 0;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 8px 8px 0;
+}
+
+.reveal .badge.outline {
+  background: transparent;
+  border: 2px solid var(--goldman-blue);
+  color: var(--goldman-blue);
+}
+
+/* 进度条 - 简洁线条 */
+.reveal .progress-bar {
+  background: var(--goldman-light-gray);
+  height: 8px;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 1em 0;
+}
+
+.reveal .progress-bar-fill {
+  height: 100%;
+  background: var(--goldman-blue);
+  transition: width 1s ease;
+}
+
+/* 分隔线 */
+.reveal hr {
+  border: none;
+  height: 2px;
+  background: var(--goldman-light-gray);
+  margin: 2em 0;
+}
+
+/* 高亮框 */
+.reveal .highlight-box {
+  background: var(--goldman-light-gray);
+  padding: 24px 28px;
+  margin: 1.5em 0;
+  border-left: 6px solid var(--goldman-blue);
+}
+
+.reveal .highlight-box h3 {
+  margin-top: 0;
+  color: var(--goldman-blue);
+}
+
+/* 图标列表 */
+.reveal .check-list {
+  list-style: none;
+  padding: 0;
+}
+
+.reveal .check-list li {
+  padding: 10px 0;
+  padding-left: 36px;
+  position: relative;
+}
+
+.reveal .check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--goldman-blue);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* 控制按钮 */
+.reveal .controls {
+  color: var(--goldman-blue);
+}
+
+.reveal .controls button {
+  color: var(--goldman-blue) !important;
+}
+
+/* 进度条 */
+.reveal .progress {
+  background: var(--goldman-light-gray);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: var(--goldman-blue);
+}
+
+/* 页码 */
+.reveal .slide-number {
+  background: var(--goldman-blue);
+  color: var(--goldman-white);
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 0;
+  font-size: 0.9em;
+}
+
+/* 链接 */
+.reveal a {
+  color: var(--goldman-blue);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid var(--goldman-blue);
+  transition: all 0.2s ease;
+}
+
+.reveal a:hover {
+  color: var(--goldman-navy);
+  border-bottom-color: var(--goldman-navy);
+}
+
+/* 数字网格 */
+.reveal .number-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 1.5em 0;
+}
+
+.reveal .number-grid .item {
+  text-align: center;
+  padding: 24px;
+  border: 2px solid var(--goldman-light-gray);
+}
+
+.reveal .number-grid .item .number {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--goldman-blue);
+}
+
+.reveal .number-grid .item .label {
+  font-size: 0.9em;
+  color: var(--goldman-gray);
+  margin-top: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

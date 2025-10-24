@@ -1,0 +1,481 @@
+/**
+ * TED演讲主题 - TED Talk Theme
+ * 红黑配色，大胆醒目的演讲分享风格
+ * 特点：TED红主色，强烈对比，故事叙述，情感共鸣
+ */
+
+:root {
+  --ted-red: #E62B1E;
+  --ted-dark-red: #C72317;
+  --ted-black: #000000;
+  --ted-white: #FFFFFF;
+  --ted-gray: #2C2C2C;
+  --ted-light-gray: #F2F2F2;
+}
+
+.reveal {
+  font-family: "Helvetica Neue", "Arial", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--ted-white);
+  background: var(--ted-black);
+}
+
+/* 幻灯片容器 */
+.reveal .slides {
+  text-align: center;
+}
+
+.reveal .slides section {
+  padding: 70px 90px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 标题样式 - 大胆醒目 */
+.reveal h1 {
+  font-size: 3.8em;
+  font-weight: 900;
+  color: var(--ted-white);
+  margin-bottom: 0.4em;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-shadow: 0 4px 20px rgba(230, 43, 30, 0.5);
+}
+
+.reveal h1 span.ted-highlight {
+  color: var(--ted-red);
+}
+
+.reveal h2 {
+  font-size: 2.6em;
+  font-weight: 700;
+  color: var(--ted-red);
+  margin-top: 0.8em;
+  margin-bottom: 0.5em;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.reveal h3 {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--ted-white);
+  margin-top: 0.7em;
+  margin-bottom: 0.4em;
+  line-height: 1.2;
+}
+
+/* 段落与文本 */
+.reveal p {
+  margin: 0.7em 0;
+  line-height: 1.6;
+  font-size: 1.15em;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  max-width: 850px;
+}
+
+.reveal strong {
+  color: var(--ted-red);
+  font-weight: 700;
+}
+
+/* 副标题样式 */
+.reveal .subtitle {
+  font-size: 1.6em;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  margin-top: -0.2em;
+  margin-bottom: 1.5em;
+  font-style: italic;
+}
+
+/* 列表样式 - 醒目 */
+.reveal ul {
+  margin: 1.2em auto;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  max-width: 800px;
+}
+
+.reveal ul li {
+  margin: 0.8em 0;
+  line-height: 1.5;
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.9);
+  padding-left: 40px;
+  position: relative;
+}
+
+.reveal ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--ted-red);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.reveal ol {
+  margin: 1.2em auto;
+  padding: 0;
+  list-style: none;
+  counter-reset: item;
+  text-align: left;
+  max-width: 800px;
+}
+
+.reveal ol li {
+  margin: 0.8em 0;
+  line-height: 1.5;
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.9);
+  counter-increment: item;
+  padding-left: 50px;
+  position: relative;
+}
+
+.reveal ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  color: var(--ted-white);
+  background: var(--ted-red);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+/* 数据卡片 - 强烈对比 */
+.reveal .data-card {
+  background: var(--ted-red);
+  padding: 50px 40px;
+  border-radius: 0;
+  margin: 2em auto;
+  color: var(--ted-white);
+  max-width: 650px;
+  box-shadow: 0 10px 40px rgba(230, 43, 30, 0.4);
+  border: 4px solid var(--ted-white);
+}
+
+.reveal .data-card h3 {
+  color: var(--ted-white);
+  margin-top: 0;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.reveal .data-card .number {
+  font-size: 5.5em;
+  font-weight: 900;
+  color: var(--ted-white);
+  margin: 0.2em 0;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 引用块 - 大胆展示 */
+.reveal blockquote {
+  background: transparent;
+  border-left: 8px solid var(--ted-red);
+  margin: 2em auto;
+  padding: 1em 2em;
+  font-style: italic;
+  color: var(--ted-white);
+  font-size: 2em;
+  font-weight: 500;
+  max-width: 850px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.reveal blockquote::before {
+  content: """;
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  font-size: 4em;
+  color: var(--ted-red);
+  font-family: Georgia, serif;
+}
+
+/* 故事卡片 */
+.reveal .story-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 8px;
+  margin: 1.5em auto;
+  max-width: 750px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.reveal .story-card .title {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--ted-red);
+  margin-bottom: 0.5em;
+}
+
+.reveal .story-card .content {
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* 表格样式 */
+.reveal table {
+  border-collapse: collapse;
+  margin: 2em auto;
+  font-size: 0.95em;
+  max-width: 900px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.reveal table thead {
+  background: var(--ted-red);
+  color: var(--ted-white);
+}
+
+.reveal table th {
+  padding: 18px 16px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9em;
+}
+
+.reveal table td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.reveal table tbody tr:hover {
+  background: rgba(230, 43, 30, 0.1);
+}
+
+/* 网格布局 */
+.reveal .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 2em auto;
+  max-width: 1100px;
+}
+
+.reveal .grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin: 2em auto;
+  max-width: 1200px;
+}
+
+/* 标签 */
+.reveal .badge {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--ted-red);
+  color: var(--ted-white);
+  border-radius: 30px;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 8px 8px 0;
+  box-shadow: 0 4px 12px rgba(230, 43, 30, 0.4);
+}
+
+.reveal .badge.outline {
+  background: transparent;
+  border: 2px solid var(--ted-red);
+  color: var(--ted-red);
+  box-shadow: none;
+}
+
+/* 大数字展示 */
+.reveal .big-stat {
+  font-size: 7em;
+  font-weight: 900;
+  color: var(--ted-red);
+  margin: 0.3em 0;
+  letter-spacing: -0.03em;
+  text-shadow: 0 6px 20px rgba(230, 43, 30, 0.5);
+}
+
+/* 高亮框 */
+.reveal .highlight-box {
+  background: linear-gradient(135deg, var(--ted-red) 0%, var(--ted-dark-red) 100%);
+  padding: 30px 40px;
+  margin: 1.5em auto;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(230, 43, 30, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.reveal .highlight-box h3 {
+  margin-top: 0;
+  color: var(--ted-white);
+  font-size: 1.6em;
+}
+
+/* 进度条 */
+.reveal .progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.5em auto;
+  max-width: 700px;
+}
+
+.reveal .progress-bar-fill {
+  height: 100%;
+  background: var(--ted-red);
+  transition: width 1s ease;
+  box-shadow: 0 0 10px rgba(230, 43, 30, 0.6);
+}
+
+/* 分隔线 */
+.reveal hr {
+  border: none;
+  height: 3px;
+  background: var(--ted-red);
+  margin: 2.5em auto;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(230, 43, 30, 0.5);
+}
+
+/* 按钮 */
+.reveal .ted-button {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--ted-red);
+  color: var(--ted-white);
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(230, 43, 30, 0.4);
+}
+
+.reveal .ted-button:hover {
+  background: var(--ted-dark-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(230, 43, 30, 0.6);
+}
+
+/* 图标列表 */
+.reveal .icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 2em auto;
+  max-width: 800px;
+}
+
+.reveal .icon-list li {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  text-align: left;
+}
+
+.reveal .icon-list li .icon {
+  font-size: 2.5em;
+  width: 70px;
+  height: 70px;
+  background: var(--ted-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(230, 43, 30, 0.4);
+}
+
+/* 控制按钮 */
+.reveal .controls {
+  color: var(--ted-red);
+}
+
+.reveal .controls button {
+  color: var(--ted-red) !important;
+}
+
+/* 进度条 */
+.reveal .progress {
+  background: rgba(255, 255, 255, 0.1);
+  height: 4px;
+}
+
+.reveal .progress span {
+  background: var(--ted-red);
+  box-shadow: 0 0 10px rgba(230, 43, 30, 0.6);
+}
+
+/* 页码 */
+.reveal .slide-number {
+  background: var(--ted-red);
+  color: var(--ted-white);
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  box-shadow: 0 4px 12px rgba(230, 43, 30, 0.4);
+}
+
+/* 链接 */
+.reveal a {
+  color: var(--ted-red);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid var(--ted-red);
+  transition: all 0.3s ease;
+}
+
+.reveal a:hover {
+  color: var(--ted-white);
+  border-bottom-color: var(--ted-white);
+}
+
+/* 聚光灯效果 */
+.reveal .spotlight {
+  position: relative;
+  padding: 50px;
+  margin: 2em auto;
+  max-width: 750px;
+}
+
+.reveal .spotlight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(230, 43, 30, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}

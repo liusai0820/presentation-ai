@@ -10,7 +10,12 @@ export type ThemeName =
   | "forest"
   | "mckinsey"
   | "bcg"
-  | "bain";
+  | "bain"
+  | "deloitte"
+  | "cicc"
+  | "goldman"
+  | "apple"
+  | "ted";
 
 interface ThemeColors {
   primary: string;
@@ -567,6 +572,221 @@ export const themes: Record<ThemeName, ThemeProperties> = {
       dark: {
         card: "5px 5px 0 rgba(255, 45, 79, 0.2)",
         button: "3px 3px 0 rgba(255, 45, 79, 0.3)",
+      },
+    },
+  },
+
+  deloitte: {
+    name: "Deloitte",
+    description: "Fresh & professional",
+    colors: {
+      light: {
+        primary: "#86BC25",
+        secondary: "#6FA01E",
+        accent: "#B4D933",
+        background: "#FFFFFF",
+        text: "#2C2C2C",
+        heading: "#000000",
+        muted: "#7A7A7A",
+      },
+      dark: {
+        primary: "#B4D933",
+        secondary: "#86BC25",
+        accent: "#C5E86C",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Open Sans",
+      body: "Open Sans",
+    },
+    borderRadius: "8px",
+    transitions: {
+      default: "all 0.3s ease",
+    },
+    shadows: {
+      light: {
+        card: "0 6px 20px rgba(134, 188, 37, 0.15)",
+        button: "0 4px 12px rgba(134, 188, 37, 0.2)",
+      },
+      dark: {
+        card: "0 6px 20px rgba(180, 217, 51, 0.2)",
+        button: "0 4px 12px rgba(180, 217, 51, 0.25)",
+      },
+    },
+  },
+
+  cicc: {
+    name: "CICC",
+    description: "Financial & sophisticated",
+    colors: {
+      light: {
+        primary: "#002B5C",
+        secondary: "#003D82",
+        accent: "#D4AF37",
+        background: "#FFFFFF",
+        text: "#1F2937",
+        heading: "#000000",
+        muted: "#6B7280",
+      },
+      dark: {
+        primary: "#003D82",
+        secondary: "#004B9F",
+        accent: "#F4E4C1",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Helvetica Neue",
+      body: "Helvetica Neue",
+    },
+    borderRadius: "12px",
+    transitions: {
+      default: "all 0.3s ease",
+    },
+    shadows: {
+      light: {
+        card: "0 8px 24px rgba(0, 43, 92, 0.15)",
+        button: "0 4px 12px rgba(0, 43, 92, 0.2)",
+      },
+      dark: {
+        card: "0 8px 24px rgba(0, 61, 130, 0.2)",
+        button: "0 4px 12px rgba(0, 61, 130, 0.25)",
+      },
+    },
+  },
+
+  goldman: {
+    name: "Goldman Sachs",
+    description: "Authoritative & minimal",
+    colors: {
+      light: {
+        primary: "#0D47A1",
+        secondary: "#1976D2",
+        accent: "#0A3D91",
+        background: "#FFFFFF",
+        text: "#263238",
+        heading: "#000000",
+        muted: "#546E7A",
+      },
+      dark: {
+        primary: "#1976D2",
+        secondary: "#2196F3",
+        accent: "#42A5F5",
+        background: "#1a1a1a",
+        text: "#E5E7EB",
+        heading: "#F9FAFB",
+        muted: "#9CA3AF",
+      },
+    },
+    fonts: {
+      heading: "Helvetica Neue",
+      body: "Helvetica Neue",
+    },
+    borderRadius: "0px",
+    transitions: {
+      default: "all 0.2s ease",
+    },
+    shadows: {
+      light: {
+        card: "0 4px 12px rgba(13, 71, 161, 0.1)",
+        button: "0 2px 8px rgba(13, 71, 161, 0.15)",
+      },
+      dark: {
+        card: "0 4px 12px rgba(25, 118, 210, 0.15)",
+        button: "0 2px 8px rgba(25, 118, 210, 0.2)",
+      },
+    },
+  },
+
+  apple: {
+    name: "Apple",
+    description: "Minimalist & elegant",
+    colors: {
+      light: {
+        primary: "#0071E3",
+        secondary: "#1D1D1F",
+        accent: "#86868B",
+        background: "#FFFFFF",
+        text: "#1D1D1F",
+        heading: "#000000",
+        muted: "#86868B",
+      },
+      dark: {
+        primary: "#0A84FF",
+        secondary: "#F5F5F7",
+        accent: "#98989D",
+        background: "#000000",
+        text: "#F5F5F7",
+        heading: "#FFFFFF",
+        muted: "#98989D",
+      },
+    },
+    fonts: {
+      heading: "SF Pro Display",
+      body: "SF Pro Text",
+    },
+    borderRadius: "18px",
+    transitions: {
+      default: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    },
+    shadows: {
+      light: {
+        card: "0 10px 40px rgba(0, 0, 0, 0.08)",
+        button: "0 4px 16px rgba(0, 113, 227, 0.15)",
+      },
+      dark: {
+        card: "0 10px 40px rgba(255, 255, 255, 0.05)",
+        button: "0 4px 16px rgba(10, 132, 255, 0.2)",
+      },
+    },
+  },
+
+  ted: {
+    name: "TED",
+    description: "Bold & inspiring",
+    colors: {
+      light: {
+        primary: "#E62B1E",
+        secondary: "#C72317",
+        accent: "#FF0000",
+        background: "#000000",
+        text: "#FFFFFF",
+        heading: "#FFFFFF",
+        muted: "#F2F2F2",
+      },
+      dark: {
+        primary: "#E62B1E",
+        secondary: "#C72317",
+        accent: "#FF3333",
+        background: "#000000",
+        text: "#FFFFFF",
+        heading: "#FFFFFF",
+        muted: "#CCCCCC",
+      },
+    },
+    fonts: {
+      heading: "Helvetica Neue",
+      body: "Helvetica Neue",
+    },
+    borderRadius: "8px",
+    transitions: {
+      default: "all 0.3s ease",
+    },
+    shadows: {
+      light: {
+        card: "0 10px 40px rgba(230, 43, 30, 0.3)",
+        button: "0 6px 20px rgba(230, 43, 30, 0.4)",
+      },
+      dark: {
+        card: "0 10px 40px rgba(230, 43, 30, 0.4)",
+        button: "0 6px 20px rgba(230, 43, 30, 0.5)",
       },
     },
   },

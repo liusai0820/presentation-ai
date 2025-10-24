@@ -1,0 +1,422 @@
+/**
+ * 苹果风格主题 - Apple Style Theme
+ * 极简灰白配色，现代科技的产品发布会风格
+ * 特点：极简主义，大量留白，聚焦内容，优雅细节
+ */
+
+:root {
+  --apple-black: #1D1D1F;
+  --apple-gray: #86868B;
+  --apple-light-gray: #F5F5F7;
+  --apple-blue: #0071E3;
+  --apple-white: #FFFFFF;
+  --apple-divider: #D2D2D7;
+}
+
+.reveal {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--apple-black);
+  background: var(--apple-white);
+}
+
+/* 幻灯片容器 */
+.reveal .slides {
+  text-align: center;
+}
+
+.reveal .slides section {
+  padding: 80px 100px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 标题样式 - 极简大标题 */
+.reveal h1 {
+  font-size: 4em;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: 0.3em;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.reveal h2 {
+  font-size: 2.5em;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-top: 0.8em;
+  margin-bottom: 0.4em;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+
+.reveal h3 {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--apple-gray);
+  margin-top: 0.6em;
+  margin-bottom: 0.4em;
+  line-height: 1.2;
+}
+
+/* 段落与文本 */
+.reveal p {
+  margin: 0.6em 0;
+  line-height: 1.5;
+  font-size: 1.1em;
+  color: var(--apple-gray);
+  font-weight: 400;
+  max-width: 800px;
+}
+
+.reveal strong {
+  color: var(--apple-black);
+  font-weight: 600;
+}
+
+/* 副标题样式 */
+.reveal .subtitle {
+  font-size: 1.4em;
+  color: var(--apple-gray);
+  font-weight: 400;
+  margin-top: -0.3em;
+  margin-bottom: 1.5em;
+}
+
+/* 列表样式 - 极简 */
+.reveal ul {
+  margin: 1em auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  max-width: 700px;
+}
+
+.reveal ul li {
+  margin: 1em 0;
+  line-height: 1.5;
+  font-size: 1.1em;
+  color: var(--apple-gray);
+}
+
+.reveal ul li::before {
+  content: "•";
+  color: var(--apple-black);
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+.reveal ol {
+  margin: 1em auto;
+  padding: 0;
+  list-style: none;
+  counter-reset: item;
+  text-align: center;
+  max-width: 700px;
+}
+
+.reveal ol li {
+  margin: 1em 0;
+  line-height: 1.5;
+  font-size: 1.1em;
+  color: var(--apple-gray);
+  counter-increment: item;
+}
+
+.reveal ol li::before {
+  content: counter(item) ". ";
+  color: var(--apple-black);
+  font-weight: 600;
+  margin-right: 0.5em;
+}
+
+/* 数据卡片 - 极简风格 */
+.reveal .data-card {
+  background: var(--apple-light-gray);
+  padding: 60px 40px;
+  border-radius: 18px;
+  margin: 2em auto;
+  color: var(--apple-black);
+  max-width: 600px;
+  box-shadow: none;
+}
+
+.reveal .data-card h3 {
+  color: var(--apple-gray);
+  margin-top: 0;
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.reveal .data-card .number {
+  font-size: 5em;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin: 0.2em 0;
+  letter-spacing: -0.02em;
+}
+
+/* 特性卡片 */
+.reveal .feature-card {
+  background: var(--apple-white);
+  padding: 40px;
+  border-radius: 18px;
+  margin: 1.5em auto;
+  max-width: 500px;
+  border: 1px solid var(--apple-divider);
+  transition: all 0.3s ease;
+}
+
+.reveal .feature-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.reveal .feature-card .icon {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.reveal .feature-card .title {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: 0.5em;
+}
+
+.reveal .feature-card .description {
+  font-size: 1em;
+  color: var(--apple-gray);
+  line-height: 1.5;
+}
+
+/* 引用块 - 极简 */
+.reveal blockquote {
+  background: transparent;
+  border-left: none;
+  margin: 2em auto;
+  padding: 0;
+  font-style: normal;
+  color: var(--apple-black);
+  font-size: 1.8em;
+  font-weight: 600;
+  max-width: 800px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* 表格样式 - 极简线条 */
+.reveal table {
+  border-collapse: collapse;
+  margin: 2em auto;
+  font-size: 0.95em;
+  max-width: 900px;
+  border: none;
+}
+
+.reveal table thead {
+  border-bottom: 1px solid var(--apple-divider);
+}
+
+.reveal table th {
+  padding: 20px 16px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--apple-gray);
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal table td {
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--apple-light-gray);
+  color: var(--apple-black);
+}
+
+.reveal table tbody tr:hover {
+  background: var(--apple-light-gray);
+}
+
+/* 网格布局 */
+.reveal .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 2em auto;
+  max-width: 1000px;
+}
+
+.reveal .grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin: 2em auto;
+  max-width: 1200px;
+}
+
+/* 标签 - 圆角设计 */
+.reveal .badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--apple-black);
+  color: var(--apple-white);
+  border-radius: 980px;
+  font-size: 0.75em;
+  font-weight: 500;
+  margin: 0 6px 6px 0;
+  letter-spacing: 0.01em;
+}
+
+.reveal .badge.outline {
+  background: transparent;
+  border: 1px solid var(--apple-black);
+  color: var(--apple-black);
+}
+
+.reveal .badge.blue {
+  background: var(--apple-blue);
+  color: var(--apple-white);
+}
+
+/* 按钮 */
+.reveal .apple-button {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--apple-blue);
+  color: var(--apple-white);
+  border-radius: 980px;
+  font-size: 1em;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.reveal .apple-button:hover {
+  background: #0077ED;
+  transform: scale(1.02);
+}
+
+/* 分隔线 */
+.reveal hr {
+  border: none;
+  height: 1px;
+  background: var(--apple-divider);
+  margin: 3em auto;
+  max-width: 600px;
+}
+
+/* 高亮文本 */
+.reveal .highlight {
+  color: var(--apple-blue);
+  font-weight: 600;
+}
+
+/* 大数字展示 */
+.reveal .big-number {
+  font-size: 6em;
+  font-weight: 700;
+  color: var(--apple-black);
+  margin: 0.3em 0;
+  letter-spacing: -0.03em;
+}
+
+/* 图标列表 */
+.reveal .icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 2em auto;
+  max-width: 700px;
+}
+
+.reveal .icon-list li {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.reveal .icon-list li .icon {
+  font-size: 2em;
+  width: 60px;
+  height: 60px;
+  background: var(--apple-light-gray);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 控制按钮 */
+.reveal .controls {
+  color: var(--apple-black);
+  opacity: 0.3;
+}
+
+.reveal .controls button {
+  color: var(--apple-black) !important;
+}
+
+.reveal .controls button:hover {
+  opacity: 1;
+}
+
+/* 进度条 */
+.reveal .progress {
+  background: var(--apple-divider);
+  height: 2px;
+}
+
+.reveal .progress span {
+  background: var(--apple-black);
+}
+
+/* 页码 */
+.reveal .slide-number {
+  background: transparent;
+  color: var(--apple-gray);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+/* 链接 */
+.reveal a {
+  color: var(--apple-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.reveal a:hover {
+  opacity: 0.7;
+}
+
+/* 特殊效果 - 模糊背景 */
+.reveal .blur-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  padding: 40px;
+}
+
+/* 渐变文本 */
+.reveal .gradient-text {
+  background: linear-gradient(90deg, var(--apple-blue) 0%, #5E5CE6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}

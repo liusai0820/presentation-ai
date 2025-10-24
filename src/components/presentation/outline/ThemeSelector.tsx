@@ -12,8 +12,12 @@ import { themes, type Themes } from "@/lib/presentation/themes";
 import { usePresentationState } from "@/states/presentation-state";
 import { Palette } from "lucide-react";
 
-// 只显示咨询公司主题
-const PRESENTATION_THEMES = ["mckinsey", "bcg", "bain"] as const;
+// 专业主题：咨询 + 金融 + 现代风格
+const PRESENTATION_THEMES = [
+  "mckinsey", "bcg", "bain", "deloitte",  // 咨询公司
+  "cicc", "goldman",                      // 金融投行
+  "apple", "ted"                          // 现代风格
+] as const;
 type PresentationTheme = (typeof PRESENTATION_THEMES)[number];
 const DEFAULT_THEME: PresentationTheme = "mckinsey";
 

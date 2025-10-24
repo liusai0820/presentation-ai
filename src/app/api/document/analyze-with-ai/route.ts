@@ -50,8 +50,9 @@ const systemPrompt = `你是一位资深的演示文稿设计师和内容策划�
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth();
-    await getUserIdOrDev(session);
+    // 开发阶段暂时跳过用户验证
+    // const session = await auth();
+    // await getUserIdOrDev(session);
 
     const body = await request.json();
     const { content, fileName, numSlides = 8, language = "zh" } = body;

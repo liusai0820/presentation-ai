@@ -110,6 +110,7 @@ interface PresentationState {
   startPresentationGeneration: () => void;
   resetGeneration: () => void;
   resetForNewGeneration: () => void;
+  resetToInitialState: () => void;
 
   // Selection state
   isSelecting: boolean;
@@ -179,7 +180,7 @@ export const usePresentationState = create<PresentationState>((set) => ({
   originalDocumentContent: null,
   htmlSlides: [],
   generatedHtml: null,
-  generationMode: "html", // 默认使用HTML模式
+  generationMode: "revealjs", // 默认使用Reveal.js模式
 
   // Sidebar states
   isSidebarCollapsed: false,
@@ -321,6 +322,35 @@ export const usePresentationState = create<PresentationState>((set) => ({
       presentationThinking: "",
       rootImageGeneration: {},
       config: {},
+    })),
+
+  // 完全重置到初始状态 - 用于返回首页
+  resetToInitialState: () =>
+    set(() => ({
+      currentPresentationId: null,
+      currentPresentationTitle: null,
+      presentationInput: "",
+      outline: [],
+      searchResults: [],
+      slides: [],
+      outlineThinking: "",
+      presentationThinking: "",
+      rootImageGeneration: {},
+      config: {},
+      thumbnailUrl: undefined,
+      shouldStartOutlineGeneration: false,
+      shouldStartPresentationGeneration: false,
+      isGeneratingOutline: false,
+      isGeneratingPresentation: false,
+      analyzedDocument: null,
+      originalDocumentContent: null,
+      htmlSlides: [],
+      generatedHtml: null,
+      currentSlideIndex: 0,
+      isPresenting: false,
+      selectedPresentations: [],
+      isSelecting: false,
+      pendingInsertNode: null,
     })),
 
   setIsThemeCreatorOpen: (update) => set({ isThemeCreatorOpen: update }),

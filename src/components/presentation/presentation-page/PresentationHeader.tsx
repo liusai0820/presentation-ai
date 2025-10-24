@@ -61,7 +61,15 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
             layout="position"
             transition={{ duration: 1 }}
           >
-            <Link href="/" className="h-max">
+            <Link 
+              href="/presentation" 
+              className="h-max"
+              onClick={() => {
+                // 重置状态到初始状态
+                const { resetToInitialState } = usePresentationState.getState();
+                resetToInitialState();
+              }}
+            >
               <AllweoneText className="h-10 w-[7.5rem] cursor-pointer transition-transform duration-100 active:scale-95"></AllweoneText>
             </Link>
           </motion.div>
@@ -75,7 +83,15 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
     <header className="flex h-12 w-full items-center justify-between border-b border-accent bg-background px-4">
       {/* Left section with breadcrumb navigation */}
       <div className="flex items-center gap-2">
-        <Link href="/" className="text-muted-foreground hover:text-foreground">
+        <Link 
+          href="/presentation" 
+          className="text-muted-foreground hover:text-foreground"
+          onClick={() => {
+            // 重置状态到初始状态
+            const { resetToInitialState } = usePresentationState.getState();
+            resetToInitialState();
+          }}
+        >
           <Brain className="h-5 w-5"></Brain>
         </Link>
         <ChevronRight className="h-4 w-4 text-muted-foreground" />

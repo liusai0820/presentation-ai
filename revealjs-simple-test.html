@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RevealJS 简化测试</title>
+  
+  <!-- Reveal.js 核心CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css">
+  
+  <!-- 简化的修复样式 -->
+  <style>
+    .reveal .slides {
+      text-align: left;
+    }
+    
+    .reveal .slides section .slide-content {
+      width: 90%;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+      height: auto;
+      min-height: auto;
+    }
+    
+    .reveal .slides section.center .slide-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+    }
+    
+    .reveal.fullscreen .slides section .slide-content {
+      width: 85%;
+      max-width: 85%;
+      padding: 30px;
+    }
+    
+    .reveal .slides section h1,
+    .reveal .slides section h2,
+    .reveal .slides section h3,
+    .reveal .slides section p,
+    .reveal .slides section ul,
+    .reveal .slides section ol {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="center">
+        <div class="slide-content">
+          <h1>深圳市发改委与易达资本座谈会演示大纲</h1>
+          <p>深化中东合作，共创新未来</p>
+        </div>
+      </section>
+      
+      <section>
+        <div class="slide-content">
+          <h1>感谢与期许</h1>
+          <h2>携手共进，共创沙中创新未来</h2>
+          
+          <p>易达资本期待与各位伙伴深化合作，共同推动沙特与中国在创新产业、投资合作、人才培养等方面的全面融合。</p>
+          
+          <div style="text-align: center; margin: 2em 0;">
+            <strong>Jerry Li & Jessica Wong</strong><br>
+            易达资本创始人
+          </div>
+          
+          <p style="font-style: italic; text-align: center; font-size: 0.9em;">
+            "投资不仅意味着资金流动，更意味着文化、技术和理念的交融。在沙中合作中，我们看到的是两个文明古国对话的深刻内涵，是全球创新生态的共建。"
+          </p>
+          
+          <div style="text-align: center; margin-top: 2em; font-size: 0.8em; color: #666;">
+            易达资本 | 连接沙特与中国的创新投资服务商<br>
+            官方网站：www.easypartners.com | 联系电话：+966-11-XXXX-XXXX
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"></script>
+  
+  <script>
+    Reveal.initialize({
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      hash: false,
+      center: true,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      keyboard: true,
+      touch: true
+    }).then(() => {
+      console.log('✅ Reveal.js初始化成功！');
+      
+      function handleFullscreenChange() {
+        const isFullscreen = !!(document.fullscreenElement || 
+                               document.webkitFullscreenElement || 
+                               document.mozFullScreenElement);
+        
+        const revealElement = document.querySelector('.reveal');
+        if (revealElement) {
+          if (isFullscreen) {
+            revealElement.classList.add('fullscreen');
+          } else {
+            revealElement.classList.remove('fullscreen');
+          }
+        }
+        
+        setTimeout(() => Reveal.layout(), 200);
+      }
+      
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    });
+  </script>
+</body>
+</html>

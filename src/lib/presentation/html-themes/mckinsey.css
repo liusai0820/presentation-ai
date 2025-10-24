@@ -511,18 +511,29 @@ body {
 /* ==================== 全屏模式 ==================== */
 /* 确保全屏时保持等比例缩放 */
 
+.reveal.fullscreen,
 .reveal:fullscreen,
 .reveal:-webkit-full-screen,
 .reveal:-moz-full-screen,
 .reveal:-ms-fullscreen {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100vw !important;
+  height: 100vh !important;
 }
 
+.reveal.fullscreen .slides,
 .reveal:fullscreen .slides,
 .reveal:-webkit-full-screen .slides,
 .reveal:-moz-full-screen .slides,
 .reveal:-ms-fullscreen .slides {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal.fullscreen .slides section,
+.reveal:fullscreen .slides section,
+.reveal:-webkit-full-screen .slides section,
+.reveal:-moz-full-screen .slides section,
+.reveal:-ms-fullscreen .slides section {
   width: 100% !important;
   height: 100% !important;
 }

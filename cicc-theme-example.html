@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中金公司主题演示</title>
+    <link rel="stylesheet" href="src/lib/presentation/html-themes/cicc.css">
+    <style>
+        body {
+            font-family: "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .demo-slide {
+            background: white;
+            width: 1024px;
+            height: 768px;
+            margin: 20px auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #8B1538;">中金公司主题演示</h1>
+    
+    <!-- 标题页示例 -->
+    <div class="demo-slide reveal">
+        <section class="title-slide">
+            <div class="logo">
+                <div style="width: 120px; height: 60px; background: #8B1538; color: #D4AF37; display: flex; align-items: center; justify-content: center; font-weight: bold;">CICC LOGO</div>
+            </div>
+            <h1>2024年度业绩报告</h1>
+            <div class="subtitle">稳健增长，持续创新</div>
+            <div class="meta">
+                <div>2024年10月24日</div>
+                <div>中金公司管理层</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 章节分隔页示例 -->
+    <div class="demo-slide reveal">
+        <section class="section-divider">
+            <div class="section-number">01</div>
+            <h1>业绩概览</h1>
+        </section>
+    </div>
+
+    <!-- 单图表内容页示例 -->
+    <div class="demo-slide reveal">
+        <section class="slides">
+            <div class="slide-header">
+                <h1>收入增长趋势</h1>
+            </div>
+            <div class="slide-content single-chart-slide">
+                <div class="chart-container">
+                    <h2>年度收入对比</h2>
+                    <figure class="cicc-chart bar-chart">
+                        <div class="chart-body">
+                            <div class="bar-item">
+                                <div class="bar-annotation negative">-12%</div>
+                                <div class="bar" style="height: 120px;"></div>
+                                <div class="bar-label">2022</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-annotation">+8%</div>
+                                <div class="bar" style="height: 150px;"></div>
+                                <div class="bar-label">2023</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar-annotation">+15%</div>
+                                <div class="bar" style="height: 180px;"></div>
+                                <div class="bar-label">2024E</div>
+                            </div>
+                        </div>
+                        <figcaption class="chart-source">来源：公司年报</figcaption>
+                    </figure>
+                </div>
+                <div class="insights">
+                    <h3>关键洞察</h3>
+                    <ul>
+                        <li>2024年预期收入增长15%</li>
+                        <li>投资银行业务表现强劲</li>
+                        <li>资产管理规模持续扩大</li>
+                    </ul>
+                    
+                    <div class="league-rank">NO.1</div>
+                    <p class="note">IPO承销排名第一</p>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <div>中金公司 机密</div>
+                <div>第 3 页</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 仪表盘页示例 -->
+    <div class="demo-slide reveal">
+        <section class="slides dashboard-slide">
+            <div class="slide-header">
+                <h1>关键业绩指标</h1>
+            </div>
+            <div class="slide-content">
+                <div class="grid-2x2">
+                    <div class="module">
+                        <div class="kpi-display">
+                            <div class="kpi-value">¥1.2万亿</div>
+                            <div class="kpi-label">资产管理规模</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="kpi-display">
+                            <div class="kpi-value">¥4万亿</div>
+                            <div class="kpi-label">股权及债务融资规模</div>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 75%;">75%</div>
+                        </div>
+                        <p class="data-label">市场份额</p>
+                    </div>
+                    <div class="module">
+                        <div class="badge accent">优秀</div>
+                        <div class="badge">稳定</div>
+                        <div class="badge secondary">增长</div>
+                        <p class="data-label">评级状况</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <div>中金公司 机密</div>
+                <div>第 4 页</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 表格中心页示例 -->
+    <div class="demo-slide reveal">
+        <section class="slides table-centric-slide">
+            <div class="slide-header">
+                <h1>财务数据概览</h1>
+            </div>
+            <div class="slide-content">
+                <h2>主要财务指标</h2>
+                <div class="table-container">
+                    <table class="cicc-table">
+                        <thead>
+                            <tr>
+                                <th>项目</th>
+                                <th class="numeric">2022A</th>
+                                <th class="numeric">2023A</th>
+                                <th class="numeric">2024E</th>
+                                <th class="numeric">变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>收入 (百万元)</td>
+                                <td class="numeric">25,746</td>
+                                <td class="numeric">27,642</td>
+                                <td class="numeric">31,788</td>
+                                <td class="numeric">+15%</td>
+                            </tr>
+                            <tr>
+                                <td>净利润 (百万元)</td>
+                                <td class="numeric negative">5,127</td>
+                                <td class="numeric">6,543</td>
+                                <td class="numeric">7,525</td>
+                                <td class="numeric">+15%</td>
+                            </tr>
+                            <tr>
+                                <td>ROE (%)</td>
+                                <td class="numeric">8.2</td>
+                                <td class="numeric">9.1</td>
+                                <td class="numeric">10.3</td>
+                                <td class="numeric">+1.2pp</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <blockquote>
+                    "中金公司继续保持在中国投资银行业的领先地位，通过持续创新和优质服务为客户创造价值。"
+                </blockquote>
+            </div>
+            <div class="slide-footer">
+                <div>中金公司 机密</div>
+                <div>第 5 页</div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

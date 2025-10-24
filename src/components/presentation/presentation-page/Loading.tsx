@@ -1,125 +1,109 @@
 "use client";
 
-import { Spinner } from "@/components/ui/spinner";
-import { ThemeBackground } from "../theme/ThemeBackground";
 import { useEffect, useState } from "react";
-import { CheckCircle2, Zap, MessageCircle } from "lucide-react";
-
-const LOADING_TIPS = [
-  "💡 提示：你可以在生成期间浏览演示文稿",
-  "🎨 McKinsey、BCG 和 Bain 主题都是顶级设计师精心打磨的",
-  "⚡ 高质量的演示文稿需要时间，但我们会尽快为你完成",
-  "📊 AI正在为你的内容进行智能排版和优化",
-  "🚀 这个过程通常需要30-60秒，请耐心等待",
-];
+import { ThemeBackground } from "../theme/ThemeBackground";
 
 export function LoadingState() {
-  const [currentTipIndex, setCurrentTipIndex] = useState(0);
-  const [loadingPhase, setLoadingPhase] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [currentPhase, setCurrentPhase] = useState(0);
+
+  const phases = ["分析内容结构", "生成幻灯片", "应用主题样式", "完善细节"];
 
   useEffect(() => {
-    const tipInterval = setInterval(() => {
-      setCurrentTipIndex((prev) => (prev + 1) % LOADING_TIPS.length);
-    }, 4000);
+    // 45-60秒完成，每秒增加约1.7-2.2%
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        const increment = 0.03; // 每100ms增加0.03%，约50秒完成
+        const newProgress = prev + increment;
 
-    return () => clearInterval(tipInterval);
-  }, []);
+        // 更新阶段
+        const newPhase = Math.floor(newProgress / 25);
+        setCurrentPhase(Math.min(newPhase, phases.length - 1));
 
-  useEffect(() => {
-    const phaseInterval = setInterval(() => {
-      setLoadingPhase((prev) => (prev + 1) % 3);
-    }, 1500);
+        // 到达100%后重置（用于演示）
+        return newProgress >= 100 ? 0 : newProgress;
+      });
+    }, 100);
 
-    return () => clearInterval(phaseInterval);
-  }, []);
-
-  const phases = [
-    { icon: "✨", label: "正在生成内容" },
-    { icon: "🎨", label: "应用专业主题" },
-    { icon: "📐", label: "优化布局样式" },
-  ];
+    return () => clearInterval(progressInterval);
+  }, [phases.length]);
 
   return (
     <ThemeBackground>
-      <div className="flex h-[calc(100vh-8rem)] flex-col items-center justify-center px-4">
-        {/* 动画加载指示器 */}
-        <div className="mb-12 flex flex-col items-center">
-          <div className="relative h-20 w-20 mb-8">
-            {/* 外圈旋转环 */}
-            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-30 animate-spin" />
-            {/* 中圈慢速旋转 */}
-            <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-20 animate-spin" style={{ animationDirection: "reverse", animationDuration: "3s" }} />
-            {/* 中心 */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Spinner className="h-8 w-8 text-primary" />
-            </div>
+      <div className="min-h-screen flex items-center justify-center p-8">
+        <div className="w-full max-w-lg space-y-16">
+          {/* 主标题 */}
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl font-light text-foreground tracking-wide">
+              正在生成演示文稿
+            </h1>
+            <p className="text-lg text-muted-foreground font-light">
+              {phases[currentPhase]}
+            </p>
           </div>
 
-          {/* 当前阶段指示 */}
-          <div className="text-center space-y-3">
-            <h2 className="text-2xl font-bold text-foreground">
-              {phases[loadingPhase].icon} {phases[loadingPhase].label}
-            </h2>
-            <p className="text-sm text-muted-foreground font-medium">AI 正在为你精心准备演示文稿</p>
-          </div>
-        </div>
+          {/* 简洁的加载动画 */}
+          <div className="flex justify-center">
+            <div className="relative w-20 h-20">
+              {/* 外圈 */}
+              <div className="absolute inset-0 rounded-full border border-border/20" />
 
-        {/* 进度条 */}
-        <div className="w-full max-w-md mb-12">
-          <div className="flex gap-2 mb-3">
-            {phases.map((_, idx) => (
-              <div
-                key={idx}
-                className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${
-                  idx <= loadingPhase
-                    ? "bg-primary"
-                    : "bg-muted"
-                }`}
-              />
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground text-center">处理进度</p>
-        </div>
+              {/* 进度圈 */}
+              <svg className="w-full h-full -rotate-90" viewBox="0 0 80 80">
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                  className="text-primary/30"
+                />
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="36"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray={`${2 * Math.PI * 36}`}
+                  strokeDashoffset={`${2 * Math.PI * 36 * (1 - progress / 100)}`}
+                  className="text-primary transition-all duration-300 ease-out"
+                  strokeLinecap="round"
+                />
+              </svg>
 
-        {/* 贴士卡片 */}
-        <div className="w-full max-w-md rounded-lg border border-border/50 bg-card/50 backdrop-blur-sm p-4 mb-8">
-          <div className="flex gap-3">
-            <MessageCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-medium text-foreground mb-1">小贴士</p>
-              <p className="text-sm text-muted-foreground transition-opacity duration-500">
-                {LOADING_TIPS[currentTipIndex]}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 检查清单 */}
-        <div className="w-full max-w-md space-y-3">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">准备中的项目</p>
-          <div className="space-y-2">
-            {[
-              "分析你的内容结构",
-              "应用专业排版规则",
-              "生成高质量幻灯片",
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div
-                  className={`w-4 h-4 rounded-full border transition-all duration-500 flex items-center justify-center ${
-                    idx <= loadingPhase
-                      ? "bg-primary border-primary"
-                      : "border-muted-foreground/30"
-                  }`}
-                >
-                  {idx <= loadingPhase && (
-                    <CheckCircle2 className="w-3 h-3 text-background" />
-                  )}
-                </div>
-                <span className={idx <= loadingPhase ? "text-foreground font-medium" : ""}>
-                  {item}
-                </span>
+              {/* 中心点 */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* 进度信息 */}
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
+              <div className="text-2xl font-light text-foreground">
+                {Math.round(progress)}%
+              </div>
+              <div className="text-sm text-muted-foreground">
+                预计还需 {Math.max(1, Math.round((100 - progress) * 0.5))} 秒
+              </div>
+            </div>
+
+            {/* 阶段指示点 */}
+            <div className="flex justify-center space-x-3">
+              {phases.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                    index <= currentPhase
+                      ? "bg-primary scale-125"
+                      : "bg-border scale-100"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

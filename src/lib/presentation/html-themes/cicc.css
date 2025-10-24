@@ -1,85 +1,175 @@
 /**
  * 中金公司主题 - CICC Theme
- * 深蓝 + 金色配色，稳重专业的金融投资风格
- * 特点：深蓝主色，金色强调，阴影立体，金融数据可视化
+ * 基于中金公司官方设计规范的专业演示文稿主题
+ * 特点：权威稳重、数据中心主义、全球化美学
  */
 
 :root {
-  --cicc-deep-blue: #002B5C;
-  --cicc-royal-blue: #003D82;
+  /* 核心品牌色 - 基于实际中金报告的真实配色 */
+  --cicc-red: #8B1538;
+  /* 中金深红 - 主品牌色 */
   --cicc-gold: #D4AF37;
-  --cicc-light-gold: #F4E4C1;
-  --cicc-gray: #6B7280;
-  --cicc-light-gray: #F3F4F6;
-  --cicc-white: #FFFFFF;
-  --cicc-text: #1F2937;
+  /* 中金金色 - 辅助品牌色 */
+  --cicc-light-red: #A0522D;
+  /* 浅红色调 */
+  --cicc-accent-gold: #FFD700;
+  /* 强调金色 */
+
+  /* 中性色系 - 用于文本和背景 */
+  --dark-grey: #333333;
+  /* 深灰 - 正文文本 */
+  --medium-grey: #666666;
+  /* 中灰 - 辅助文本 */
+  --light-grey: #F5F5F5;
+  /* 浅灰 - 背景填充 */
+  --white: #FFFFFF;
+  /* 白色 - 主背景 */
+
+  /* 数据可视化色彩 */
+  --chart-red: #8B1538;
+  /* 图表红 - 主数据系列 */
+  --chart-gold: #D4AF37;
+  /* 图表金 - 第二数据系列 */
+  --chart-orange: #CD853F;
+  /* 图表橙 - 第三数据系列 */
+  --chart-brown: #A0522D;
+  /* 图表棕 - 第四数据系列 */
+
+  /* 表格专用色 */
+  --table-header-bg: #F4E4C1;
+  /* 表头背景 - 浅金色调 */
+  --grid-line: #E0E0E0;
+  /* 网格线颜色 */
 }
 
 .reveal {
-  font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 32px;
+  font-family: "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  font-size: 16px;
   font-weight: 400;
-  color: var(--cicc-text);
-  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2F7 100%);
+  color: var(--dark-grey);
+  background: var(--white);
 }
 
-/* 幻灯片容器 */
+/* 幻灯片容器 - 采用12列网格系统 */
 .reveal .slides {
   text-align: left;
 }
 
 .reveal .slides section {
-  padding: 60px 80px;
+  padding: 4% 4%;
+  /* 统一的内边距，占幻灯片宽高的4% */
   height: 100%;
   box-sizing: border-box;
-  background: var(--cicc-white);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
 }
 
-/* 标题样式 */
+/* 页眉区域 - 固定占据顶部10%高度 */
+.reveal .slide-header {
+  height: 10%;
+  border-bottom: 1px solid var(--medium-grey);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* 页脚区域 - 固定占据底部8%高度 */
+.reveal .slide-footer {
+  height: 8%;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--light-grey);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--medium-grey);
+}
+
+/* 主内容区域 */
+.reveal .slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 字体排印层级 - 严格按照中金规范 */
 .reveal h1 {
-  font-size: 2.8em;
+  font-size: 2.5rem;
+  /* 40px - 幻灯片主标题 */
   font-weight: 700;
-  color: var(--cicc-deep-blue);
-  margin-bottom: 0.5em;
-  text-transform: none;
+  color: var(--cicc-red);
+  margin: 0;
   line-height: 1.2;
-  border-left: 8px solid var(--cicc-gold);
-  padding-left: 24px;
+  text-transform: none;
 }
 
 .reveal h2 {
-  font-size: 2em;
+  font-size: 1.75rem;
+  /* 28px - 章节标题 */
   font-weight: 600;
-  color: var(--cicc-royal-blue);
-  margin-top: 1em;
-  margin-bottom: 0.6em;
-  border-bottom: 3px solid var(--cicc-light-gold);
-  padding-bottom: 0.3em;
+  color: var(--dark-grey);
+  margin: 1em 0 0.6em 0;
+  line-height: 1.3;
 }
 
 .reveal h3 {
-  font-size: 1.4em;
-  font-weight: 600;
-  color: var(--cicc-royal-blue);
-  margin-top: 0.8em;
-  margin-bottom: 0.5em;
+  font-size: 1.25rem;
+  /* 20px - 子标题 */
+  font-weight: 700;
+  color: var(--dark-grey);
+  margin: 0.8em 0 0.5em 0;
+  line-height: 1.4;
 }
 
 /* 段落与文本 */
 .reveal p {
-  margin: 0.8em 0;
+  font-size: 1rem;
+  /* 16px - 正文文本 */
+  font-weight: 400;
+  color: var(--dark-grey);
   line-height: 1.6;
-  font-size: 1em;
-  color: var(--cicc-text);
+  margin: 0.8em 0;
 }
 
 .reveal strong {
-  color: var(--cicc-deep-blue);
+  color: var(--cicc-red);
   font-weight: 600;
 }
 
-/* 列表样式 */
-.reveal ul, .reveal ol {
+/* 数据标签样式 */
+.reveal .data-label {
+  font-size: 0.875rem;
+  /* 14px - 数据标签 */
+  font-weight: 400;
+  color: var(--dark-grey);
+  line-height: 1.4;
+}
+
+/* 注释/来源样式 */
+.reveal .note,
+.reveal .source {
+  font-size: 0.75rem;
+  /* 12px - 注释/来源 */
+  font-weight: 400;
+  color: var(--medium-grey);
+  line-height: 1.4;
+}
+
+/* 关键指标数值 (KPI) */
+.reveal .kpi-value {
+  font-size: 2.25rem;
+  /* 36px - KPI数值 */
+  font-weight: 600;
+  color: var(--cicc-red);
+  line-height: 1.2;
+}
+
+/* 列表样式 - 简洁专业 */
+.reveal ul,
+.reveal ol {
   margin: 1em 0;
   padding-left: 1.5em;
 }
@@ -87,13 +177,10 @@
 .reveal ul li {
   margin: 0.6em 0;
   line-height: 1.5;
-  position: relative;
-  padding-left: 0.5em;
 }
 
 .reveal ul li::marker {
-  color: var(--cicc-gold);
-  font-size: 1.2em;
+  color: var(--cicc-red);
 }
 
 .reveal ol li {
@@ -102,236 +189,776 @@
 }
 
 .reveal ol li::marker {
-  color: var(--cicc-deep-blue);
+  color: var(--cicc-red);
   font-weight: 600;
 }
 
-/* 数据卡片 */
-.reveal .data-card {
-  background: linear-gradient(135deg, var(--cicc-deep-blue) 0%, var(--cicc-royal-blue) 100%);
-  padding: 28px;
-  border-radius: 12px;
+/* ========== 中金特色数据可视化组件 ========== */
+
+/* 条形图组件 */
+.reveal .cicc-chart.bar-chart {
   margin: 1.5em 0;
-  color: var(--cicc-white);
-  box-shadow: 0 8px 24px rgba(0, 43, 92, 0.25);
 }
 
-.reveal .data-card h3 {
-  color: var(--cicc-gold);
-  margin-top: 0;
-  font-size: 1.3em;
+.reveal .cicc-chart .chart-body {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--medium-grey);
 }
 
-.reveal .data-card .number {
-  font-size: 3em;
-  font-weight: 700;
-  color: var(--cicc-gold);
-  margin: 0.3em 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.reveal .cicc-chart .bar-group {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
 }
 
-/* 金融指标卡片 */
-.reveal .metric-card {
-  background: var(--cicc-white);
-  border: 2px solid var(--cicc-light-gold);
-  border-left: 6px solid var(--cicc-gold);
-  padding: 24px;
-  border-radius: 8px;
-  margin: 1em 0;
-  box-shadow: 0 4px 12px rgba(0, 43, 92, 0.1);
-  transition: all 0.3s ease;
+.reveal .cicc-chart .bar-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
 }
 
-.reveal .metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 43, 92, 0.18);
+.reveal .cicc-chart .bar {
+  background-color: var(--cicc-red);
+  width: 40px;
+  border-radius: 2px 2px 0 0;
+  transition: all 0.2s ease-in-out;
 }
 
-.reveal .metric-card .label {
-  font-size: 0.9em;
-  color: var(--cicc-gray);
-  margin-bottom: 0.3em;
+.reveal .cicc-chart .bar:hover {
+  opacity: 0.8;
 }
 
-.reveal .metric-card .value {
-  font-size: 2.5em;
-  font-weight: 700;
-  color: var(--cicc-deep-blue);
-}
-
-.reveal .metric-card .change {
-  font-size: 1.1em;
-  margin-top: 0.3em;
-}
-
-.reveal .metric-card .change.up {
-  color: #10B981;
-}
-
-.reveal .metric-card .change.down {
-  color: #EF4444;
-}
-
-/* 引用块 */
-.reveal blockquote {
-  background: linear-gradient(to right, var(--cicc-light-gold) 0%, transparent 100%);
-  border-left: 6px solid var(--cicc-gold);
-  margin: 1.5em 0;
-  padding: 1.2em 1.5em;
-  font-style: italic;
-  color: var(--cicc-deep-blue);
-  box-shadow: 0 2px 8px rgba(0, 43, 92, 0.08);
-}
-
-/* 表格样式 */
-.reveal table {
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 1.5em 0;
-  font-size: 0.9em;
+/* 条形图上方的百分比注释 - 中金特色 */
+.reveal .cicc-chart .bar-annotation {
+  position: absolute;
+  top: -25px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--medium-grey);
+  text-align: center;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 43, 92, 0.1);
-  border-radius: 8px;
+}
+
+.reveal .cicc-chart .bar-annotation.negative {
+  color: var(--cicc-red);
+}
+
+.reveal .cicc-chart .bar-label {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: var(--dark-grey);
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
 }
 
-.reveal table thead {
-  background: linear-gradient(135deg, var(--cicc-deep-blue) 0%, var(--cicc-royal-blue) 100%);
-  color: var(--cicc-white);
-}
-
-.reveal table th {
-  padding: 16px;
-  font-weight: 600;
+/* 图表来源说明 */
+.reveal .cicc-chart .chart-source {
+  font-size: 0.75rem;
+  color: var(--medium-grey);
+  margin-top: 8px;
   text-align: left;
 }
 
-.reveal table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--cicc-light-gray);
-  background: var(--cicc-white);
+/* 排名榜单标注 - 中金签名式设计 */
+.reveal .league-rank {
+  background-color: var(--cicc-red);
+  color: var(--white);
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 3px;
+  text-align: center;
+  display: inline-block;
+  margin: 0.5em 0;
 }
 
-.reveal table tbody tr:hover {
-  background: var(--cicc-light-gold);
+/* KPI展示模块 */
+.reveal .kpi-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 1em 0;
 }
 
-/* 网格布局 */
-.reveal .grid-2 {
+.reveal .kpi-display .kpi-value {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--cicc-red);
+  line-height: 1.2;
+  margin-bottom: 0.3em;
+}
+
+.reveal .kpi-display .kpi-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--dark-grey);
+  line-height: 1.4;
+}
+
+/* 引用块 - 简洁专业风格 */
+.reveal blockquote {
+  background: var(--light-grey);
+  border-left: 4px solid var(--cicc-gold);
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  font-style: normal;
+  color: var(--dark-grey);
+}
+
+/* 财务数据表格 - 中金专业风格 */
+.reveal .cicc-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5em 0;
+  font-size: 0.875rem;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.reveal .cicc-table thead th {
+  background-color: var(--table-header-bg);
+  color: var(--dark-grey);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid var(--cicc-red);
+}
+
+.reveal .cicc-table thead th.numeric {
+  text-align: right;
+}
+
+.reveal .cicc-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--light-grey);
+  background: var(--white);
+  vertical-align: middle;
+}
+
+/* 斑马条纹效果 */
+.reveal .cicc-table tbody tr:nth-child(even) {
+  background-color: var(--light-grey);
+}
+
+/* 数字列样式 */
+.reveal .cicc-table .numeric {
+  text-align: right;
+  font-feature-settings: "tnum";
+  /* 等宽数字 */
+}
+
+/* 负数样式 */
+.reveal .cicc-table .negative {
+  color: var(--cicc-red);
+}
+
+.reveal .cicc-table .negative::before {
+  content: "(";
+}
+
+.reveal .cicc-table .negative::after {
+  content: ")";
+}
+
+/* ========== 幻灯片原型布局 ========== */
+
+/* 标题页原型 */
+.reveal .title-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8% 10%;
+}
+
+.reveal .title-slide .logo {
+  margin-bottom: 2em;
+  max-height: 80px;
+}
+
+.reveal .title-slide h1 {
+  font-size: 4rem;
+  margin-bottom: 0.5em;
+}
+
+.reveal .title-slide .subtitle {
+  font-size: 1.5rem;
+  color: var(--medium-grey);
+  margin-bottom: 2em;
+}
+
+.reveal .title-slide .meta {
+  font-size: 1rem;
+  color: var(--medium-grey);
+}
+
+/* 章节分隔页原型 */
+.reveal .section-divider {
+  background-color: var(--cicc-red);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
+  padding: 8% 10%;
+}
+
+.reveal .section-divider .section-number {
+  font-size: 8rem;
+  font-weight: 700;
+  opacity: 0.3;
+  line-height: 0.8;
+}
+
+.reveal .section-divider h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-top: 0.2em;
+}
+
+/* 单图表内容页原型 */
+.reveal .single-chart-slide {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.reveal .single-chart-slide .chart-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reveal .single-chart-slide .insights {
+  padding-left: 20px;
+  border-left: 3px solid var(--cicc-gold);
+}
+
+.reveal .single-chart-slide .insights h3 {
+  color: var(--cicc-red);
+  margin-top: 0;
+}
+
+/* 仪表盘/多元素页原型 */
+.reveal .dashboard-slide .grid-2x2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin: 1.5em 0;
-}
-
-.reveal .grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 24px;
-  margin: 1.5em 0;
+  height: 100%;
 }
 
-/* 标签 */
+.reveal .dashboard-slide .grid-2x3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+}
+
+.reveal .dashboard-slide .module {
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 表格中心页原型 */
+.reveal .table-centric-slide .table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* 12列网格系统 */
+.reveal .grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  margin: 1em 0;
+}
+
+.reveal .col-1 {
+  grid-column: span 1;
+}
+
+.reveal .col-2 {
+  grid-column: span 2;
+}
+
+.reveal .col-3 {
+  grid-column: span 3;
+}
+
+.reveal .col-4 {
+  grid-column: span 4;
+}
+
+.reveal .col-5 {
+  grid-column: span 5;
+}
+
+.reveal .col-6 {
+  grid-column: span 6;
+}
+
+.reveal .col-7 {
+  grid-column: span 7;
+}
+
+.reveal .col-8 {
+  grid-column: span 8;
+}
+
+.reveal .col-9 {
+  grid-column: span 9;
+}
+
+.reveal .col-10 {
+  grid-column: span 10;
+}
+
+.reveal .col-11 {
+  grid-column: span 11;
+}
+
+.reveal .col-12 {
+  grid-column: span 12;
+}
+
+/* 标签组件 */
 .reveal .badge {
   display: inline-block;
-  padding: 6px 16px;
-  background: var(--cicc-gold);
-  color: var(--cicc-white);
-  border-radius: 20px;
-  font-size: 0.8em;
+  padding: 4px 12px;
+  background: var(--cicc-red);
+  color: var(--white);
+  border-radius: 3px;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin: 0 8px 8px 0;
-}
-
-.reveal .badge.primary {
-  background: var(--cicc-deep-blue);
+  margin: 0 4px 4px 0;
 }
 
 .reveal .badge.secondary {
-  background: var(--cicc-gray);
+  background: var(--medium-grey);
 }
 
-/* 进度条 */
+.reveal .badge.accent {
+  background: var(--cicc-gold);
+}
+
+/* 进度条 - 数据驱动设计 */
 .reveal .progress-bar {
-  background: var(--cicc-light-gray);
-  height: 24px;
-  border-radius: 12px;
+  background: var(--light-grey);
+  height: 20px;
+  border-radius: 2px;
   overflow: hidden;
   margin: 1em 0;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .reveal .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--cicc-gold) 0%, #FFD700 100%);
+  background: var(--cicc-gold);
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 12px;
-  color: var(--cicc-deep-blue);
+  padding-right: 8px;
+  color: var(--dark-grey);
   font-weight: 600;
-  font-size: 0.8em;
-  transition: width 1s ease;
+  font-size: 0.75rem;
+  transition: width 0.8s ease;
 }
 
-/* 图标列表 */
-.reveal .icon-list {
-  list-style: none;
-  padding: 0;
+/* 分隔线 */
+.reveal .divider {
+  height: 1px;
+  background: var(--medium-grey);
+  margin: 2em 0;
+  border: none;
 }
 
-.reveal .icon-list li {
-  padding: 12px 0;
-  padding-left: 40px;
-  position: relative;
+.reveal .divider.thick {
+  height: 2px;
+  background: var(--cicc-red);
 }
 
-.reveal .icon-list li::before {
-  content: "▸";
-  position: absolute;
-  left: 0;
-  color: var(--cicc-gold);
-  font-size: 1.4em;
-  font-weight: bold;
-}
+/* ========== Reveal.js 控制元素样式 ========== */
 
 /* 控制按钮 */
 .reveal .controls {
-  color: var(--cicc-gold);
+  color: var(--cicc-red);
 }
 
 .reveal .controls button {
-  color: var(--cicc-gold) !important;
+  color: var(--cicc-red) !important;
 }
 
-/* 进度条 */
+/* 演示进度条 */
 .reveal .progress {
-  background: rgba(0, 43, 92, 0.1);
-  height: 4px;
+  background: var(--light-grey);
+  height: 3px;
 }
 
 .reveal .progress span {
-  background: linear-gradient(90deg, var(--cicc-gold) 0%, var(--cicc-deep-blue) 100%);
+  background: var(--cicc-red);
 }
 
 /* 页码 */
 .reveal .slide-number {
-  background: var(--cicc-deep-blue);
-  color: var(--cicc-gold);
+  background: var(--cicc-red);
+  color: var(--white);
   font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 0.875rem;
 }
 
 /* 链接 */
 .reveal a {
-  color: var(--cicc-royal-blue);
+  color: var(--cicc-red);
   text-decoration: none;
-  border-bottom: 2px solid var(--cicc-gold);
-  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--cicc-red);
+  transition: all 0.2s ease;
 }
 
 .reveal a:hover {
-  color: var(--cicc-gold);
-  border-bottom-color: var(--cicc-deep-blue);
+  color: var(--cicc-red);
+  border-bottom-color: var(--cicc-red);
+}
+
+/* ========== 动画与交互 ========== */
+
+/* 微妙的悬停效果 */
+.reveal .cicc-chart .bar:hover,
+.reveal .kpi-display:hover,
+.reveal .league-rank:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* 图表加载动画 */
+.reveal .cicc-chart .bar {
+  animation: barGrow 0.8s ease-out;
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* 工具提示样式 */
+.reveal .tooltip {
+  position: absolute;
+  background: var(--dark-grey);
+  color: var(--white);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.reveal .tooltip.show {
+  opacity: 1;
+}
+
+/* ========== 可访问性增强 ========== */
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  :root {
+    --cicc-red: #800000;
+    --cicc-gold: #B8860B;
+    --dark-grey: #000000;
+    --medium-grey: #666666;
+  }
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal .cicc-chart .bar {
+    animation: none;
+  }
+
+  .reveal * {
+    transition: none !important;
+  }
+}
+
+/* ========== 呼吸式加载动画 - 正念设计 ========== */
+
+/* 主加载容器 */
+.cicc-breathing-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 40px;
+  position: relative;
+}
+
+/* 呼吸圆环 - 核心动画元素 */
+.breathing-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* 外层呼吸环 */
+.breathing-circle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(139, 21, 56, 0.1) 0%, 
+    rgba(212, 175, 55, 0.15) 40%, 
+    rgba(139, 21, 56, 0.05) 70%, 
+    transparent 100%);
+  animation: breatheOuter 4s ease-in-out infinite;
+}
+
+/* 内层呼吸环 */
+.breathing-circle::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(212, 175, 55, 0.3) 0%, 
+    rgba(139, 21, 56, 0.2) 50%, 
+    transparent 100%);
+  animation: breatheInner 4s ease-in-out infinite 0.5s;
+}
+
+/* 中心脉冲点 */
+.breathing-pulse {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--cicc-red), var(--cicc-gold));
+  position: relative;
+  z-index: 2;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 加载文本 */
+.breathing-text {
+  text-align: center;
+  color: var(--dark-grey);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.breathing-subtext {
+  text-align: center;
+  color: var(--medium-grey);
+  font-size: 0.9rem;
+  opacity: 0.6;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+/* 进度指示器 - 优雅的点状进度 */
+.breathing-progress {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--light-grey);
+  animation: dotProgress 2s ease-in-out infinite;
+}
+
+.progress-dot:nth-child(1) { animation-delay: 0s; }
+.progress-dot:nth-child(2) { animation-delay: 0.3s; }
+.progress-dot:nth-child(3) { animation-delay: 0.6s; }
+.progress-dot:nth-child(4) { animation-delay: 0.9s; }
+.progress-dot:nth-child(5) { animation-delay: 1.2s; }
+
+/* ========== 呼吸动画关键帧 ========== */
+
+/* 外层呼吸 - 慢而深 */
+@keyframes breatheOuter {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.1;
+  }
+}
+
+/* 内层呼吸 - 快而轻 */
+@keyframes breatheInner {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+}
+
+/* 中心脉冲 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(139, 21, 56, 0.4);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(139, 21, 56, 0);
+  }
+}
+
+/* 文本淡入淡出 */
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* 点状进度动画 */
+@keyframes dotProgress {
+  0%, 80%, 100% {
+    background: var(--light-grey);
+    transform: scale(1);
+  }
+  40% {
+    background: var(--cicc-gold);
+    transform: scale(1.3);
+  }
+}
+
+/* ========== 高级呼吸加载器变体 ========== */
+
+/* 大型呼吸加载器 - 用于全屏加载 */
+.cicc-breathing-loader.large {
+  min-height: 100vh;
+}
+
+.cicc-breathing-loader.large .breathing-circle {
+  width: 200px;
+  height: 200px;
+}
+
+.cicc-breathing-loader.large .breathing-pulse {
+  width: 30px;
+  height: 30px;
+}
+
+/* 紧凑型呼吸加载器 - 用于组件内加载 */
+.cicc-breathing-loader.compact {
+  min-height: 150px;
+  padding: 20px;
+}
+
+.cicc-breathing-loader.compact .breathing-circle {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+.cicc-breathing-loader.compact .breathing-pulse {
+  width: 12px;
+  height: 12px;
+}
+
+.cicc-breathing-loader.compact .breathing-text {
+  font-size: 0.9rem;
+}
+
+/* 深色主题变体 */
+.cicc-breathing-loader.dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: var(--white);
+}
+
+.cicc-breathing-loader.dark .breathing-text {
+  color: var(--white);
+}
+
+.cicc-breathing-loader.dark .breathing-subtext {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========== 响应式设计 ========== */
+
+@media (max-width: 768px) {
+  .cicc-breathing-loader .breathing-circle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .cicc-breathing-loader .breathing-text {
+    font-size: 1rem;
+  }
+  
+  .cicc-breathing-loader .breathing-subtext {
+    font-size: 0.8rem;
+  }
+}
+
+/* ========== 可访问性增强 ========== */
+
+/* 为减少动画偏好的用户提供静态版本 */
+@media (prefers-reduced-motion: reduce) {
+  .breathing-circle::before,
+  .breathing-circle::after,
+  .breathing-pulse,
+  .breathing-subtext,
+  .progress-dot {
+    animation: none;
+  }
+  
+  .breathing-circle::before {
+    opacity: 0.2;
+    transform: scale(1.2);
+  }
+  
+  .breathing-circle::after {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+  
+  .progress-dot {
+    background: var(--cicc-gold);
+  }
 }

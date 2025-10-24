@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中金呼吸式加载动画演示</title>
+    <link rel="stylesheet" href="src/lib/presentation/html-themes/cicc.css">
+    <style>
+        body {
+            font-family: "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .demo-title {
+            text-align: center;
+            color: #8B1538;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .demo-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .demo-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .demo-card-header {
+            background: linear-gradient(135deg, #8B1538 0%, #A0522D 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .demo-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .demo-card-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+        
+        .fullscreen-demo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #8B1538;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .demo-btn {
+            background: #D4AF37;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            background: #FFD700;
+            transform: translateY(-2px);
+        }
+        
+        .code-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .code-title {
+            color: #8B1538;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        code {
+            color: #8B1538;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">中金呼吸式加载动画</h1>
+        <p class="demo-subtitle">正念设计 · 优雅体验 · 专业品质</p>
+        
+        <div class="demo-grid">
+            <!-- 标准呼吸加载器 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3 class="demo-card-title">标准呼吸加载器</h3>
+                    <p class="demo-card-desc">适用于一般内容加载场景</p>
+                </div>
+                <div class="cicc-breathing-loader">
+                    <div class="breathing-circle">
+                        <div class="breathing-pulse"></div>
+                    </div>
+                    <div class="breathing-text">正在生成内容</div>
+                    <div class="breathing-subtext">AI正在为您精心准备演示文稿</div>
+                    <div class="breathing-progress">
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 紧凑型加载器 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3 class="demo-card-title">紧凑型加载器</h3>
+                    <p class="demo-card-desc">适用于组件内或小空间场景</p>
+                </div>
+                <div class="cicc-breathing-loader compact">
+                    <div class="breathing-circle">
+                        <div class="breathing-pulse"></div>
+                    </div>
+                    <div class="breathing-text">处理中</div>
+                    <div class="breathing-subtext">请稍候...</div>
+                    <div class="breathing-progress">
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 深色主题加载器 -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <h3 class="demo-card-title">深色主题加载器</h3>
+                    <p class="demo-card-desc">适用于深色背景或夜间模式</p>
+                </div>
+                <div class="cicc-breathing-loader compact dark">
+                    <div class="breathing-circle">
+                        <div class="breathing-pulse"></div>
+                    </div>
+                    <div class="breathing-text">数据分析中</div>
+                    <div class="breathing-subtext">正在处理财务数据</div>
+                    <div class="breathing-progress">
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="demo-btn" onclick="showFullscreen()">
+                体验全屏呼吸加载器
+            </button>
+        </div>
+        
+        <!-- 使用说明 -->
+        <div class="code-section">
+            <h2 class="code-title">使用方法</h2>
+            <p>将以下HTML结构添加到你的页面中：</p>
+            <pre><code>&lt;div class="cicc-breathing-loader"&gt;
+  &lt;div class="breathing-circle"&gt;
+    &lt;div class="breathing-pulse"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="breathing-text"&gt;正在生成内容&lt;/div&gt;
+  &lt;div class="breathing-subtext"&gt;AI正在为您精心准备演示文稿&lt;/div&gt;
+  &lt;div class="breathing-progress"&gt;
+    &lt;div class="progress-dot"&gt;&lt;/div&gt;
+    &lt;div class="progress-dot"&gt;&lt;/div&gt;
+    &lt;div class="progress-dot"&gt;&lt;/div&gt;
+    &lt;div class="progress-dot"&gt;&lt;/div&gt;
+    &lt;div class="progress-dot"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            
+            <h3 style="color: #8B1538; margin-top: 30px;">可用的修饰类：</h3>
+            <ul style="line-height: 1.8;">
+                <li><code>.large</code> - 大型加载器，适用于全屏场景</li>
+                <li><code>.compact</code> - 紧凑型加载器，适用于小空间</li>
+                <li><code>.dark</code> - 深色主题变体</li>
+            </ul>
+            
+            <h3 style="color: #8B1538; margin-top: 30px;">设计理念：</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>呼吸节奏</strong>：4秒一个完整的呼吸周期，模拟自然呼吸</li>
+                <li><strong>渐变色彩</strong>：中金红到金色的渐变，体现品牌特色</li>
+                <li><strong>正念体验</strong>：平静的动画让等待变得舒缓</li>
+                <li><strong>可访问性</strong>：支持减少动画偏好设置</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 全屏演示 -->
+    <div class="fullscreen-demo" id="fullscreenDemo">
+        <button class="close-btn" onclick="hideFullscreen()">×</button>
+        <div class="cicc-breathing-loader large">
+            <div class="breathing-circle">
+                <div class="breathing-pulse"></div>
+            </div>
+            <div class="breathing-text">正在生成演示文稿</div>
+            <div class="breathing-subtext">AI正在为您创建专业的中金风格演示文稿，请耐心等待</div>
+            <div class="breathing-progress">
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showFullscreen() {
+            document.getElementById('fullscreenDemo').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideFullscreen() {
+            document.getElementById('fullscreenDemo').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 演示自动隐藏全屏加载器
+        let autoHideTimer;
+        function showFullscreen() {
+            document.getElementById('fullscreenDemo').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // 10秒后自动隐藏
+            autoHideTimer = setTimeout(() => {
+                hideFullscreen();
+            }, 10000);
+        }
+        
+        function hideFullscreen() {
+            document.getElementById('fullscreenDemo').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (autoHideTimer) {
+                clearTimeout(autoHideTimer);
+            }
+        }
+    </script>
+</body>
+</html>

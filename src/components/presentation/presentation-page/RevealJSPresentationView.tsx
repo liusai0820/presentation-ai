@@ -1,12 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { usePresentationState } from "@/states/presentation-state";
 import { Download, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function RevealJSPresentationView() {
   const generatedHtml = usePresentationState((s) => s.generatedHtml);
-  const currentPresentationTitle = usePresentationState((s) => s.currentPresentationTitle);
+  const currentPresentationTitle = usePresentationState(
+    (s) => s.currentPresentationTitle,
+  );
 
   if (!generatedHtml) {
     return (
@@ -39,22 +41,19 @@ export function RevealJSPresentationView() {
       {/* 操作栏 */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold">{currentPresentationTitle || "演示文稿"}</h3>
-          <p className="text-sm text-muted-foreground">Reveal.js 演示文稿已生成</p>
+          <h3 className="text-lg font-semibold">
+            {currentPresentationTitle || "演示文稿"}
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            Reveal.js 演示文稿已生成
+          </p>
         </div>
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            onClick={handlePreview}
-            className="gap-2"
-          >
+          <Button variant="outline" onClick={handlePreview} className="gap-2">
             <ExternalLink className="h-4 w-4" />
             在新窗口打开
           </Button>
-          <Button
-            onClick={handleDownload}
-            className="gap-2"
-          >
+          <Button onClick={handleDownload} className="gap-2">
             <Download className="h-4 w-4" />
             下载 HTML
           </Button>
@@ -63,20 +62,25 @@ export function RevealJSPresentationView() {
 
       {/* 预览区域 - 16:9比例 */}
       <div className="w-full">
-        <div 
-          className="relative w-full overflow-hidden rounded-lg border bg-card shadow-sm mx-auto" 
-          style={{ 
-            aspectRatio: '16/9',
-            maxWidth: '100%',
-            height: 'calc(100vh - 200px)',
-            minHeight: '600px'
+        <div
+          className="relative w-full overflow-hidden rounded-lg border bg-card shadow-sm mx-auto"
+          style={{
+            aspectRatio: "16/9",
+            maxWidth: "100%",
+            height: "calc(100vh - 200px)",
+            minHeight: "600px",
           }}
         >
           <iframe
             srcDoc={generatedHtml}
             className="absolute inset-0 w-full h-full border-0"
             title="Presentation Preview"
-            sandbox="allow-scripts allow-same-origin"
+            sandbox="allow-scripts allow-same-origin allow-fullscreen"
+            allowFullScreen
+            style={{
+              border: "none",
+              outline: "none",
+            }}
           />
         </div>
       </div>

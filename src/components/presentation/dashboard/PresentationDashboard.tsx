@@ -7,7 +7,6 @@ import { Wand2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { PresentationControls } from "./PresentationControls";
 import { PresentationExamples } from "./PresentationExamples";
 import { PresentationHeader } from "./PresentationHeader";
 import { PresentationInput } from "./PresentationInput";
@@ -23,25 +22,23 @@ export function PresentationDashboard({
   const {
     presentationInput,
     isGeneratingOutline,
-    setCurrentPresentation,
-    setIsGeneratingOutline,
     language,
     theme,
-    setShouldStartOutlineGeneration,
+    resetToInitialState,
   } = usePresentationState();
 
   useEffect(() => {
-    setCurrentPresentation("", "");
-    // Make sure to reset any generation flags when landing on dashboard
-    setIsGeneratingOutline(false);
-    setShouldStartOutlineGeneration(false);
-  }, []);
+    // 完全重置到初始状态，清除所有缓存内容
+    resetToInitialState();
+  }, [resetToInitialState]);
 
   const handleGenerate = async () => {
     if (!presentationInput.trim()) {
       toast.error("请输入您的演示文稿主题");
       return;
     }
+
+    const { setIsGeneratingOutline, setCurrentPresentation } = usePresentationState.getState();
 
     // Set UI loading state
     setIsGeneratingOutline(true);
@@ -77,22 +74,28 @@ export function PresentationDashboard({
       <div className="mx-auto max-w-4xl space-y-12 px-6 py-12">
         <PresentationHeader />
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           <PresentationInput handleGenerate={handleGenerate} />
-          <PresentationControls />
 
-          <div className="flex items-center justify-end">
-            <div className="flex items-center gap-2">
-              <Button
-                onClick={handleGenerate}
-                disabled={!presentationInput.trim() || isGeneratingOutline}
-                variant={isGeneratingOutline ? "loading" : "default"}
-                className="gap-2"
-              >
-                <Wand2 className="h-4 w-4" />
-                生成演示文稿
-              </Button>
-            </div>
+          <div className="flex items-center justify-center pt-2">
+            <Button
+              onClick={handleGenerate}
+              disabled={!presentationInput.trim() || isGeneratingOutline}
+              size="lg"
+              className="gap-2.5 px-8 py-6 text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
+            >
+              {isGeneratingOutline ? (
+                <>
+                  <div className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                  正在生成...
+                </>
+              ) : (
+                <>
+                  <Wand2 className="h-5 w-5" />
+                  生成演示文稿
+                </>
+              )}
+            </Button>
           </div>
         </div>
 

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RevealJS 全屏测试</title>
+  
+  <!-- Reveal.js 核心CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css">
+  
+  <!-- 修复后的样式 -->
+  <style>
+    .reveal .slides {
+      text-align: left;
+    }
+    
+    .reveal .slides section {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      position: relative !important;
+    }
+    
+    .reveal .slides section .slide-content {
+      width: 95%;
+      max-width: 95%;
+      height: auto;
+      min-height: 80%;
+      margin: 0 auto;
+      padding: 30px 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: visible !important;
+    }
+    
+    .reveal .slides section.center {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    .reveal .slides section.center .slide-content {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: auto;
+    }
+    
+    .reveal.fullscreen .slides section .slide-content {
+      width: 92% !important;
+      max-width: 92% !important;
+      padding: 40px 50px !important;
+    }
+    
+    .reveal.fullscreen .slides section {
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="center">
+        <div class="slide-content">
+          <h1>易达资本：连接中国与中东的战略枢纽</h1>
+          <h2>深化中东合作，共创新未来</h2>
+        </div>
+      </section>
+      
+      <section>
+        <div class="slide-content">
+          <h1>感谢与期许</h1>
+          <h2>携手共进，共创沙中创新未来</h2>
+          
+          <p>易达资本期待与各位伙伴深化合作，共同推动沙特与中国在创新产业、投资合作、人才培养等方面的全面融合。</p>
+          
+          <div style="text-align: center; margin: 2em 0;">
+            <strong>Jerry Li & Jessica Wong</strong><br>
+            易达资本创始人
+          </div>
+          
+          <p style="font-style: italic; text-align: center; font-size: 0.9em;">
+            "投资不仅意味着资金流动，更意味着文化、技术和理念的交融。在沙中合作中，我们看到的是两个文明古国对话的深刻内涵，是全球创新生态的共建。"
+          </p>
+          
+          <div style="text-align: center; margin-top: 3em; font-size: 0.8em; color: #666;">
+            易达资本 | 连接沙特与中国的创新投资服务商<br>
+            官方网站：www.easypartners.com | 联系电话：+966-11-XXXX-XXXX
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"></script>
+  
+  <script>
+    function initReveal() {
+      if (typeof Reveal === 'undefined') {
+        setTimeout(initReveal, 1000);
+        return;
+      }
+      
+      Reveal.initialize({
+        width: 1024,
+        height: 768,
+        margin: 0.02,
+        minScale: 0.1,
+        maxScale: 3.0,
+        
+        hash: false,
+        center: false,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        backgroundTransition: 'fade',
+        embedded: false,
+        disableLayout: false,
+        respondToHashChanges: true,
+        
+        controls: true,
+        progress: true,
+        slideNumber: true,
+        keyboard: true,
+        touch: true,
+        loop: false,
+        autoSlide: 0
+      }).then(() => {
+        console.log('✅ Reveal.js初始化成功！');
+        
+        function handleFullscreenChange() {
+          const isFullscreen = !!(document.fullscreenElement || 
+                                 document.webkitFullscreenElement || 
+                                 document.mozFullScreenElement);
+          
+          const revealElement = document.querySelector('.reveal');
+          if (revealElement) {
+            if (isFullscreen) {
+              revealElement.classList.add('fullscreen');
+            } else {
+              revealElement.classList.remove('fullscreen');
+            }
+          }
+          
+          setTimeout(() => Reveal.layout(), 100);
+          setTimeout(() => { Reveal.layout(); Reveal.sync(); }, 300);
+          setTimeout(() => Reveal.layout(), 500);
+        }
+        
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+      });
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  </script>
+</body>
+</html>

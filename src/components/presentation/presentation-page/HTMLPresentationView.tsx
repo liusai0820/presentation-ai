@@ -40,7 +40,7 @@ export function HTMLPresentationView() {
     <>
       {htmlSlides.map((slide, index) => (
         <div
-          key={slide.id}
+          key={`${slide.id}-${index}`}
           className={cn(
             "slide-wrapper group/card-container relative z-10 grid w-full place-items-center pb-6",
             isPresenting && "fixed inset-0 pb-0",

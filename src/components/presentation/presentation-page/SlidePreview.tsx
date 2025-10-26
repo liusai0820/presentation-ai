@@ -130,7 +130,7 @@ function SlidePreviewBase({
                         // HTML幻灯片 - 简洁的数字列表
                         htmlSlides.map((slide, index) => (
                           <button
-                            key={slide.id}
+                            key={`${slide.id}-${index}`}
                             onClick={() => handleSlideClick(index)}
                             className={`flex items-center gap-3 rounded-lg px-3 py-2 text-left transition-all ${
                               effectiveCurrentSlideIndex === index
@@ -158,7 +158,7 @@ function SlidePreviewBase({
                         // XML组件幻灯片缩略图（原有逻辑）
                         slides.map((slide, index) => (
                           <MemoPreviewItem
-                            key={slide.id}
+                            key={`${slide.id}-${index}`}
                             index={index}
                             isActive={effectiveCurrentSlideIndex === index}
                             onClick={handleSlideClick}

@@ -127,7 +127,7 @@ export function HTMLSlideViewer({ slides, onExportPDF }: HTMLSlideViewerProps) {
         <div className="flex gap-2 overflow-x-auto">
           {slides.map((slide, index) => (
             <button
-              key={slide.id}
+              key={`${slide.id}-${index}`}
               onClick={() => setCurrentIndex(index)}
               className={`flex-shrink-0 rounded border-2 p-2 transition-all ${
                 index === currentIndex

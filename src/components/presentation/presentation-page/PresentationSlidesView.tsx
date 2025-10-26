@@ -96,7 +96,7 @@ export const PresentationSlidesView = ({
 
           {items.map((slide, index) => (
             <div
-              key={slide.id}
+              key={`${slide.id}-${index}`}
               className={`slide-wrapper slide-wrapper-${index} w-full`}
             >
               <SlideContainer

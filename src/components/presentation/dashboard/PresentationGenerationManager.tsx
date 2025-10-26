@@ -114,18 +114,37 @@ export function PresentationGenerationManager() {
             try {
               let result;
 
+              console.log(`🖼️ 开始为幻灯片 ${slideId} 生成图片`);
+              console.log(`   查询: "${rootImage.query}"`);
+              console.log(`   图片源: ${imageSource}`);
+              console.log(`   布局类型: ${rootImage.layoutType}`);
+
               if (imageSource === "stock") {
                 // Use Unsplash for stock images
+                console.log("📸 使用Unsplash获取图片...");
                 const unsplashResult = await getImageFromUnsplash(
                   rootImage.query,
                   rootImage.layoutType,
                 );
+                console.log("📸 Unsplash结果:", unsplashResult);
+
                 if (unsplashResult.success && unsplashResult.imageUrl) {
                   result = { image: { url: unsplashResult.imageUrl } };
+                  console.log(
+                    "✅ Unsplash图片获取成功:",
+                    unsplashResult.imageUrl,
+                  );
+                } else {
+                  console.error(
+                    "❌ Unsplash图片获取失败:",
+                    unsplashResult.error,
+                  );
                 }
               } else {
                 // Use AI generation
+                console.log("🤖 使用AI生成图片...");
                 result = await generateImageAction(rootImage.query, imageModel);
+                console.log("🤖 AI生成结果:", result);
               }
 
               if (result?.image?.url) {
@@ -240,7 +259,7 @@ export function PresentationGenerationManager() {
     // Extract outline from the last assistant message
     if (lastMessage.role === "assistant" && lastMessage.content) {
       console.log("🔍 处理助手消息，内容长度:", lastMessage.content.length);
-      
+
       // Extract <think> content from assistant message and keep only the remainder for parsing
       const thinkingExtract = extractThinking(lastMessage.content);
       if (thinkingExtract.hasThinking) {
@@ -250,7 +269,7 @@ export function PresentationGenerationManager() {
       let cleanContent = thinkingExtract.hasThinking
         ? thinkingExtract.content
         : lastMessage.content;
-        
+
       console.log("🧹 清理后的内容预览:", cleanContent.substring(0, 300));
 
       // Only extract title if we haven't done it yet
@@ -302,7 +321,7 @@ export function PresentationGenerationManager() {
   // Function to update outline and search results using requestAnimationFrame
   const updateOutlineWithRAF = (): void => {
     console.log("🎬 RAF更新被调用");
-    
+
     // Update search results if available
     if (searchResultsBufferRef.current !== null) {
       console.log("🔍 更新搜索结果:", searchResultsBufferRef.current.length);
@@ -386,7 +405,7 @@ export function PresentationGenerationManager() {
   // Lightweight useEffect that only schedules RAF updates
   useEffect(() => {
     console.log("📨 收到消息数量:", outlineMessages.length);
-    
+
     // Only update if we have new messages
     if (outlineMessages.length > 1) {
       lastProcessedMessagesLength.current = outlineMessages.length;
@@ -415,22 +434,30 @@ export function PresentationGenerationManager() {
           setIsGeneratingOutline(true);
 
           // Get the current state after reset
-          const { presentationInput, analyzedDocument } = usePresentationState.getState();
+          const { presentationInput, analyzedDocument } =
+            usePresentationState.getState();
 
           // 如果有文档分析结果，直接使用它生成大纲
           if (analyzedDocument) {
             console.log("📄 使用文档分析结果生成大纲");
-            
+
             // 设置标题
-            setCurrentPresentation(currentPresentationId, analyzedDocument.title);
+            setCurrentPresentation(
+              currentPresentationId,
+              analyzedDocument.title,
+            );
             titleExtractedRef.current = true;
 
             // 生成大纲
-            const outlineItems = analyzedDocument.sections.map((section, idx) => {
-              const heading = `# ${idx + 1}. ${section.heading}`;
-              const points = section.keyPoints.map(point => `- ${point}`).join('\n');
-              return `${heading}\n${points}`;
-            });
+            const outlineItems = analyzedDocument.sections.map(
+              (section, idx) => {
+                const heading = `# ${idx + 1}. ${section.heading}`;
+                const points = section.keyPoints
+                  .map((point) => `- ${point}`)
+                  .join("\n");
+                return `${heading}\n${points}`;
+              },
+            );
 
             setOutline(outlineItems);
             setIsGeneratingOutline(false);
@@ -541,30 +568,62 @@ export function PresentationGenerationManager() {
       setThumbnailUrl(undefined);
 
       // 检查生成模式
-      if (generationMode === "html" || generationMode === "revealjs") {
-        // HTML或Reveal.js生成模式
-        const modeLabel = generationMode === "revealjs" ? "Reveal.js" : "HTML";
+      if (
+        generationMode === "html" ||
+        generationMode === "revealjs" ||
+        generationMode === "powerpoint"
+      ) {
+        // HTML、Reveal.js或PowerPoint生成模式
+        const modeLabel =
+          generationMode === "revealjs"
+            ? "Reveal.js"
+            : generationMode === "powerpoint"
+              ? "PowerPoint"
+              : "HTML";
         console.log(`🎨 使用${modeLabel}生成模式`);
         console.log("📄 文档分析结果:", analyzedDocument ? "有" : "无");
-        
+
         void (async () => {
           try {
             const { originalDocumentContent } = usePresentationState.getState();
-            
+
             // 根据模式选择API端点和默认主题
-            const endpoint = generationMode === "revealjs"
-              ? "/api/presentation/generate_revealjs"
-              : "/api/presentation/generate_html";
-            const defaultTheme = generationMode === "revealjs" ? "mckinsey" : "professional";
-            
+            const endpoint =
+              generationMode === "revealjs"
+                ? "/api/presentation/generate_revealjs"
+                : generationMode === "powerpoint"
+                  ? "/api/presentation/generate_powerpoint" // 使用专用PowerPoint API
+                  : "/api/presentation/generate_html";
+            const defaultTheme =
+              generationMode === "revealjs"
+                ? "mckinsey"
+                : generationMode === "powerpoint"
+                  ? "professional"
+                  : "professional";
+
             const response = await fetch(endpoint, {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                "x-generation-mode": generationMode, // 添加模式标识
+              },
               body: JSON.stringify({
                 title: currentPresentationTitle ?? presentationInput ?? "",
                 prompt: presentationInput ?? "",
                 outline,
                 language,
+                tone:
+                  generationMode === "powerpoint"
+                    ? "powerpoint"
+                    : presentationStyle || "professional", // 添加tone参数
+                modelProvider:
+                  generationMode === "powerpoint"
+                    ? "openrouter"
+                    : modelProvider, // PowerPoint使用OpenRouter
+                modelId:
+                  generationMode === "powerpoint"
+                    ? "minimax/minimax-m2:free"
+                    : modelId, // PowerPoint使用免费模型
                 theme: theme || defaultTheme,
                 searchResults: stateSearchResults,
                 analyzedDocument,
@@ -576,88 +635,276 @@ export function PresentationGenerationManager() {
               throw new Error(`${modeLabel}生成失败`);
             }
 
-            // Reveal.js返回JSON，HTML返回流
+            // Reveal.js返回JSON，HTML和PowerPoint返回流
             if (generationMode === "revealjs") {
               const data = await response.json();
-              
+
               if (!data.success || !data.html) {
                 throw new Error("Reveal.js生成失败");
               }
-              
+
               console.log("✅ Reveal.js生成完成");
               console.log("   - 标题:", data.title);
               console.log("   - 主题:", data.theme);
               console.log("   - Tokens:", data.tokensUsed);
-              
+
               // 存储完整的HTML
               setGeneratedHtml(data.html);
-              
+
               // 创建虚拟幻灯片列表用于预览
               const slideCount = (data.html.match(/<section/g) || []).length;
-              const virtualSlides = Array.from({ length: slideCount }, (_, i) => ({
-                id: `slide-${i + 1}`,
-                index: i,
-                html: `<section>幻灯片 ${i + 1}</section>`,
-                title: `幻灯片 ${i + 1}`,
-              }));
-              
+              const virtualSlides = Array.from(
+                { length: slideCount },
+                (_, i) => ({
+                  id: `slide-${i + 1}`,
+                  index: i,
+                  html: `<section>幻灯片 ${i + 1}</section>`,
+                  title: `幻灯片 ${i + 1}`,
+                }),
+              );
+
               setHtmlSlides(virtualSlides);
               console.log(`✅ 创建了${slideCount}个虚拟幻灯片用于预览`);
-              
+
               setIsGeneratingPresentation(false);
               setShouldStartPresentationGeneration(false);
               toast.success(`成功生成 ${slideCount} 页Reveal.js演示文稿！`);
               return;
             }
 
-            // HTML模式：读取流式响应
-            const reader = response.body?.getReader();
-            if (!reader) {
-              throw new Error("无法读取响应");
-            }
-
             let htmlContent = "";
-            const decoder = new TextDecoder();
-            let buffer = "";
 
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
+            // PowerPoint模式：读取纯文本响应
+            if (generationMode === "powerpoint") {
+              let rawContent = await response.text();
+              console.log(
+                "✅ PowerPoint XML接收完成，原始长度:",
+                rawContent.length,
+              );
+              console.log("📄 原始内容预览:", rawContent.substring(0, 1000));
 
-              buffer += decoder.decode(value, { stream: true });
-              
-              const lines = buffer.split("\n");
-              buffer = lines.pop() || "";
+              // 清理可能的markdown格式和多余的文本
+              htmlContent = rawContent.trim();
 
-              for (const line of lines) {
-                if (line.startsWith("0:")) {
-                  const match = line.match(/^0:"(.*)"/);
-                  if (match && match[1]) {
-                    try {
-                      const unescaped = JSON.parse('"' + match[1] + '"');
-                      htmlContent += unescaped;
-                    } catch (e) {
-                      htmlContent += match[1]
-                        .replace(/\\n/g, '\n')
-                        .replace(/\\"/g, '"')
-                        .replace(/\\\\/g, '\\');
+              // 如果内容被包装在代码块中，提取XML内容
+              const xmlBlockMatch = htmlContent.match(
+                /```xml\s*([\s\S]*?)\s*```/,
+              );
+              if (xmlBlockMatch && xmlBlockMatch[1]) {
+                console.log("🔧 检测到XML代码块，提取内容");
+                htmlContent = xmlBlockMatch[1].trim();
+              }
+
+              // 如果内容被包装在普通代码块中，提取内容
+              const codeBlockMatch = htmlContent.match(
+                /```\s*([\s\S]*?)\s*```/,
+              );
+              if (
+                codeBlockMatch &&
+                codeBlockMatch[1] &&
+                htmlContent.includes("<PRESENTATION")
+              ) {
+                console.log("🔧 检测到普通代码块，提取内容");
+                htmlContent = codeBlockMatch[1].trim();
+              }
+
+              // 移除可能的前导/后导文本，只保留XML部分
+              const presentationMatch = htmlContent.match(
+                /(<PRESENTATION[\s\S]*<\/PRESENTATION>)/,
+              );
+              if (presentationMatch && presentationMatch[1]) {
+                console.log("🔧 提取PRESENTATION标签内容");
+                htmlContent = presentationMatch[1].trim();
+              }
+
+              console.log("📄 清理后XML内容长度:", htmlContent.length);
+              console.log("📄 清理后XML预览:", htmlContent.substring(0, 1000));
+            } else {
+              // HTML模式：读取流式响应
+              const reader = response.body?.getReader();
+              if (!reader) {
+                throw new Error("无法读取响应");
+              }
+
+              const decoder = new TextDecoder();
+              let buffer = "";
+
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+
+                const lines = buffer.split("\n");
+                buffer = lines.pop() || "";
+
+                for (const line of lines) {
+                  if (line.startsWith("0:")) {
+                    const match = line.match(/^0:"(.*)"/);
+                    if (match && match[1]) {
+                      try {
+                        const unescaped = JSON.parse('"' + match[1] + '"');
+                        htmlContent += unescaped;
+                      } catch (e) {
+                        htmlContent += match[1]
+                          .replace(/\\n/g, "\n")
+                          .replace(/\\"/g, '"')
+                          .replace(/\\\\/g, "\\");
+                      }
                     }
                   }
                 }
               }
+
+              console.log("✅ HTML生成完成，长度:", htmlContent.length);
+              console.log("📄 HTML内容预览:", htmlContent.substring(0, 1000));
             }
 
-            console.log("✅ HTML生成完成，长度:", htmlContent.length);
-            console.log("📄 HTML内容预览:", htmlContent.substring(0, 1000));
-            
-            // 检查是否包含SLIDE标记
-            const hasSlideMarkers = htmlContent.includes("<!-- SLIDE") && htmlContent.includes("<!-- END SLIDE");
-            console.log("🔍 是否包含SLIDE标记:", hasSlideMarkers);
-            
+            // PowerPoint模式检查XML格式，HTML模式检查HTML格式
+            if (generationMode === "powerpoint") {
+              const hasXmlSections =
+                htmlContent.includes("<SECTION") &&
+                htmlContent.includes("</SECTION>");
+              console.log(
+                "🔍 PowerPoint模式 - 是否包含SECTION标记:",
+                hasXmlSections,
+              );
+
+              if (!hasXmlSections) {
+                console.error("❌ PowerPoint XML内容中没有找到SECTION标记");
+                console.error("完整XML内容:", htmlContent);
+                console.error("内容长度:", htmlContent.length);
+                console.error(
+                  "是否包含<PRESENTATION>:",
+                  htmlContent.includes("<PRESENTATION"),
+                );
+                console.error(
+                  "是否包含```xml:",
+                  htmlContent.includes("```xml"),
+                );
+                console.error("是否包含```:", htmlContent.includes("```"));
+
+                // 尝试从markdown代码块中提取XML
+                const xmlBlockMatch = htmlContent.match(
+                  /```xml\s*([\s\S]*?)\s*```/,
+                );
+                if (xmlBlockMatch && xmlBlockMatch[1]) {
+                  console.log("🔧 发现XML代码块，尝试提取内容");
+                  const extractedXml = xmlBlockMatch[1].trim();
+                  console.log("📄 提取的XML内容长度:", extractedXml.length);
+                  console.log(
+                    "📄 提取的XML预览:",
+                    extractedXml.substring(0, 500),
+                  );
+
+                  // 检查提取的内容是否包含SECTION标记
+                  if (
+                    extractedXml.includes("<SECTION") &&
+                    extractedXml.includes("</SECTION>")
+                  ) {
+                    console.log("✅ 提取的XML包含SECTION标记，使用提取的内容");
+                    htmlContent = extractedXml;
+                  } else {
+                    console.error("❌ 提取的XML仍然不包含SECTION标记");
+                    throw new Error(
+                      "AI生成的PowerPoint XML格式不正确，即使从代码块提取后仍缺少<SECTION>标记",
+                    );
+                  }
+                } else {
+                  throw new Error(
+                    "AI生成的PowerPoint XML格式不正确，缺少<SECTION>标记",
+                  );
+                }
+              }
+
+              // PowerPoint模式：直接解析XML创建幻灯片
+              console.log("📦 PowerPoint模式：直接解析XML");
+              console.log("📄 XML内容长度:", htmlContent.length);
+              console.log(
+                "📄 XML内容前500字符:",
+                htmlContent.substring(0, 500),
+              );
+
+              try {
+                // 直接解析XML内容创建幻灯片
+                const sectionMatches = htmlContent.match(
+                  /<SECTION[^>]*>(.*?)<\/SECTION>/gs,
+                );
+                console.log(
+                  "🔍 找到的SECTION数量:",
+                  sectionMatches?.length || 0,
+                );
+
+                if (sectionMatches && sectionMatches.length > 0) {
+                  // 使用正确的XML解析器
+                  console.log("🔧 使用SlideParser解析PowerPoint XML");
+
+                  // PowerPoint模式：创建新的解析器实例以确保干净的状态
+                  // 但保持一致的ID生成逻辑
+                  const powerpointParser = new SlideParser();
+                  powerpointParser.parseChunk(htmlContent);
+                  powerpointParser.finalize();
+                  const parsedSlides = powerpointParser.getAllSlides();
+
+                  console.log(
+                    "✅ SlideParser解析出",
+                    parsedSlides.length,
+                    "张幻灯片",
+                  );
+                  console.log(
+                    "📋 解析的幻灯片:",
+                    parsedSlides.map((s) => ({
+                      id: s.id,
+                      hasRootImage: !!s.rootImage,
+                      imageQuery: s.rootImage?.query,
+                    })),
+                  );
+
+                  // 为每个有图片查询的幻灯片触发图片生成
+                  parsedSlides.forEach((slide) => {
+                    if (slide.rootImage?.query) {
+                      console.log(
+                        `🖼️ 为幻灯片 ${slide.id} 触发图片生成:`,
+                        slide.rootImage.query,
+                      );
+                      const { startRootImageGeneration } =
+                        usePresentationState.getState();
+                      startRootImageGeneration(slide.id, slide.rootImage.query);
+                    }
+                  });
+
+                  // 更新状态
+                  const { setSlides } = usePresentationState.getState();
+                  setSlides(parsedSlides);
+                  console.log("✅ 幻灯片状态已更新");
+                } else {
+                  throw new Error("没有找到有效的SECTION标签");
+                }
+              } catch (error) {
+                console.error("❌ PowerPoint XML解析失败:", error);
+                throw error;
+              }
+
+              setIsGeneratingPresentation(false);
+              setShouldStartPresentationGeneration(false);
+
+              const slideCount = (htmlContent.match(/<SECTION/g) || []).length;
+              toast.success(`成功生成 ${slideCount} 页PowerPoint演示文稿！`);
+              return;
+            }
+
+            // HTML模式检查
+            const hasSlideMarkers =
+              htmlContent.includes("<!-- SLIDE") &&
+              htmlContent.includes("<!-- END SLIDE");
+            console.log("🔍 HTML模式 - 是否包含SLIDE标记:", hasSlideMarkers);
+
             if (!hasSlideMarkers) {
               console.error("❌ HTML内容中没有找到SLIDE标记");
               console.error("完整HTML内容:", htmlContent);
-              throw new Error("AI生成的HTML格式不正确，缺少<!-- SLIDE X -->标记");
+              throw new Error(
+                "AI生成的HTML格式不正确，缺少<!-- SLIDE X -->标记",
+              );
             }
 
             // 解析HTML内容
@@ -669,23 +916,29 @@ export function PresentationGenerationManager() {
 
             if (slides.length === 0) {
               console.error("❌ 未能解析出任何幻灯片");
-              console.error("HTML内容前2000字符:", htmlContent.substring(0, 2000));
+              console.error(
+                "HTML内容前2000字符:",
+                htmlContent.substring(0, 2000),
+              );
               throw new Error("未能解析出任何幻灯片，请检查HTML格式");
             }
 
             console.log("📄 解析出", slides.length, "个HTML幻灯片");
-            console.log("📄 幻灯片详情:", slides.map(s => ({ id: s.id, index: s.index, title: s.title })));
-            
+            console.log(
+              "📄 幻灯片详情:",
+              slides.map((s) => ({ id: s.id, index: s.index, title: s.title })),
+            );
+
             setHtmlSlides(slides);
             console.log("✅ HTML幻灯片已存储到状态");
-            
+
             setIsGeneratingPresentation(false);
             setShouldStartPresentationGeneration(false);
             toast.success(`成功生成 ${slides.length} 页HTML演示文稿！`);
           } catch (error) {
             console.error("❌ HTML生成错误:", error);
             toast.error(
-              error instanceof Error ? error.message : "HTML生成失败"
+              error instanceof Error ? error.message : "HTML生成失败",
             );
             resetGeneration();
           }

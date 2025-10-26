@@ -241,6 +241,14 @@ export class SlideParser {
    * Get all parsed slides
    */
   public getAllSlides(): PlateSlide[] {
+    // Check for duplicate IDs and log them
+    const ids = this.parsedSlides.map(slide => slide.id);
+    const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+    if (duplicateIds.length > 0) {
+      console.warn(`⚠️ 发现重复的slide ID:`, duplicateIds);
+      console.warn(`📋 所有slide ID:`, ids);
+    }
+    
     return this.parsedSlides;
   }
 
@@ -297,7 +305,9 @@ export class SlideParser {
       return [];
     }
 
-    const newSlides = this.completedSections.map(this.convertSectionToPlate);
+    const newSlides = this.completedSections.map((section, index) => 
+      this.convertSectionToPlate(section, this.parsedSlides.length + index)
+    );
     this.parsedSlides = [...this.parsedSlides, ...newSlides];
     this.completedSections = [];
 
@@ -403,7 +413,7 @@ export class SlideParser {
    * Generate a section identifier to track the same section across updates
    * This helps maintain the same ID when the section is updated
    */
-  private generateSectionIdentifier(sectionNode: XMLNode): string {
+  private generateSectionIdentifier(sectionNode: XMLNode, sectionIndex?: number): string {
     // Try to find a unique heading to identify the section
     const h1Node = sectionNode.children.find(
       (child) => child.tag.toUpperCase() === "H1",
@@ -451,6 +461,11 @@ export class SlideParser {
       fingerprint = `content-hash-${Math.abs(hash)}`;
     }
 
+    // If we have a section index, use it as a prefix for more stability
+    if (sectionIndex !== undefined) {
+      return `section-${sectionIndex}-${fingerprint}`;
+    }
+    
     return fingerprint;
   }
 
@@ -458,7 +473,7 @@ export class SlideParser {
    * Convert an XML section string to Plate.js format
    * Modified to extract root-level images and layout type
    */
-  private convertSectionToPlate = (sectionString: string): PlateSlide => {
+  private convertSectionToPlate = (sectionString: string, sectionIndex?: number): PlateSlide => {
     // Parse XML string into a structured XMLNode tree
     const rootNode = this.parseXML(sectionString);
 
@@ -477,18 +492,20 @@ export class SlideParser {
     }
 
     // Generate a section identifier to check if we've seen this section before
-    const sectionIdentifier = this.generateSectionIdentifier(sectionNode);
+    const sectionIdentifier = this.generateSectionIdentifier(sectionNode, sectionIndex);
 
     // Check if we already have an ID for this section
     let slideId: string;
     if (this.sectionIdMap.has(sectionIdentifier)) {
       // Use the existing ID for consistency
       slideId = this.sectionIdMap.get(sectionIdentifier)!;
+      console.log(`🔄 重用已存在的slide ID: ${slideId} (标识符: ${sectionIdentifier})`);
     } else {
       // Generate a new ID using nanoid
       slideId = nanoid();
       // Store it for future reference
       this.sectionIdMap.set(sectionIdentifier, slideId);
+      console.log(`🆕 生成新的slide ID: ${slideId} (标识符: ${sectionIdentifier})`);
     }
 
     // Extract layout type from SECTION attributes

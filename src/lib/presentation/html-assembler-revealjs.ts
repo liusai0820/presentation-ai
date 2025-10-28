@@ -9,6 +9,7 @@ export interface AssembleOptions {
   theme?: string;
   title?: string;
   customCSS?: string;
+  coverBackgroundImageUrl?: string;
 }
 
 /**
@@ -18,28 +19,34 @@ export function assembleRevealJSPresentation(
   aiGeneratedContent: string,
   options: AssembleOptions = {}
 ): string {
-  const { theme = 'white', title = 'Presentation', customCSS } = options;
-  
+  const { theme = 'white', title = 'Presentation', customCSS, coverBackgroundImageUrl } = options;
+
   console.log('🔍 AI生成内容长度:', aiGeneratedContent.length);
   console.log('🔍 AI生成内容预览:', aiGeneratedContent.substring(0, 500));
-  
+
   // 将AI生成的内容分割成单独的幻灯片
   const slides = splitIntoSlides(aiGeneratedContent);
-  
+
   console.log('🔍 分割后幻灯片数量:', slides.length);
   if (slides.length > 0) {
     console.log('🔍 第一个幻灯片预览:', slides[0].substring(0, 200));
   }
-  
+
   // 为每个幻灯片包装section标签
   const wrappedSlides = slides.map((slide, index) => {
+    let attributes = '';
     // 第一页通常是封面，居中显示
-    const className = index === 0 ? 'center' : '';
-    return wrapSlideSection(slide, className);
+    if (index === 0) {
+      attributes += ' class="center"';
+      if (coverBackgroundImageUrl) {
+        attributes += ` data-background-image="${coverBackgroundImageUrl}" data-background-opacity="0.5"`;
+      }
+    }
+    return wrapSlideSection(slide, attributes);
   }).join('\n\n');
-  
+
   console.log('🔍 包装后的幻灯片预览:', wrappedSlides.substring(0, 500));
-  
+
   // 组装完整的HTML
   return wrapWithRevealJS(wrappedSlides, theme, title, customCSS);
 }

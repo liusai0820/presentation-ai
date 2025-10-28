@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海南自贸港：核心战略与发展机遇</title>
+  
+  <!-- Reveal.js 核心CSS - 必须加载！ -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  
+  <!-- 主题样式 -->
+  <style>/**
+ * 麦肯锡主题 - McKinsey & Company
+ * 专业级商业演示文稿样式
+ * 
+ * 设计原则：
+ * - 简洁专业
+ * - 数据驱动
+ * - 清晰层次
+ * - 精致细节
+ */
+
+/* ==================== 全局设置 ==================== */
+
+body {
+  background: #ffffff;
+}
+
+.reveal {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* ==================== 幻灯片容器 ==================== */
+/* 使用Reveal.js响应式系统，基础尺寸960x700 */
+
+.reveal .slides {
+  background: #ffffff !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal .slides section {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  text-align: left !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  font-size: 20px !important;
+  line-height: 1.5 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+/* 封面页特殊样式 - 垂直居中 */
+.reveal .slides section.cover {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 80px;
+}
+
+/* 标准内容页 - Reveal.js margin 已提供边距，这里只需少量内边距 */
+.reveal .slides section:not(.cover) {
+  padding: 30px 20px 25px 20px !important;
+}
+
+/* ==================== 页面结构 ==================== */
+
+/* 页眉区域 - 固定在顶部 */
+.slide-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 12px 20px;
+  background: #ffffff;
+  z-index: 10;
+}
+
+/* 内容区域 - 在页眉下方 */
+.slide-content {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+  margin-top: 0;
+}
+
+/* 页脚区域 - 固定在底部 */
+.slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.7em;
+  color: #666666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* ==================== 标题层级 ==================== */
+
+/* H1 - 用于封面页 */
+.reveal h1 {
+  font-size: 2.5em !important;
+  font-weight: 200 !important;
+  color: #0066CC !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.5em !important;
+  letter-spacing: -0.02em !important;
+  display: block !important;
+}
+
+/* H2 - 用于页面标题（页眉） */
+.reveal h2 {
+  font-size: 1.6em !important;
+  font-weight: 300 !important;
+  color: #1a1a1a !important;
+  text-transform: none !important;
+  line-height: 1.3 !important;
+  margin: 0 0 20px 0 !important;
+  padding-bottom: 12px !important;
+  border-bottom: 2px solid #0066CC !important;
+  display: block !important;
+}
+
+.reveal h3 {
+  font-size: 1.2em !important;
+  font-weight: 400 !important;
+  color: #333333 !important;
+  text-transform: none !important;
+  margin-bottom: 0.5em !important;
+  margin-top: 0.8em !important;
+  display: block !important;
+}
+
+.reveal h4 {
+  font-size: 0.9em !important;
+  font-weight: 500;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5em;
+}
+
+/* ==================== 段落和文本 ==================== */
+
+.reveal p {
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+.reveal strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.reveal em {
+  font-style: italic;
+  color: #333333;
+}
+
+/* ==================== 数据卡片 ==================== */
+
+.data-card {
+  background: #f8f9fa;
+  padding: 24px 28px;
+  margin: 15px 0;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+}
+
+.data-card:hover {
+  background: #f0f2f5;
+}
+
+.data-card h3,
+.data-card h4 {
+  margin-top: 0;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999999;
+  margin-bottom: 0.8em;
+}
+
+.data-value {
+  font-size: 2.8em;
+  font-weight: 300;
+  line-height: 1;
+  color: #0066CC;
+  margin: 0.3em 0 0.5em 0;
+  letter-spacing: -0.03em;
+}
+
+.data-card p {
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+}
+
+/* ==================== 布局系统 ==================== */
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin: 15px 0;
+  align-items: start;
+}
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+/* ==================== 列表样式 ==================== */
+
+.reveal ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+.reveal ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: #0066CC;
+  border-radius: 50%;
+}
+
+.reveal ol {
+  counter-reset: item;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 1.5em;
+}
+
+.reveal ol li {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  counter-increment: item;
+  color: #1a1a1a;
+}
+
+.reveal ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  background: #0066CC;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: 500;
+}
+
+/* ==================== 强调元素 ==================== */
+
+.highlight {
+  color: #0066CC;
+  font-weight: 500;
+  background: rgba(0, 102, 204, 0.08);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.key-number {
+  font-size: 1.8em;
+  font-weight: 300;
+  color: #0066CC;
+  display: inline-block;
+  margin: 0 0.2em;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: #0066CC;
+  color: white;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  margin: 0 0.2em;
+}
+
+/* ==================== 分隔线 ==================== */
+
+.divider {
+  height: 1px;
+  background: #d0d0d0;
+  margin: 32px 0;
+  border: none;
+}
+
+/* ==================== 图表容器 ==================== */
+
+.chart-container {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  padding: 32px;
+  margin: 24px 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h4 {
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ==================== 引用块 ==================== */
+
+.reveal blockquote {
+  border-left: 5px solid #0066CC;
+  padding: 0.8em 1.2em;
+  margin: 1em 0;
+  background: #f8f9fa;
+  font-style: italic;
+  color: #333333;
+  font-size: 1.1em;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reveal blockquote p {
+  margin: 0;
+}
+
+/* ==================== 表格样式 ==================== */
+
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.85em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.reveal table th {
+  background: #0066CC;
+  color: white;
+  padding: 0.5em 0.7em;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #1a1a1a;
+  background: white;
+}
+
+.reveal table tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal table tr:hover td {
+  background: #f8f9fa;
+}
+
+/* 表格斑马纹 */
+.reveal table tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.reveal table tbody tr:nth-child(even):hover {
+  background: #f5f6f7;
+}
+
+/* ==================== 图片样式 ==================== */
+
+.reveal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reveal figure {
+  margin: 30px 0;
+}
+
+.reveal figcaption {
+  font-size: 0.8em;
+  color: #666666;
+  text-align: center;
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* ==================== 代码块 ==================== */
+
+.reveal pre {
+  background: #f5f5f5;
+  border-left: 4px solid #0066CC;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.reveal code {
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #d63384;
+  background: #f8f9fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.reveal pre code {
+  color: #333333;
+  background: transparent;
+  padding: 0;
+}
+
+/* ==================== 控制元素 ==================== */
+
+.reveal .controls {
+  color: #0066CC;
+}
+
+.reveal .controls button {
+  color: #0066CC;
+}
+
+.reveal .controls button:hover {
+  color: #0052a3;
+}
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.1);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: #0066CC;
+}
+
+.reveal .slide-number {
+  color: #666666;
+  background: transparent;
+  padding: 0;
+  font-size: 0.8em;
+  bottom: 12px;
+  right: 20px;
+}
+
+/* ==================== 全屏模式 ==================== */
+/* 确保全屏时保持等比例缩放 */
+
+.reveal.fullscreen,
+.reveal:fullscreen,
+.reveal:-webkit-full-screen,
+.reveal:-moz-full-screen,
+.reveal:-ms-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.reveal.fullscreen .slides,
+.reveal:fullscreen .slides,
+.reveal:-webkit-full-screen .slides,
+.reveal:-moz-full-screen .slides,
+.reveal:-ms-fullscreen .slides {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.reveal.fullscreen .slides section,
+.reveal:fullscreen .slides section,
+.reveal:-webkit-full-screen .slides section,
+.reveal:-moz-full-screen .slides section,
+.reveal:-ms-fullscreen .slides section {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ==================== 响应式设计 ==================== */
+/* 注意：由于使用固定尺寸960x700，响应式主要由Reveal.js的缩放处理 */
+
+@media (max-width: 768px) {
+  /* 移动设备上保持固定尺寸，让Reveal.js自动缩放 */
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .reveal .slides section {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .reveal .controls,
+  .reveal .progress,
+  .reveal .slide-number {
+    display: none;
+  }
+}
+
+/* ==================== 动画效果 ==================== */
+
+.data-card,
+.chart-container,
+.reveal table {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 辅助类 ==================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: #666666;
+  opacity: 0.7;
+}
+
+.text-small {
+  font-size: 0.8em;
+}
+
+.mt-1 {
+  margin-top: 0.5em;
+}
+
+.mt-2 {
+  margin-top: 1em;
+}
+
+.mt-3 {
+  margin-top: 1.5em;
+}
+
+.mt-4 {
+  margin-top: 2em;
+}
+
+.mb-1 {
+  margin-bottom: 0.5em;
+}
+
+.mb-2 {
+  margin-bottom: 1em;
+}
+
+.mb-3 {
+  margin-bottom: 1.5em;
+}
+
+.mb-4 {
+  margin-bottom: 2em;
+}
+
+
+/* ==================== ECharts图表样式 ==================== */
+
+.chart-wrapper {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chart-wrapper h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: #333333;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+  min-height: 300px;
+}
+
+/* ==================== 进度条 ==================== */
+
+.progress-bar {
+  background: #e0e0e0;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+  position: relative;
+}
+
+.progress-fill {
+  background: #0066CC;
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5em;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.progress-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-bottom: 0.3em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==================== 时间线 ==================== */
+
+.timeline {
+  position: relative;
+  padding-left: 50px;
+  margin: 30px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d0d0d0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -42px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background: #0066CC;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+}
+
+.timeline-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  color: #0066CC;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.timeline-item p {
+  margin: 0;
+  color: #555555;
+  font-size: 0.9em;
+}
+
+/* ==================== 流程图 ==================== */
+
+.process-flow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.flow-step {
+  flex: 1;
+  padding: 18px 15px;
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.flow-step:hover {
+  border-color: #0066CC;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+}
+
+.flow-step::after {
+  content: '→';
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3em;
+  color: #0066CC;
+  font-weight: 300;
+}
+
+.flow-step:last-child::after {
+  display: none;
+}
+
+.flow-step h4 {
+  margin: 0 0 0.3em 0;
+  color: #0066CC;
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.flow-step p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555555;
+}
+
+/* ==================== 指标卡片网格 ==================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 0;
+  padding: 28px 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.metric-card:hover {
+  border-color: #0066CC;
+  background: #fafbfc;
+}
+
+.metric-value {
+  font-size: 2.5em;
+  font-weight: 300;
+  color: #0066CC;
+  line-height: 1;
+  margin: 0 0 0.4em 0;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  font-size: 0.7em;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8em;
+  display: block;
+  font-weight: 600;
+}
+
+.metric-change {
+  font-size: 0.75em;
+  margin-top: 0.6em;
+  font-weight: 500;
+}
+
+.metric-change.positive {
+  color: #28a745;
+}
+
+.metric-change.negative {
+  color: #dc3545;
+}
+
+/* ==================== 对比卡片 ==================== */
+
+.comparison-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.comparison-card {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 28px;
+  position: relative;
+}
+
+.comparison-card.highlight {
+  border-color: #0066CC;
+  background: #fafbfc;
+}
+
+.comparison-card h3 {
+  margin-top: 0;
+  color: #0066CC;
+  font-size: 1.2em;
+}
+
+.comparison-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #0066CC;
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 12px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==================== 图标列表 ==================== */
+
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.icon-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.icon-list li::before {
+  display: none;
+}
+
+.icon-list .icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: #0066CC;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+/* ==================== 统计数字行 ==================== */
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px 0;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5em;
+  font-weight: 200;
+  color: #0066CC;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #666666;
+  margin-top: 0.3em;
+}</style>
+  
+  <!-- 代码高亮主题 -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/plugin/highlight/monokai.css">
+  
+  <!-- 基础样式修复 - 不干扰 reveal.js 布局 -->
+  <style>
+    /* 确保 reveal 容器占满整个视口 */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .reveal {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* 确保幻灯片容器不会被裁剪 */
+    .reveal .slides {
+      text-align: left;
+    }
+    
+    /* 确保每个 section 内容不会溢出 */
+    .reveal .slides section {
+      box-sizing: border-box;
+    }
+    
+    /* --- CORE FIX for Background Image --- */
+    .reveal .slides section[data-background-image] {
+      background: transparent !important;
+    }
+
+    /* Text wrapping */
+    .reveal .slides section h1,
+    .reveal .slides section h2,
+    .reveal .slides section h3,
+    .reveal .slides section p,
+    .reveal .slides section ul,
+    .reveal .slides section ol {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 100%;
+    }
+    
+    /* Responsive table */
+    .reveal .slides section table {
+      max-width: 100%;
+      font-size: 0.9em;
+    }
+    
+    /* Responsive image */
+    .reveal .slides section img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+  
+  <!-- Overview 网格布局CSS - 使用官方推荐方法 -->
+  <style>
+    /* Overview模式：使用CSS zoom属性进行缩放 */
+    .reveal.overview .slides {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)) !important;  /* 960 * 0.3 = 288 */
+      gap: 20px !important;
+      width: 95% !important;
+      max-width: 1920px !important;
+      padding: 30px !important;
+      margin: 0 auto !important;
+      overflow-y: auto !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      height: auto !important;
+      max-height: 95vh !important;
+      justify-items: center !important;
+      align-items: start !important;
+    }
+    
+    /* 缩略图卡片 - 使用zoom进行缩放 */
+    .reveal.overview .slides section {
+      position: relative !important;
+      width: 960px !important;  /* 与幻灯片宽度一致 */
+      height: 700px !important;  /* 与幻灯片高度一致 */
+      zoom: 0.3 !important;  /* 使用zoom缩小到30% */
+      
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      cursor: pointer !important;
+      background: white !important;
+      border: 2px solid rgba(0, 0, 0, 0.1) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      transition: all 0.2s ease !important;
+      overflow: hidden !important;  /* 防止内容溢出 */
+      
+      /* 重置位置 */
+      top: 0 !important;
+      left: 0 !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+    
+    .reveal.overview .slides section:hover {
+      border-color: #0066cc !important;
+      box-shadow: 0 4px 16px rgba(0, 102, 204, 0.2) !important;
+      zoom: 0.32 !important;
+      z-index: 10 !important;
+    }
+    
+    /* 当前幻灯片高亮 */
+    .reveal.overview .slides section.present {
+      border-color: #0066cc !important;
+      border-width: 3px !important;
+      box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3) !important;
+    }
+    
+    /* 保持原始内容布局，不进行额外变换 */
+    .reveal.overview .slides section > * {
+      pointer-events: none !important;
+    }
+    
+    /* 控制按钮和进度条 */
+    .reveal.overview .controls,
+    .reveal.overview .progress {
+      opacity: 0.3 !important;
+    }
+    
+    .reveal.overview .slide-number {
+      display: none !important;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 1600px) {
+      .reveal.overview .slides {
+        grid-template-columns: repeat(auto-fill, minmax(259px, 1fr)) !important;  /* 960 * 0.27 */
+      }
+      .reveal.overview .slides section {
+        zoom: 0.27 !important;
+      }
+      .reveal.overview .slides section:hover {
+        zoom: 0.29 !important;
+      }
+    }
+    
+    @media (max-width: 1200px) {
+      .reveal.overview .slides {
+        grid-template-columns: repeat(auto-fill, minmax(221px, 1fr)) !important;  /* 960 * 0.23 */
+        gap: 15px !important;
+      }
+      .reveal.overview .slides section {
+        zoom: 0.23 !important;
+      }
+      .reveal.overview .slides section:hover {
+        zoom: 0.25 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section  class="center" data-background-image="https://images.unsplash.com/photo-1595225169322-cd7aba049690?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE2MzB8MHwxfHNlYXJjaHwxfHxIYWluYW4lMkMlMjB0cm9waWNhbCUyMHBvcnQlMkMlMjBidXNpbmVzcyUyQyUyMGZ1dHVyZXxlbnwwfDB8fHwxNzYxNTM4NDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080" data-background-opacity="0.5">
+        <div class="slide-content-wrapper">
+<h1>海南自贸港：核心战略与发展机遇</h1>
+<p>开启中国新时代全面深化改革开放的新篇章</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>三大核心战略：擘画海南未来蓝图</h2>
+<p>海南自贸港并非简单的政策优惠区，而是承载国家深远战略意图的系统性工程。其建设围绕三大核心任务展开，共同构成其独特的战略价值。</p>
+<div class="three-columns">
+  <div>
+    <h3>贸易投资新高地</h3>
+    <p>打造一个要素自由流动的“超级经济区”，旨在大幅降低贸易和投资壁垒，营造国际一流的营商环境。</p>
+  </div>
+  <div>
+    <h3>改革开放试验田</h3>
+    <p>作为新时代中国最高水平开放形态的探路者，先行先试前沿政策，为国家全面深化改革积累可复制的经验。</p>
+  </div>
+  <div>
+    <h3>国家战略备份</h3>
+    <p>在全球经济不确定性加剧的背景下，构建一个安全、自主的对外连接通道，保障国家产业链与供应链安全。</p>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>核心战略一：构建全球贸易与投资新高地</h2>
+<p>海南自贸港的核心目标是实现商品、资金、人员和数据的高度自由便捷流动，打造一个<span class="highlight">“超级免税区”</span>与<span class="highlight">“低税商业区”</span>的结合体，重塑区域经济格局。</p>
+<div class="two-columns">
+  <div>
+    <h3>对个人：国际消费新天堂</h3>
+    <ul>
+      <li><strong>零关税购物体验</strong>：清单内的进口商品免征关税，使海南成为一个巨大的“境内免税店”，消费者能以更低价格购买全球优品。</li>
+      <li><strong>高端医疗服务</strong>：放宽境外医师执业和医疗器械准入，吸引国际顶尖医疗资源，满足高端健康需求。</li>
+      <li><strong>个人所得税优惠</strong>：对在海南自贸港工作的高端人才和紧缺人才，其个人所得税实际税负超过15%的部分予以免征。</li>
+    </ul>
+  </div>
+  <div>
+    <h3>对企业：全球投资新热土</h3>
+    <ul>
+      <li><strong>极具竞争力的税率</strong>：对注册在自贸港并实质性运营的鼓励类产业企业，减按15%的税率征收企业所得税。</li>
+      <li><strong>生产要素零关税</strong>：企业进口自用的生产设备、原辅料等实行“零关税”正面清单管理，显著降低生产成本。</li>
+      <li><strong>投资与资金自由化</strong>：大幅放宽市场准入，实施“非禁即入”，并建立自由贸易账户体系，促进跨境资金自由便利流动。</li>
+    </ul>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>关键数据：极具吸引力的政策红利</h2>
+<p>海南自贸港的政策优势并非空谈，而是由一系列具体的、可量化的数据指标构成，为个人和企业带来切实利益。</p>
+<div class="media-with-text reverse">
+  <div class="text-content">
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">企业所得税率</div>
+        <div class="metric-value">15%</div>
+        <div class="metric-change positive">↓ 较内地标准低10%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">高端人才个税</div>
+        <div class="metric-value">≤15%</div>
+        <div class="metric-change positive">↓ 最高档降幅达30%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">部分进口商品关税</div>
+        <div class="metric-value">0%</div>
+        <div class="metric-change positive">实现消费品与生产资料零关税</div>
+      </div>
+    </div>
+    <p class="chart-caption"><strong>影响解读</strong>：这些税收优惠政策的组合拳，直接降低了企业运营成本和个人生活成本。例如，一家年利润<span class="key-number">1亿</span>元的高新技术企业，在海南可比在内地节省<span class="key-number">1000万</span>元所得税，极大地增强了其全球竞争力。</p>
+  </div>
+  <div class="media-content">
+    <img src="https://images.unsplash.com/photo-1707157284454-553ef0a4ed0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE2MzB8MHwxfHNlYXJjaHwxfHxmaW5hbmNlJTJDJTIwZ3Jvd3RoJTJDJTIwY2hhcnQlMkMlMjBhbmFseXRpY3N8ZW58MHwwfHx8MTc2MTUzODQ0N3ww&ixlib=rb-4.1.0&q=80&w=1080" alt="finance, growth, chart, analytics" />
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>核心战略二：国家重大改革的“压力测试区”</h2>
+<p>海南岛独特的地理单元优势，使其成为测试国家最高水平开放政策的理想<span class="highlight">“新政策孵化器”</span>。在这里，风险可被有效隔离，成功经验则能安全地推广至全国。</p>
+<div class="process-flow">
+  <div class="flow-step">
+    <h4>1. 前沿政策设计</h4>
+    <p>围绕资金、数据、人员、运输等领域，设计超越现有框架的开放政策。</p>
+  </div>
+  <div class="flow-step">
+    <h4>2. 在岛内先行先试</h4>
+    <p>在海南特定区域内实施新政，进行小范围、高强度的压力测试，收集数据与反馈。</p>
+  </div>
+  <div class="flow-step">
+    <h4>3. 风险评估与优化</h4>
+    <p>系统评估政策效果与潜在风险，快速迭代优化方案，形成稳定可靠的制度体系。</p>
+  </div>
+  <div class="flow-step">
+    <h4>4. 形成经验并推广</h4>
+    <p>将成熟、有效的制度创新成果，总结提炼为可复制的经验，逐步向国内其他地区推广。</p>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>前沿探索：三大核心政策领域的先行先试</h2>
+<p>海南自贸港的“试验田”职能主要聚焦于当前全球经贸规则中最前沿、最核心的领域，旨在为中国更高水平的开放积累宝贵经验。</p>
+<div class="media-with-text">
+  <div class="text-content">
+    <h3>探索领域与目标</h3>
+    <ul>
+      <li><strong>资本项目可兑换</strong>：稳步推进海南自贸港内资本自由流入流出和自由兑换，探索建立一套适应高水平开放的金融风险防控体系。</li>
+      <li><strong>数据安全有序流动</strong>：在确保国家安全和个人隐私的前提下，探索建立跨境数据流动的“白名单”制度，支持数字经济发展。</li>
+      <li><strong>服务贸易负面清单</strong>：以“跨境交付、境外消费、自然人移动”模式为核心，探索制定比全国版更短、更开放的服务贸易负面清单。</li>
+    </ul>
+    <p>这些探索将直接对标《全面与进步跨太平洋伙伴关系协定》（CPTPP）等高标准国际经贸规则，为中国未来加入更高水平的自由贸易协定奠定基础。</p>
+  </div>
+  <div class="media-content">
+    <img src="https://images.unsplash.com/photo-1683844372064-80613380f933?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE2MzB8MHwxfHNlYXJjaHwxfHxnbG9iYWwlMjBuZXR3b3JrJTJDJTIwZGF0YSUyQyUyMGZpbmFuY2UlMkMlMjBpbm5vdmF0aW9ufGVufDB8MHx8fDE3NjE1Mzg0NDh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="global network, data, finance, innovation" />
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>核心战略三：保障国家经济安全的“战略备份”</h2>
+<p>在当前复杂多变的国际形势下，过度依赖单一对外通道存在风险。海南自贸港的建设，旨在构建一个由中国<span class="highlight">百分百掌控的对外连接“新插座”</span>，提升国家经济体系的韧性。</p>
+<div class="two-columns">
+  <div>
+    <h3>面临的挑战：单一通道依赖</h3>
+    <ul>
+      <li><strong>地缘政治风险</strong>：传统转口贸易和金融中心易受外部政治环境波动的影响，可能对我国产业链构成威胁。</li>
+      <li><strong>供应链脆弱性</strong>：关键技术、设备和资源的进口通道过于集中，增加了供应链中断的风险。</li>
+      <li><strong>金融安全考量</strong>：国际金融联系需要多元化的渠道来分散风险，确保在极端情况下的金融稳定。</li>
+    </ul>
+  </div>
+  <div>
+    <h3>海南的角色：多元化战略支点</h3>
+    <ul>
+      <li><strong>互补与备份</strong>：与香港等现有国际中心形成功能互补，在极端情况下可作为备用通道，确保全球连接“不断电”。</li>
+      <li><strong>产业链安全阀</strong>：通过零关税政策吸引关键产业回流或建立备份基地，保障国内产业链、供应链的完整与安全。</li>
+      <li><strong>人民币国际化新支点</strong>：为人民币的跨境使用和回流提供一个新的、更自由的离岸市场，助力人民币国际化进程。</li>
+    </ul>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>发展蓝图：分阶段迈向高水平自由贸易港</h2>
+<p>海南自贸港的建设并非一蹴而就，而是遵循着一个清晰、务实的时间表，稳步推进，以确保每一步都坚实有力。</p>
+<div class="timeline">
+  <div class="timeline-item">
+    <h4>2025年：初步建立</h4>
+    <p>初步建立以贸易自由便利和投资自由便利为重点的自由贸易港政策制度体系。完成全岛封关运作，实现“一线放开、二线管住”的货物进出境管理。</p>
+  </div>
+  <div class="timeline-item">
+    <h4>2035年：成熟运作</h4>
+    <p>自由贸易港制度体系和运作模式更加成熟。贸易投资自由化便利化达到世界领先水平，营商环境跻身全球前列，成为我国开放型经济新高地。</p>
+  </div>
+  <div class="timeline-item">
+    <h4>本世纪中叶：全面建成</h4>
+    <p>全面建成具有较强国际影响力的高水平自由贸易港。经济实力和综合竞争力大幅跃升，成为引领中国新时代对外开放的鲜明旗帜和重要开放门户。</p>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h2>总结：把握海南自贸港的历史性机遇</h2>
+<p>海南自贸港不仅是地理上的新高地，更是中国面向未来的战略支点。它集多重角色于一身，为全球投资者、企业和人才提供了前所未有的发展平台。</p>
+<div class="media-with-text reverse">
+  <div class="text-content">
+    <h3>关键 takeaways</h3>
+    <ul>
+      <li><strong>全球一流的营商环境</strong>：以极具竞争力的税收政策和高度自由化的贸易投资环境，成为全球资本的新洼地。</li>
+      <li><strong>制度创新的前沿阵地</strong>：作为国家改革的“试验田”，将持续释放政策红利，引领未来发展方向。</li>
+      <li><strong>安全可靠的战略支点</strong>：在中国深度融入全球化的进程中，提供一个稳定、自主的战略备份，增强经济韧性。</li>
+    </ul>
+    <p><strong>展望未来</strong>，海南自贸港将成为中国经济高质量发展的重要引擎。现在，正是共同见证并参与这一历史进程，共享中国开放红利的最佳时机。</p>
+  </div>
+  <div class="media-content">
+    <img src="https://images.unsplash.com/photo-1645245924084-d6cb34ad0687?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE2MzB8MHwxfHNlYXJjaHwxfHxzdWNjZXNzJTJDJTIwdGVhbSUyQyUyMGZ1dHVyZSUyQyUyMHZpc2lvbnxlbnwwfDB8fHwxNzYxNTM0MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="success, team, future, vision" />
+  </div>
+</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-content-wrapper">
+<h1>Q&A</h1>
+<p>感谢聆听</p>
+[UNSPLASH_IMAGE_QUERY: handshake, partnership, discussion]
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ECharts 图表库 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  
+  <!-- Reveal.js 核心库 -->
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"></script>
+  
+  <!-- 捝件 -->
+  <script src="https://unpkg.com/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@5.0.4/plugin/markdown/markdown.js"></script>
+  <script src="https://unpkg.com/reveal.js@5.0.4/plugin/highlight/highlight.js"></script>
+  <script src="https://unpkg.com/reveal.js@5.0.4/plugin/zoom/zoom.js"></script>
+  
+  <script>
+    // 等待Reveal.js加载完成
+    function initReveal() {
+      if (typeof Reveal === 'undefined') {
+        console.error('Reveal.js未加载，3秒后重试...');
+        setTimeout(initReveal, 3000);
+        return;
+      }
+      
+      console.log('Reveal.js已加载，开始初始化...');
+      
+      // 检测是否在 iframe 中
+      const isInIframe = window.self !== window.top;
+      console.log('🔍 运行环境:', isInIframe ? 'iframe 内嵌' : '独立窗口');
+      
+      // 初始化 Reveal.js - 优化配置以支持多种视图模式
+      Reveal.initialize({
+        // 标准PPT尺寸 (16:9 比例)
+        width: 960,
+        height: 700,
+        
+        // 关键：margin 控制内容与边缘的距离（增加一点边距）
+        margin: 0.1,
+        
+        // 关键：缩放范围 - 确保在不同容器尺寸下都能正确显示
+        minScale: 0.2,
+        maxScale: 2.0,
+        
+        // 基础配置
+        hash: false,
+        
+        // 关键：center 设为 true，让内容垂直居中
+        center: true,
+        
+        transition: 'slide',
+        transitionSpeed: 'default',
+        backgroundTransition: 'fade',
+        
+        // embedded 保持 false
+        embedded: false,
+        
+        // disableLayout 保持 false，让 reveal.js 自动处理布局
+        disableLayout: false,
+        
+        // 响应式配置
+        respondToHashChanges: true,
+        
+        // 控制选项
+        controls: true,
+        progress: true,
+        slideNumber: true,
+        
+        // 导航
+        keyboard: true,
+        touch: true,
+        loop: false,
+        
+        // 自动播放
+        autoSlide: 0,
+        
+        // 插件
+        plugins: [
+          typeof RevealMarkdown !== 'undefined' ? RevealMarkdown : null,
+          typeof RevealHighlight !== 'undefined' ? RevealHighlight : null,
+          typeof RevealNotes !== 'undefined' ? RevealNotes : null,
+          typeof RevealZoom !== 'undefined' ? RevealZoom : null
+        ].filter(Boolean)
+      }).then(() => {
+        console.log('✅ Reveal.js初始化成功！');
+        console.log('幻灯片数量:', Reveal.getTotalSlides());
+        
+        // 监听全屏变化 - 优化布局刷新
+        function handleFullscreenChange() {
+          const isFullscreen = !!(document.fullscreenElement || 
+                                 document.webkitFullscreenElement || 
+                                 document.mozFullScreenElement);
+          
+          console.log('🔄 全屏状态变化:', isFullscreen ? '进入全屏' : '退出全屏');
+          
+          // 添加/移除全屏CSS类
+          const revealElement = document.querySelector('.reveal');
+          if (revealElement) {
+            if (isFullscreen) {
+              revealElement.classList.add('fullscreen');
+            } else {
+              revealElement.classList.remove('fullscreen');
+            }
+          }
+          
+          // 关键：延迟重新布局，确保浏览器完成全屏切换动画
+          // 使用多次布局刷新，确保在不同浏览器下都能正确显示
+          setTimeout(() => {
+            Reveal.layout();
+            console.log('🔄 第一次布局刷新完成');
+          }, 100);
+          
+          setTimeout(() => {
+            Reveal.layout();
+            console.log('🔄 第二次布局刷新完成');
+          }, 300);
+        }
+        
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        
+        // 监听窗口大小变化
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            Reveal.layout();
+            console.log('🔄 窗口大小改变，重新布局');
+          }, 200);
+        });
+        
+        // 如果在 iframe 中，添加额外的布局刷新
+        if (isInIframe) {
+          console.log('🔍 检测到 iframe 环境，启用增强布局刷新');
+          
+          // 延迟刷新，确保 iframe 完全加载
+          setTimeout(() => {
+            Reveal.layout();
+            console.log('🔄 iframe 初始布局刷新');
+          }, 500);
+          
+          // 监听父窗口的消息（如果需要）
+          window.addEventListener('message', (event) => {
+            if (event.data === 'reveal-layout') {
+              Reveal.layout();
+              console.log('🔄 收到父窗口布局刷新请求');
+            }
+          });
+        }
+        
+        // 调试：检查第一个幻灯片的样式
+        const firstSlide = document.querySelector('.reveal .slides section');
+        if (firstSlide) {
+          const styles = window.getComputedStyle(firstSlide);
+          console.log('🔍 第一个幻灯片样式:', {
+            display: styles.display,
+            opacity: styles.opacity,
+            visibility: styles.visibility,
+            color: styles.color,
+            background: styles.background,
+            transform: styles.transform
+          });
+          console.log('🔍 第一个幻灯片HTML:', firstSlide.innerHTML.substring(0, 200));
+        } else {
+          console.error('❌ 找不到幻灯片元素！');
+        }
+      }).catch((error) => {
+        console.error('❌ Reveal.js初始化错误:', error);
+      });
+    }
+    
+    // 页面加载完成后初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海南自贸港测试</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css">
+  
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .reveal {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .reveal .slides {
+      text-align: left;
+    }
+    
+    .reveal .slides section {
+      height: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="center">
+        <h1>海南自贸港：新时代的战略引擎与全球机遇</h1>
+        <p>探索中国全面深化改革开放的未来蓝图</p>
+      </section>
+
+      <section>
+        <h2>发展蓝图：分阶段迈向高水平开放形态</h2>
+        <p>海南自贸港的建设遵循清晰的三个阶段，分阶段的宏伟蓝图，旨在逐步实现最终目标。</p>
+        <ul>
+          <li><strong>2025年：初步建立</strong><br>初步建立以贸易投资自由化便利化为重点的自由贸易港政策制度体系，为全面深化改革，为全球投资者提供更大吸引力，为全球投资者提供更大吸引力。</li>
+          <li><strong>2035年：成熟运作</strong><br>自由贸易港制度体系和运作模式更加成熟，成为我国开放型经济新高地，营商环境达到国际一流水平，经贸实力和社会文明程度达到新高度。</li>
+          <li><strong>本世纪中叶：全面建成</strong><br>全面建成具有较强国际影响力的高水平自由贸易港，成为我国深度融入全球经济体系的战略支点，成为中国深度融入全球经济体系的战略支点。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>三大核心：政策孵化器、战略通道、开放新高地</h2>
+        <p>海南自贸港承担着三大核心使命，为中国的改革开放注入新动能。</p>
+        <ul>
+          <li><strong>政策孵化器</strong><br>在风险可控环境下，先行先试金融、数据等前沿开放政策，为全国改革探路。</li>
+          <li><strong>战略通道</strong><br>构建独立自主的对外连接通道，提升国家战略安全。</li>
+          <li><strong>开放新高地</strong><br>打造高水平自由贸易港，吸引全球资源，营商环境达到国际一流水平，经贸实力和社会文明程度达到新高度，成为我国开放型经济新高地。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>谢谢观看</h2>
+        <p>海南自贸港 - 中国改革开放的新篇章</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"></script>
+  
+  <script>
+    Reveal.initialize({
+      width: 960,
+      height: 700,
+      margin: 0.1,
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      center: true,
+      embedded: false,
+      disableLayout: false,
+      
+      hash: false,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      keyboard: true,
+      touch: true,
+    }).then(() => {
+      console.log('Reveal.js 初始化成功');
+      
+      function handleFullscreenChange() {
+        const isFullscreen = !!(document.fullscreenElement || 
+                               document.webkitFullscreenElement || 
+                               document.mozFullScreenElement);
+        
+        console.log('全屏状态:', isFullscreen);
+        
+        setTimeout(() => Reveal.layout(), 100);
+        setTimeout(() => Reveal.layout(), 300);
+      }
+      
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+      
+      window.addEventListener('resize', () => {
+        setTimeout(() => Reveal.layout(), 200);
+      });
+    });
+  </script>
+</body>
+</html>

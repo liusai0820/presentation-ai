@@ -74,6 +74,16 @@
   - HTML 模式 vs 富编辑器模式
   - 各模式的优缺点
   - 使用场景建议
+- **[POWERPOINT_MODE_IMPLEMENTATION.md](POWERPOINT_MODE_IMPLEMENTATION.md)** - PowerPoint 模式实现 ⭐ 新增
+  - XML 格式规范
+  - 组件库说明
+  - Prompt 设计要点
+  - PPTX 导出优化
+- **[REVEALJS_OPTIMIZATION.md](REVEALJS_OPTIMIZATION.md)** - Reveal.js 模式优化 ⭐ 最新
+  - 页面宽度问题修复
+  - 图片自动生成功能
+  - Unsplash 集成
+  - AI Prompt 优化
 
 ---
 
@@ -180,6 +190,8 @@
 ## 📝 文档维护
 
 ### 最近更新
+- **2024-10-27**: 创建 [REVEALJS_OPTIMIZATION.md](REVEALJS_OPTIMIZATION.md) - Reveal.js 模式优化
+- **2024-10-27**: 创建 [POWERPOINT_MODE_IMPLEMENTATION.md](POWERPOINT_MODE_IMPLEMENTATION.md) - PowerPoint 模式实现
 - **2024-10-24**: 创建 [REVEALJS_LAYOUT_OPTIMIZATION.md](REVEALJS_LAYOUT_OPTIMIZATION.md)
 - **2024-10-24**: 重构 [README.md](README.md) 和 [README_CN.md](README_CN.md)
 - **2024-10-24**: 创建本文档索引

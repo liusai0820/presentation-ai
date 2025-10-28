@@ -137,8 +137,8 @@ interface PresentationState {
   setHtmlSlides: (slides: Array<{ id: string; index: number; html: string; title: string }>) => void;
   generatedHtml: string | null; // 完整的生成HTML（用于Reveal.js）
   setGeneratedHtml: (html: string | null) => void;
-  generationMode: "xml" | "html" | "revealjs"; // 生成模式：XML组件、HTML页面 或 Reveal.js
-  setGenerationMode: (mode: "xml" | "html" | "revealjs") => void;
+  generationMode: "xml" | "html" | "revealjs" | "powerpoint"; // 生成模式：XML组件、HTML页面、Reveal.js 或 PowerPoint
+  setGenerationMode: (mode: "xml" | "html" | "revealjs" | "powerpoint") => void;
 }
 
 export const usePresentationState = create<PresentationState>((set) => ({

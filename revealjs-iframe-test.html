@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reveal.js iframe 测试 - 模拟应用预览框</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .info {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      button:hover {
+        background: #f0f0f0;
+        border-color: #0066cc;
+      }
+
+      button.primary {
+        background: #0066cc;
+        color: white;
+        border-color: #0066cc;
+      }
+
+      button.primary:hover {
+        background: #0052a3;
+      }
+
+      .preview-container {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .preview-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .iframe-wrapper {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 250px);
+        min-height: 600px;
+        max-height: 900px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fafafa;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .tips {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f0f7ff;
+        border-left: 4px solid #0066cc;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .tips strong {
+        color: #0066cc;
+      }
+
+      .status {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 12px;
+        z-index: 9999;
+        min-width: 200px;
+      }
+
+      .status-item {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Reveal.js 预览测试</h1>
+        <p class="info">模拟应用中的预览框环境，测试全屏功能</p>
+        <div class="buttons">
+          <button class="primary" onclick="openInNewWindow()">
+            在新窗口打开
+          </button>
+          <button onclick="downloadHTML()">下载 HTML</button>
+          <button onclick="refreshIframe()">刷新预览</button>
+        </div>
+      </div>
+
+      <div class="preview-container">
+        <div class="preview-title">演示文稿预览</div>
+        <div class="iframe-wrapper">
+          <iframe id="previewFrame" title="Presentation Preview"></iframe>
+        </div>
+        <div class="tips">
+          <strong>测试步骤：</strong><br />
+          1. 在预览框内，按 <strong>F 键</strong> 进入全屏模式<br />
+          2. 使用 <strong>方向键</strong> 切换幻灯片<br />
+          3. 按 <strong>ESC 键</strong> 查看缩略图<br />
+          4. 再按 <strong>ESC 键</strong> 退出全屏<br />
+          5. 点击"在新窗口打开"按钮，测试独立窗口的全屏效果
+        </div>
+      </div>
+    </div>
+
+    <div class="status" id="status">
+      <div class="status-item">状态：加载中...</div>
+    </div>
+
+    <script>
+      // 生成测试用的 reveal.js HTML
+      const revealHTML = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试演示文稿</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css">
+  
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .reveal {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .test-content {
+      padding: 20px;
+    }
+    
+    .highlight {
+      color: #0066cc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>测试演示文稿</h1>
+        <p class="highlight">这是封面页</p>
+        <p>请测试以下功能：</p>
+        <ul>
+          <li>按 F 键进入全屏</li>
+          <li>按 ESC 查看缩略图</li>
+          <li>使用方向键翻页</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>第二页：内容测试</h2>
+        <div class="test-content">
+          <p>这是一个普通的内容页</p>
+          <ul>
+            <li>列表项 1</li>
+            <li>列表项 2</li>
+            <li>列表项 3</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>第三页：表格测试</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>数值</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>100</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>200</td>
+              <td>✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>第四页：图片测试</h2>
+        <p>这里可以放置图片内容</p>
+        <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 20px auto; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+          示例图片区域
+        </div>
+      </section>
+
+      <section>
+        <h2>谢谢观看！</h2>
+        <p class="highlight">演示结束</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"><\/script>
+  
+  <script>
+    const isInIframe = window.self !== window.top;
+    console.log('🔍 运行环境:', isInIframe ? 'iframe 内嵌' : '独立窗口');
+    
+    Reveal.initialize({
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      center: true,
+      embedded: false,
+      disableLayout: false,
+      
+      hash: false,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      keyboard: true,
+      touch: true,
+    }).then(() => {
+      console.log('✅ Reveal.js 初始化成功');
+      
+      // 通知父窗口
+      if (isInIframe) {
+        window.parent.postMessage({ type: 'reveal-ready' }, '*');
+      }
+      
+      // 监听全屏变化
+      function handleFullscreenChange() {
+        const isFullscreen = !!(document.fullscreenElement || 
+                               document.webkitFullscreenElement || 
+                               document.mozFullScreenElement);
+        
+        console.log('🔄 全屏状态:', isFullscreen ? '进入全屏' : '退出全屏');
+        
+        setTimeout(() => Reveal.layout(), 100);
+        setTimeout(() => Reveal.layout(), 300);
+        
+        // 通知父窗口
+        if (isInIframe) {
+          window.parent.postMessage({ 
+            type: 'fullscreen-change', 
+            isFullscreen 
+          }, '*');
+        }
+      }
+      
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+      
+      // 监听窗口大小变化
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          Reveal.layout();
+          console.log('🔄 窗口大小改变，重新布局');
+        }, 200);
+      });
+      
+      // iframe 环境增强
+      if (isInIframe) {
+        setTimeout(() => {
+          Reveal.layout();
+          console.log('🔄 iframe 初始布局刷新');
+        }, 500);
+        
+        window.addEventListener('message', (event) => {
+          if (event.data === 'reveal-layout') {
+            Reveal.layout();
+            console.log('🔄 收到父窗口布局刷新请求');
+          }
+        });
+      }
+    });
+  <\/script>
+</body>
+</html>`;
+
+      // 加载 iframe
+      const iframe = document.getElementById("previewFrame");
+      iframe.srcdoc = revealHTML;
+
+      // 监听 iframe 消息
+      window.addEventListener("message", (event) => {
+        const status = document.getElementById("status");
+
+        if (event.data.type === "reveal-ready") {
+          status.innerHTML =
+            '<div class="status-item">✅ Reveal.js 已就绪</div>';
+        } else if (event.data.type === "fullscreen-change") {
+          const fsStatus = event.data.isFullscreen ? "全屏模式" : "正常模式";
+          status.innerHTML = `<div class="status-item">状态：${fsStatus}</div>`;
+        }
+      });
+
+      // 按钮功能
+      function openInNewWindow() {
+        const blob = new Blob([revealHTML], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+      }
+
+      function downloadHTML() {
+        const blob = new Blob([revealHTML], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "test-presentation.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      function refreshIframe() {
+        iframe.srcdoc = revealHTML;
+        document.getElementById("status").innerHTML =
+          '<div class="status-item">🔄 刷新中...</div>';
+      }
+    </script>
+  </body>
+</html>

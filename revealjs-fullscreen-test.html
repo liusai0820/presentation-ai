@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reveal.js 全屏测试</title>
+  
+  <!-- Reveal.js 核心CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@5.0.4/dist/theme/white.css">
+  
+  <!-- 基础样式 -->
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .reveal {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* 测试样式 */
+    .test-slide {
+      border: 3px solid red;
+      padding: 20px;
+    }
+    
+    .status-info {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-info" id="statusInfo">
+    状态：正常模式<br>
+    按 F 键进入全屏
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+      <section class="test-slide">
+        <h1>第一页：封面</h1>
+        <p>这是封面页，应该在所有模式下都能正常显示</p>
+        <ul>
+          <li>按 F 键：进入全屏模式</li>
+          <li>按 ESC 键：查看缩略图</li>
+          <li>按 ESC 键两次：退出全屏</li>
+        </ul>
+      </section>
+
+      <section class="test-slide">
+        <h2>第二页：内容页</h2>
+        <p>这是内容页，测试文字是否正常显示</p>
+        <ul>
+          <li>列表项 1</li>
+          <li>列表项 2</li>
+          <li>列表项 3</li>
+        </ul>
+      </section>
+
+      <section class="test-slide">
+        <h2>第三页：图表页</h2>
+        <p>这是图表页，测试复杂内容</p>
+        <table>
+          <tr>
+            <th>项目</th>
+            <th>数值</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>200</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="test-slide">
+        <h2>第四页：结束页</h2>
+        <p>谢谢观看！</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@5.0.4/dist/reveal.js"></script>
+  
+  <script>
+    const statusInfo = document.getElementById('statusInfo');
+    
+    function updateStatus() {
+      const isFullscreen = !!(document.fullscreenElement || 
+                             document.webkitFullscreenElement || 
+                             document.mozFullScreenElement);
+      const isOverview = Reveal.isOverview();
+      
+      let status = '正常模式';
+      if (isFullscreen) {
+        status = '全屏模式';
+      }
+      if (isOverview) {
+        status += ' + 缩略图';
+      }
+      
+      const scale = Reveal.getScale();
+      const config = Reveal.getConfig();
+      
+      statusInfo.innerHTML = `
+        状态：${status}<br>
+        缩放比例：${scale.toFixed(2)}<br>
+        容器尺寸：${config.width} x ${config.height}<br>
+        视口尺寸：${window.innerWidth} x ${window.innerHeight}
+      `;
+    }
+    
+    Reveal.initialize({
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      center: true,
+      embedded: false,
+      disableLayout: false,
+      
+      hash: false,
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      keyboard: true,
+      touch: true,
+    }).then(() => {
+      console.log('✅ Reveal.js 初始化成功');
+      updateStatus();
+      
+      // 监听各种事件
+      Reveal.on('slidechanged', updateStatus);
+      Reveal.on('overviewshown', updateStatus);
+      Reveal.on('overviewhidden', updateStatus);
+      
+      document.addEventListener('fullscreenchange', () => {
+        updateStatus();
+        setTimeout(() => {
+          Reveal.layout();
+          updateStatus();
+        }, 100);
+        setTimeout(() => {
+          Reveal.layout();
+          updateStatus();
+        }, 300);
+      });
+      
+      window.addEventListener('resize', () => {
+        setTimeout(() => {
+          Reveal.layout();
+          updateStatus();
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

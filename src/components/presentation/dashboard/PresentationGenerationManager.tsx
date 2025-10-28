@@ -611,19 +611,9 @@ export function PresentationGenerationManager() {
                 title: currentPresentationTitle ?? presentationInput ?? "",
                 prompt: presentationInput ?? "",
                 outline,
+                numSlides: outline.length, // 添加幻灯片数量
                 language,
-                tone:
-                  generationMode === "powerpoint"
-                    ? "powerpoint"
-                    : presentationStyle || "professional", // 添加tone参数
-                modelProvider:
-                  generationMode === "powerpoint"
-                    ? "openrouter"
-                    : modelProvider, // PowerPoint使用OpenRouter
-                modelId:
-                  generationMode === "powerpoint"
-                    ? "minimax/minimax-m2:free"
-                    : modelId, // PowerPoint使用免费模型
+                tone: presentationStyle || "professional",
                 theme: theme || defaultTheme,
                 searchResults: stateSearchResults,
                 analyzedDocument,
@@ -820,6 +810,8 @@ export function PresentationGenerationManager() {
               // PowerPoint模式：直接解析XML创建幻灯片
               console.log("📦 PowerPoint模式：直接解析XML");
               console.log("📄 XML内容长度:", htmlContent.length);
+              console.log("🖼️ 当前图片源设置:", imageSource);
+              console.log("🎨 当前生成模式:", generationMode);
               console.log(
                 "📄 XML内容前500字符:",
                 htmlContent.substring(0, 500),
@@ -857,10 +849,12 @@ export function PresentationGenerationManager() {
                       id: s.id,
                       hasRootImage: !!s.rootImage,
                       imageQuery: s.rootImage?.query,
+                      layoutType: s.rootImage?.layoutType,
                     })),
                   );
 
                   // 为每个有图片查询的幻灯片触发图片生成
+                  let imagesTriggered = 0;
                   parsedSlides.forEach((slide) => {
                     if (slide.rootImage?.query) {
                       console.log(
@@ -870,8 +864,12 @@ export function PresentationGenerationManager() {
                       const { startRootImageGeneration } =
                         usePresentationState.getState();
                       startRootImageGeneration(slide.id, slide.rootImage.query);
+                      imagesTriggered++;
+                    } else {
+                      console.warn(`⚠️ 幻灯片 ${slide.id} 没有 rootImage.query`);
                     }
                   });
+                  console.log(`✅ 触发了 ${imagesTriggered} 个图片生成任务`);
 
                   // 更新状态
                   const { setSlides } = usePresentationState.getState();

@@ -157,7 +157,18 @@ export function SlideContainer({
           </div>
         )}
 
-        {children}
+        {!isPresenting ? (
+          <div
+            className="w-full border border-border/20 rounded-lg shadow-sm bg-background overflow-hidden"
+            style={{ aspectRatio: "16 / 9", maxWidth: "100%" }}
+          >
+            <div className="w-full h-full overflow-auto p-8">{children}</div>
+          </div>
+        ) : (
+          <div className="h-full w-full flex items-center justify-center">
+            <div className="w-full h-full p-12">{children}</div>
+          </div>
+        )}
       </div>
 
       {!isPresenting && !isReadOnly && (

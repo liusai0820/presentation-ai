@@ -175,6 +175,7 @@ export class PlateJSToPPTXConverter {
     this.currentSlide = this.pptx.addSlide();
 
     // Add root image first (no margins/padding as requested)
+    // ⚠️ IMPORTANT: Must await to ensure image is loaded before processing content
     if (slide.rootImage) {
       await this.addRootImage(slide.rootImage, slide.layoutType);
     }
@@ -232,9 +233,35 @@ export class PlateJSToPPTXConverter {
 
   private async addRootImage(rootImage: RootImage, layoutType?: string) {
     if (!this.currentSlide) return;
-    if (!rootImage.url) return;
-
-    const imagePath = rootImage.url as string;
+    
+    // 如果没有 URL，尝试从 Unsplash 获取
+    let imagePath = rootImage.url as string;
+    if (!imagePath && rootImage.query) {
+      try {
+        console.log(`🔍 [exportToPPT] 尝试从 Unsplash 获取图片: ${rootImage.query}`);
+        const { getImageFromUnsplash } = await import("@/app/_actions/image/unsplash");
+        
+        // ✅ 关键：必须等待异步操作完成
+        const result = await getImageFromUnsplash(rootImage.query, layoutType as any);
+        console.log(`📊 [exportToPPT] Unsplash API 响应:`, result);
+        
+        if (result.success && result.imageUrl) {
+          imagePath = result.imageUrl;
+          console.log(`✅ [exportToPPT] 成功获取 Unsplash 图片: ${imagePath.substring(0, 100)}...`);
+        } else {
+          console.warn(`⚠️ [exportToPPT] 无法获取 Unsplash 图片: ${result.error}`);
+          return; // 无法获取图片，跳过
+        }
+      } catch (error) {
+        console.error(`❌ [exportToPPT] 获取 Unsplash 图片失败:`, error);
+        return; // 获取失败，跳过
+      }
+    }
+    
+    if (!imagePath) {
+      console.warn(`⚠️ [exportToPPT] 没有找到有效的图片路径`);
+      return;
+    }
 
     let imageOptions: PptxGenJS.ImageProps = {
       path: imagePath,
@@ -1440,8 +1467,26 @@ export class PlateJSToPPTXConverter {
     width: number,
     measureOnly = false,
   ): Promise<number> {
-    const imageUrl: string | undefined = (element as Partial<ImageElement>).url;
+    let imageUrl: string | undefined = (element as Partial<ImageElement>).url;
+    const query = (element as Partial<ImageElement>).query;
     const height = 2; // Default image height
+    
+    // 如果没有 URL 但有 query，尝试从 Unsplash 获取
+    if (!imageUrl && query && !measureOnly) {
+      try {
+        console.log(`🔍 尝试从 Unsplash 获取图片: ${query}`);
+        const { getImageFromUnsplash } = await import("@/app/_actions/image/unsplash");
+        const result = await getImageFromUnsplash(query, undefined);
+        if (result.success && result.imageUrl) {
+          imageUrl = result.imageUrl;
+          console.log(`✅ 成功获取 Unsplash 图片: ${imageUrl}`);
+        } else {
+          console.warn(`⚠️ 无法获取 Unsplash 图片: ${result.error}`);
+        }
+      } catch (error) {
+        console.error(`❌ 获取 Unsplash 图片失败:`, error);
+      }
+    }
 
     if (!measureOnly && imageUrl && this.currentSlide) {
       try {

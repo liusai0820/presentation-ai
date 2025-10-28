@@ -524,6 +524,9 @@ export class SlideParser {
       } else {
         layoutType = "left";
       }
+    } else {
+      // 默认使用 "right" 布局（图片在右侧）
+      layoutType = "right";
     }
 
     // Process each child of SECTION as a separate top-level element

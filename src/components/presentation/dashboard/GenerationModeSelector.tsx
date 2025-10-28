@@ -4,7 +4,15 @@ import { usePresentationState } from "@/states/presentation-state";
 import { FileText, Code, Presentation } from "lucide-react";
 
 export function GenerationModeSelector() {
-  const { generationMode, setGenerationMode } = usePresentationState();
+  const { generationMode, setGenerationMode, setImageSource } = usePresentationState();
+  
+  const handleModeChange = (mode: "xml" | "html" | "revealjs" | "powerpoint") => {
+    setGenerationMode(mode);
+    // PowerPoint 模式自动使用 Unsplash 图片
+    if (mode === "powerpoint") {
+      setImageSource("stock");
+    }
+  };
 
   const modes = [
     {
@@ -21,6 +29,12 @@ export function GenerationModeSelector() {
     },
     {
       value: "xml" as const,
+      label: "XML编辑器",
+      icon: Code,
+      description: "富文本编辑器",
+    },
+    {
+      value: "powerpoint" as const,
       label: "PowerPoint",
       icon: Presentation,
       description: "传统PPT文件",
@@ -33,7 +47,7 @@ export function GenerationModeSelector() {
         <span className="h-1 w-1 rounded-full bg-primary" />
         生成模式
       </label>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-4 gap-3">
         {modes.map((mode) => {
           const Icon = mode.icon;
           const isSelected = generationMode === mode.value;
@@ -42,7 +56,7 @@ export function GenerationModeSelector() {
             <button
               key={mode.value}
               type="button"
-              onClick={() => setGenerationMode(mode.value)}
+              onClick={() => handleModeChange(mode.value)}
               className={`
                 relative flex flex-col items-center gap-2.5 p-4 rounded-xl border-2 transition-all group
                 ${
@@ -99,6 +113,19 @@ export function GenerationModeSelector() {
         </div>
       )}
       {generationMode === "xml" && (
+        <div className="text-xs text-primary/80 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl p-3.5 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="mt-0.5 p-1.5 rounded-lg bg-primary/10">
+              <Code className="h-4 w-4 text-primary" />
+            </div>
+            <div>
+              <strong className="text-primary font-semibold">XML 编辑器模式</strong>
+              <p className="mt-0.5 text-muted-foreground">使用富文本编辑器，支持拖拽、自定义样式、完全可编辑</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {generationMode === "powerpoint" && (
         <div className="text-xs text-primary/80 bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 rounded-xl p-3.5 shadow-sm">
           <div className="flex items-start gap-3">
             <div className="mt-0.5 p-1.5 rounded-lg bg-primary/10">

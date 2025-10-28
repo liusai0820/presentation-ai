@@ -1,11 +1,82 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateText } from 'ai';
+import { createApi } from 'unsplash-js';
+import fetch from 'node-fetch';
 import { getGenerateModel } from '@/lib/get-configured-model';
 import { getUserIdOrDev } from '@/lib/dev-user';
 import { auth } from '@/server/auth';
 import { generateRevealJSPrompt } from '@/lib/prompts/revealjs-content-generator';
 import { assembleRevealJSPresentation, extractTitle } from '@/lib/presentation/html-assembler-revealjs';
 import { getCustomThemeCSS, isCustomTheme } from '@/lib/presentation/html-themes/theme-css-loader';
+
+const unsplash = createApi({
+  accessKey: process.env.UNSPLASH_ACCESS_KEY!,
+  fetch: fetch as unknown as typeof fetch,
+});
+
+async function processImagePlaceholders(content: string): Promise<{ processedContent: string; coverImageUrl?: string }> {
+  const slides = content.split('\n\n');
+  const imagePlaceholderRegex = /\[UNSPLASH_IMAGE_QUERY:\s*([^\]]+)\]/g;
+  let coverImageUrl: string | undefined;
+
+  const processedSlides = await Promise.all(
+    slides.map(async (slide, index) => {
+      const match = imagePlaceholderRegex.exec(slide);
+      if (!match) return slide;
+
+      const query = match[1].trim();
+      let imageUrl = '';
+
+      try {
+        console.log(`   - 正在为幻灯片 ${index + 1} 搜索图片: "${query}"`);
+        const result = await unsplash.search.getPhotos({
+          query: query,
+          page: 1,
+          perPage: 1,
+          orientation: 'landscape',
+        });
+
+        if (result.response && result.response.results.length > 0) {
+          imageUrl = result.response.results[0].urls.regular;
+          console.log(`   - 找到图片: ${imageUrl}`);
+        } else {
+          console.warn(`   - ⚠️  警告: 未找到关于 "${query}" 的图片`);
+          return slide.replace(match[0], ''); // Remove placeholder if no image found
+        }
+      } catch (error) {
+        console.error(`   - ❌ 错误: 搜索图片 "${query}" 时失败:`, error);
+        return slide.replace(match[0], ''); // Remove placeholder on error
+      }
+
+      // Cover slide (first slide)
+      if (index === 0) {
+        coverImageUrl = imageUrl;
+        // Just remove the placeholder, the URL will be handled by the assembler
+        return slide.replace(match[0], '').trim();
+      } else {
+        // Content slides
+        const isMediaComponent = /<div class="media-content">\s*\[UNSPLASH_IMAGE_QUERY:[^\]]+\]\s*<\/div>/.test(slide);
+
+        if (isMediaComponent) {
+          // If it's the new component, just replace the placeholder with an img tag
+          return slide.replace(match[0], `<img src="${imageUrl}" alt="${query}" />`);
+        } else {
+          // Otherwise, wrap it with the old image-wrapper for backward compatibility
+          const imageHtml = `
+<div class="image-wrapper">
+  <img src="${imageUrl}" alt="${query}" />
+</div>`;
+          return slide.replace(match[0], imageHtml);
+        }
+      }
+    })
+  );
+
+  return {
+    processedContent: processedSlides.join('\n\n'),
+    coverImageUrl,
+  };
+}
 
 /**
  * 清理AI生成的内容
@@ -127,8 +198,11 @@ export async function POST(request: NextRequest) {
     console.log(`🔍 清理后内容长度: ${aiContent.length}`);
     console.log(`🔍 清理后内容预览: ${aiContent.substring(0, 300)}`);
 
+    // 处理图片占位符
+    const { processedContent, coverImageUrl } = await processImagePlaceholders(aiContent);
+
     // 提取标题
-    const extractedTitle = extractTitle(aiContent);
+    const extractedTitle = extractTitle(processedContent);
 
     // 加载自定义CSS - 支持mckinsey, bcg, bain三个主题
     const isCustom = isCustomTheme(theme);
@@ -146,10 +220,11 @@ export async function POST(request: NextRequest) {
     }
 
     // 组装完整的Reveal.js HTML（应用CSS主题）
-    const completeHTML = assembleRevealJSPresentation(aiContent, {
+    const completeHTML = assembleRevealJSPresentation(processedContent, {
       theme: themeToLoad,
       title: extractedTitle,
       customCSS,
+      coverBackgroundImageUrl: coverImageUrl,
     });
 
     console.log(`🎉 Reveal.js演示文稿生成完成: ${extractedTitle}`);

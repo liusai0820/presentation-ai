@@ -20,7 +20,7 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
     throw new Error("PDF文件不有效，请确保上传的是真实的PDF文件");
   }
 
-  // 目前的解决方案：返回一个PDF效位字符串，演示仚ai分析可以处理PDF
+  // 目前的解决方案：返回一个PDF效位字符串，演示ai分析可以处理PDF
   // 正第的处理应该是使用云端或专业的PDF提取服务
   
   // 为PDF效效，方案是：
